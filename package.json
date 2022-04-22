@@ -24,8 +24,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.2",
     "passport": "^0.5.2",
-    "passport-local": "^1.0.0",
-    "stylus": "^0.57.0"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.0",

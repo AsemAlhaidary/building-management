@@ -6,19 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
-  Login
-  <% if (messages.error) { %>
-    <%- messages.error %>
-  <% } %>
-  <form action="/login" method="POST">
-    <input type="name" class="name" name="name" placeholder="Name" required>
-    <input type="password" class="password" name="password" placeholder="Password" required>
-    <button type="submit">login</button>
-  </form>
-  <a href="/signin">Sign in</a>
+  <div class="container">
+    <div class="formBox">
+      <h1 class="title">الدخول</h1>
+      <form action="/login" method="POST">
+        <label for="name">الإسم:</label>
+        <input type="name" id="name" class="input" name="name" placeholder="'أحمد..إلخ'" required>
+        <label for="password">كلمة المرور:</label>
+        <input type="password" id="password" class="input" name="password" placeholder="'3jg82g04'" required>
+        <% if (messages.error) { %>
+          <p class="error"><%- messages.error %></p>
+        <% } %>
+        <button type="submit">دخول</button>
+        <a href="/signin">تسجيل</a>
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>
