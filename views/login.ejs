@@ -5,24 +5,24 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Log in</title>
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
   <div class="container">
     <div class="formBox">
-      <h1 class="title">الدخول</h1>
+      <h1 class="title">Log in</h1>
       <form action="/login" method="POST">
-        <label for="name">الإسم:</label>
-        <input type="text" id="name" class="input" name="name" placeholder="'أحمد..إلخ'" required>
-        <label for="password">كلمة المرور:</label>
-        <input type="password" id="password" class="input" name="password" placeholder="'3jg82g04'" required>
+        <label for="name">Name:</label>
+        <input type="text" id="name" class="input" name="name" placeholder="ex...'Ahmed'" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" class="input" name="password" placeholder="ex...'426443'" required>
         <% if (messages.error) { %>
           <p class="error"><%- messages.error %></p>
         <% } %>
-        <button type="submit">دخول</button>
-        <a href="/signin">تسجيل</a>
+        <button type="submit">Log in</button>
+        <a href="/signin">Sign in</a>
       </form>
     </div>
   </div>
