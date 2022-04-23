@@ -5,9 +5,11 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const initializePassport = require('./passport-config');
 const flash = require('express-flash');
 const session = require('express-session');
+const methodOverride = require('method-override');
+const initializePassport = require('./passport-config');
+
 const app = express();
 
 // Store the users inside a local variables instead of database
@@ -16,7 +18,7 @@ const users = [];
 
 initializePassport(passport, 
   username => users.find(user => user.username === username),
-  id => users.find(user => user.username === id)
+  id => users.find(user => user.id === id)
 );
 
 // Let the server know we are using 'ejs'
@@ -32,9 +34,10 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 app.get('/', checkAuthenticated, (req, res) => {
-  res.render('index.ejs', { name: 'Asem' });
+  res.render('index.ejs', { name: req.user.username });
 });
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -44,7 +47,7 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
-  failureMessage: true
+  failureFlash: true
 }));
 
 app.get('/signin', checkNotAuthenticated, (req, res) => {
@@ -56,17 +59,19 @@ app.post('/signin', checkNotAuthenticated, async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     users.push({
       id: Date.now().toString(),
-      name: req.body.name,
+      username: req.body.name,
       password: hashedPassword
     });
     res.redirect('/login');
   } catch (error) {
     res.redirect('/signin');
   }
-  console.log(users);
 });
 
-
+app.delete('/logout', (req, res) => {
+  req.logOut();
+  res.redirect('/login');
+});
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
