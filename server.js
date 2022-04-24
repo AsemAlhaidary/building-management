@@ -3,26 +3,30 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
-const bcrypt = require('bcrypt');
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
+const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
-const initializePassport = require('./passport-config');
+const stylus = require('stylus');
+const nib = require('nib');
+
+const indexRouter = require('./routes/index');
+const loginRouter = require('./routes/login');
+const signinRouter = require('./routes/signin');
+const security = require('./security/security');
+const database = require('./models/database');
 
 const app = express();
 
-// Store the users inside a local variables instead of database
-// temporarily for development purposes
-const users = [];
-
-initializePassport(passport, 
-  username => users.find(user => user.username === username),
-  id => users.find(user => user.id === id)
-);
+function compile(str, path) {
+  return stylus(str).set('style', path).use(nib());
+}
 
 // Let the server know we are using 'ejs'
-app.set('view-engine', 'ejs');
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+app.set('layout', 'layouts/layout');
 // Let the server know we are are getting informations from forms
 // to able to access them isnide 'req' variable
 app.use(express.urlencoded({ extended: false }));
@@ -35,58 +39,15 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
-
-app.get('/', checkAuthenticated, (req, res) => {
-  res.render('index.ejs', { name: req.user.username });
-});
-
-app.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('login.ejs');
-});
-
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
+app.use(expressLayouts);
+app.use(express.static(__dirname + '/public'));
+app.use(stylus.middleware({ 
+  src: __dirname + '/public/css',
+  compile: compile
 }));
 
-app.get('/signin', checkNotAuthenticated, (req, res) => {
-  res.render('signin.ejs');
-});
+app.use('/', indexRouter);
+app.use('/login', loginRouter);
+app.use('/signin', signinRouter);
 
-app.post('/signin', checkNotAuthenticated, async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    users.push({
-      id: Date.now().toString(),
-      username: req.body.name,
-      password: hashedPassword
-    });
-    res.redirect('/login');
-  } catch (error) {
-    res.redirect('/signin');
-  }
-});
-
-app.delete('/logout', (req, res) => {
-  req.logOut();
-  res.redirect('/login');
-});
-
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/login');
-}
-
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/');
-  }
-
-  next();
-}
-
-app.listen(3000);
+app.listen(process.env.PORT || 3000);

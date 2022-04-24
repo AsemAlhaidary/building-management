@@ -1,31 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log in</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
-</head>
-
-<body>
-  <div class="container">
-    <div class="formBox">
-      <h1 class="title">Log in</h1>
-      <form action="/login" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" class="input" name="name" placeholder="ex...'Ahmed'" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" class="input" name="password" placeholder="ex...'426443'" required>
-        <% if (messages.error) { %>
-          <p class="error"><%- messages.error %></p>
-        <% } %>
-        <button type="submit">Log in</button>
-        <a href="/signin">Sign in</a>
-      </form>
-    </div>
+<div class="container">
+  <div class="formBox">
+    <h1 class="title">Log in</h1>
+    <form action="/login" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" class="input" name="name" placeholder="ex...'Ahmed'" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" class="input" name="password" placeholder="ex...'426443'" required>
+      <% if (messages.error) { %>
+        <p class="error"><%- messages.error %></p>
+      <% } %>
+      <button type="submit">Log in</button>
+      <a href="/signin">Sign in</a>
+    </form>
   </div>
-</body>
-
-</html>
+</div>
