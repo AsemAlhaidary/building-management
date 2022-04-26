@@ -19,10 +19,6 @@ const database = require('./models/database');
 
 const app = express();
 
-function compile(str, path) {
-  return stylus(str).set('style', path).use(nib());
-}
-
 // Let the server know we are using 'ejs'
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -41,10 +37,6 @@ app.use(passport.session());
 app.use(methodOverride('_method'));
 app.use(expressLayouts);
 app.use(express.static(__dirname + '/public'));
-app.use(stylus.middleware({ 
-  src: __dirname + '/public/css',
-  compile: compile
-}));
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
