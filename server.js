@@ -11,11 +11,17 @@ const methodOverride = require('method-override');
 const stylus = require('stylus');
 const nib = require('nib');
 
-const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const signinRouter = require('./routes/signin');
-const security = require('./security/security');
-const database = require('./models/database');
+const dashboardRouter = require('./routes/dashboard');
+const projectsRouter = require('./routes/projects');
+const employeesRouter = require('./routes/employees');
+const purchasingRouter = require('./routes/purchasing');
+const additionalRouter = require('./routes/additional');
+const depordisRouter = require('./routes/depordis');
+const reportsRouter = require('./routes/reports');
+// const security = require('./security/security');
+// const database = require('./models/database');
 
 const app = express();
 
@@ -38,8 +44,14 @@ app.use(methodOverride('_method'));
 app.use(expressLayouts);
 app.use(express.static(__dirname + '/public'));
 
-app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/signin', signinRouter);
+app.use('/', dashboardRouter);
+app.use('/projects', projectsRouter);
+app.use('/employees', employeesRouter);
+app.use('/purchasing', purchasingRouter);
+app.use('/additional', additionalRouter);
+app.use('/depordis', depordisRouter);
+app.use('/reports', reportsRouter);
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || process.env.LISTEN_PORT);

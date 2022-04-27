@@ -8,7 +8,7 @@ router.get('/', security.checkNotAuthenticated, (req, res) => {
 });
 
 router.post('/', security.checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/dashboard',
   failureRedirect: '/login',
   failureFlash: true
 }));

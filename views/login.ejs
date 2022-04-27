@@ -1,16 +1,26 @@
-<div class="container">
+<div class="formContainer">
   <div class="formBox">
     <h1 class="title">Log in</h1>
-    <form action="/login" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" class="input" name="name" placeholder="ex...'Ahmed'" required>
-      <label for="password">Password:</label>
-      <input type="password" id="password" class="input" name="password" placeholder="ex...'426443'" required>
-      <% if (messages.error) { %>
-        <p class="error"><%- messages.error %></p>
-      <% } %>
-      <button type="submit">Log in</button>
-      <a href="/signin">Sign in</a>
+    <form class="form" action="/login" method="POST">
+      <div class="row">
+        <label class="def" for="name">Name</label>
+        <input type="text" id="name" class="input" name="name" placeholder="Ahmed" required>
+      </div>
+      <!-- <div class="row">
+        <label class="def" for="username">Username</label>
+        <input type="email" id="username" class="input" name="username" placeholder="ahmed@some" required>
+      </div> -->
+      <div class="row">
+        <label class="def" for="password">Password</label>
+        <input type="password" id="password" class="input" name="password" placeholder="426443" required>
+      </div>
+      <p class="error">
+          <% if (messages.error) { %>
+            <%- messages.error %>
+          <% } %>
+        </p>
+      <button class="button" type="submit">Log in</button>
+      <a class="link" href="/signin">Sign in</a>
     </form>
   </div>
 </div>

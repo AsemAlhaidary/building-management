@@ -1,0 +1,27 @@
+<div class="container">
+  <%- include('../partials/navbar.ejs') %>
+  <%- include('../partials/sidebar.ejs') %>
+  <div class="workspace">
+    <form action="/projects/new" method="POST" class="addForm">
+      <div class="field">
+        <label class="def" for="name">Name</label>
+        <input type="text" id="name" class="input" name="name" placeholder="Someon's house" required>
+      </div>
+      <div class="field">
+        <label class="def" for="address">Address</label>
+        <input type="text" id="address" class="input" name="address" placeholder="Jamal street" required>
+      </div>
+      <div class="field">
+        <label class="def" for="startDate">Start Date</label>
+        <input type="date" id="startDate" class="input" name="startDate" placeholder="32-6-2022" required>
+      </div>
+      <div class="field">
+        <label class="def" for="endDate">End Date</label>
+        <input type="date" id="endDate" class="input" name="endDate" placeholder="32-6-2022" required>
+      </div>
+      <div class="actionButtons">
+        <button type="submit">Add</button>
+      </div>
+    </form>
+  </div>
+</div>

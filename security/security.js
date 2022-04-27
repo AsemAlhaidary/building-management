@@ -1,8 +1,8 @@
-const express = require('express');
+// const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const flash = require('express-flash');
-const session = require('express-session');
+// const flash = require('express-flash');
+// const session = require('express-session');
 
 const initializePassport = require('./passport-config');
 const database = require('../models/database');

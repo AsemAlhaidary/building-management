@@ -1,0 +1,37 @@
+<div class="container">
+  <%- include('../partials/navbar.ejs') %>
+  <%- include('../partials/sidebar.ejs') %>
+  <div class="workspace">
+    <div class="info">
+      <%# employees.forEach((employee) => { %>
+        <!-- <a class="employee">
+          <div class="infos">
+            <h3 class="info name">Name: <%#= employee.name %></h3>
+            <h3 class="info job">Job: <%#= employee.job %></h3>
+            <h3 class="info phone">Phone: <%#= employee.phone %></h3>
+          </div>
+          <div class="buttons">
+            <button type="submit">Delete</button>
+            <button type="submit">Edit</button>
+            <button type="submit">Info</button>
+          </div>
+        </a> -->
+      <%# }) %>
+      <a class="employee">
+        <div class="infos">
+          <h3 class="info name">Name: additional</h3>
+          <h3 class="info job">Job: job</h3>
+          <h3 class="info phone">Phone: +967777777777</h3>
+        </div>
+        <div class="buttons">
+          <button type="submit">Delete</button>
+          <button type="submit">Edit</button>
+          <button type="submit">Info</button>
+        </div>
+      </a>
+    </div>
+    <div class="actionButtons">
+      <button type="submit">Add New employee</button>
+    </div>
+  </div>
+</div>
