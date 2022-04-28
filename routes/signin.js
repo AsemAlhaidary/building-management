@@ -14,7 +14,7 @@ router.post('/addUser', security.checkNotAuthenticated, async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-    dbService.insertUser(req.body.name, req.body.username, hashedPassword);
+    await dbService.insertUser(req.body.name, req.body.username, hashedPassword);
 
     res.redirect('/login');
   } catch (error) {

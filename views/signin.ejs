@@ -15,10 +15,10 @@
         <input type="password" id="password" class="input" name="password" placeholder="426443" required>
       </div>
       <p class="error">
-          <% if (messages.error) { %>
-            <%- messages.error %>
-          <% } %>
-        </p>
+        <% if (messages.error) { %>
+          <%= messages.error %>
+        <% } %>
+      </p>
       <button class="button" type="submit">Sign in</button>
       <a class="link" href="/login">Log in</a>
     </form>

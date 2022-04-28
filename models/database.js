@@ -22,10 +22,20 @@ class DbService {
     return instance ? instance : new DbService();
   }
 
+  async checkUsername(username) {
+    const users = await this.getData();
+
+    if (users.find(user => user.username === username)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   async getData() {
     try {
       const result = await new Promise((resolve, reject) => {
-        let sql = "SELECT * FROM \`users\`;";
+        let sql = "SELECT * FROM \`users\`";
         con.query(sql, (err, result) => {
           if (err) reject(new Error(err.message));
           resolve(result);
@@ -40,7 +50,10 @@ class DbService {
 
   async insertUser(name, username, password) {
     try {
-      const result = await new Promise((resolve, reject) => {
+      if (this.checkUsername(username)) {
+        throw new Error('The user name is already exists');
+      }
+      await new Promise((resolve, reject) => {
         let sql = "INSERT INTO users (name, username, password) VALUES (?, ?, ?)";
         con.query(sql, [name, username, password], (err, result) => {
           if (err) reject(new Error(err.message));
@@ -48,9 +61,8 @@ class DbService {
         });
       });
 
-      return result;
     } catch (error) {
-      console.log(error);
+      throw new Error('The user name is already exists');
     }
   }
 
