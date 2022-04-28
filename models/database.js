@@ -53,64 +53,38 @@ class DbService {
       console.log(error);
     }
   }
+
+  async getUser(username) {
+    try {
+      const result = await new Promise((resolve, reject) => {
+        let sql = "SELECT * FROM users WHERE username = ?";
+        con.query(sql, [username], (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+
+      return result[0];
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getUserById(id) {
+    try {
+      const result = await new Promise((resolve, reject) => {
+        let sql = "SELECT * FROM users WHERE id = ?";
+        con.query(sql, [id], (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+
+      return result[0];
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
-
-// function insertUser(id, name, hashedPassword) {
-//   let sql = `INSERT INTO \`users\` (\`id\`, \`name\`, \`phone\`) VALUES (${id}, '${name}', '${hashedPassword}')`
-
-//   con.query(sql);
-// }
-
-// function checkUser(name) {
-//   let sql = `SELECT * FROM users WHERE id = ${5}`;
-
-//   // let finalResult = returned => returned ;
-
-//   con.connect(function(err) {
-//     if (err) throw err;
-//     console.log("Connected!");
-//     console.log(con.query(sql, (err, result, fields) => {
-//       if (err) throw err;
-//       // console.log(result[0]);
-//       return result[0];
-//       // finalResult(result[0]);
-//       // return console.log(result[0]);
-//     }));
-//   });
-
-//   // console.log(finalResult);
-//   // return finalResult;
-//   // const result = con.query(sql, (err, result, fields) => {
-//   //   if (err) {
-//   //     return console.log(err);
-//   //   }
-
-//   //   return console.log(result[0]);
-//   // });
-
-//   // return {
-//   //   id: 5,
-//   //   name: 'Asem',
-//   //   phone: '$2b$10$/gnkUldR2CXGVcvqBYTdMu5gpOxUprZSAkduaOd6HX6QREsEEBkfK'
-//   // };
-// }
-
-// function checkUserId(name) {
-//   let sql = `SELECT * FROM users WHERE id = ${5}`;
-
-//   const result = con.query(sql, (err, result, fields) => {
-//     if (err) {
-//       return console.log(err);
-//     }
-
-//     return console.log(result[0]);
-//   });
-
-//   return {
-//     id: 5,
-//     name: 'Asem',
-//     phone: '$2b$10$/gnkUldR2CXGVcvqBYTdMu5gpOxUprZSAkduaOd6HX6QREsEEBkfK'
-//   };
-// }
 
 module.exports = DbService;

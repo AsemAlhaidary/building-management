@@ -1,15 +1,13 @@
-// const express = require('express');
-const bcrypt = require('bcrypt');
 const passport = require('passport');
-// const flash = require('express-flash');
-// const session = require('express-session');
 
 const initializePassport = require('./passport-config');
 const database = require('../models/database');
+const dbService = database.getDbServiceInstance();
 
-initializePassport.initialize(passport, 
-  username => database.checkUser(username),
-  id => database.checkUserId(id)
+initializePassport.initialize(
+  passport, 
+  async username => JSON.stringify(await dbService.getUser(username)),
+  async id => JSON.stringify(await dbService.getUserById(id))
 );
 
 function checkAuthenticated(req, res, next) {

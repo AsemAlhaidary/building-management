@@ -8,8 +8,6 @@ const flash = require('express-flash');
 const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
-const stylus = require('stylus');
-const nib = require('nib');
 
 const loginRouter = require('./routes/login');
 const signinRouter = require('./routes/signin');
@@ -20,8 +18,6 @@ const purchasingRouter = require('./routes/purchasing');
 const additionalRouter = require('./routes/additional');
 const depordisRouter = require('./routes/depordis');
 const reportsRouter = require('./routes/reports');
-// const security = require('./security/security');
-// const database = require('./models/database');
 
 const app = express();
 
