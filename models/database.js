@@ -120,7 +120,7 @@ class DbService {
   }
 
   async getProjectById(id) {
-    const sql = "SELECT FROM projects WHERE id = ?";
+    const sql = "SELECT * FROM projects WHERE id = ?";
     const params = [id];
 
     try {
@@ -169,6 +169,30 @@ class DbService {
 
   async getEmployeesByProjectId(id) {
     const sql = "SELECT e.* FROM employees e LEFT JOIN projects p ON e.project_id = p.id WHERE p.id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async deleteEmployeeById(id) {
+    const sql = "DELETE FROM employees WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async getEmployeeById(id) {
+    const sql = "SELECT * FROM employees WHERE id = ?";
     const params = [id];
 
     try {

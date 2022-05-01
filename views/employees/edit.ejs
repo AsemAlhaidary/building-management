@@ -1,0 +1,24 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <%- include('../partials/sidebar') %>
+  <div class="workspace">
+    <form action="/employees/<%= projectId %>/edit/<%= employee.id %>" method="POST" class="addForm">
+      <div class="field">
+        <label class="def" for="name">Name</label>
+        <input type="text" id="name" class="input" name="projectName" value="<%= employee.project_name %>" placeholder="First Last" required>
+      </div>
+      <div class="field">
+        <label class="def" for="job">Job</label>
+        <input type="text" id="job" class="input" name="employeeJob" value="<%= employee.employee_job %>" placeholder="Carpenter" required>
+      </div>
+      <div class="field">
+        <label class="def" for="phoneNum">Phone Number</label>
+        <input type="" id="phoneNum" class="input" name="employeePhoneNum" value="<%= employee.employee_phone_num %>" placeholder="777777777" required>
+      </div>
+      
+      <div class="actionButtons">
+        <button type="submit">Edit</button>
+      </div>
+    </form>
+  </div>
+</div>
