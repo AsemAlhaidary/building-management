@@ -6,7 +6,7 @@ const dbService = database.getDbServiceInstance();
 
 initializePassport.initialize(
   passport, 
-  async username => JSON.stringify(await dbService.getUser(username)),
+  async username => JSON.stringify(await dbService.getUserByUserName(username)),
   async id => JSON.stringify(await dbService.getUserById(id))
 );
 

@@ -1,0 +1,34 @@
+.navigation {
+  padding: 0 var(--sitePadding);
+  width: 100%;
+  height: var(--navbarHeight);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--secondaryColor);
+
+  .navList {
+    display: flex;
+
+    .list {
+      display: flex;
+      align-items: center;
+      list-style-type: none;
+
+      .navLink {
+        text-decoration: none;
+        color: var(--textColor);
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .arrow {
+        margin: 0 2em;
+        font-size: 0.8em;
+        color: var(--textColor);
+      }
+    }
+  }
+}

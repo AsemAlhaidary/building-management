@@ -1,39 +1,36 @@
 <div class="container">
-  <%- include('../partials/navbar.ejs') %>
-  <%- include('../partials/sidebar.ejs') %>
-  <div class="workspace">
-    <div class="info">
-      <%# projects.forEach((project) => { %>
-        <!-- <a class="project">
-          <div class="infos">
-            <h3 class="info name">Name: <%#= project.name %></h3>
-            <h3 class="info address">Address: <%#= project.address %></h3>
-            <h3 class="info start">Start Date: <%#= project.start %></h3>
-            <h3 class="info end">End Date: <%#= project.end %></h3>
-          </div>
-          <div class="buttons">
-            <button type="submit">Delete</button>
-            <button type="submit">Edit</button>
-            <button type="submit">Open</button>
-          </div>
-        </a> -->
-      <%# }) %>
-      <a class="project">
-        <div class="infos">
-          <h3 class="info name">Name: project</h3>
-          <h3 class="info address">Address: address</h3>
-          <h3 class="info start">Start Date: 32-4-3234</h3>
-          <h3 class="info end">End Date: 32-4-3234</h3>
-        </div>
-        <div class="buttons">
-          <button type="submit">Delete</button>
-          <button type="submit">Edit</button>
-          <button type="submit">Open</button>
-        </div>
-      </a>
-    </div>
-    <div class="actionButtons">
-      <button type="submit">Add New Project</button>
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar') %>
+    <div class="workspace">
+      <div class="info">
+        <% projects.forEach((project) => { %>
+          <span class="project">
+            <div class="infos">
+              <h3 class="data name">Name: <span class="value"><%= project.project_name %></span></h3>
+              <h3 class="data address">Address: <span class="value"><%= project.project_address %></span></h3>
+              <h3 class="data start">Start Date: <span class="value"><%= project.project_start_date %></span></h3>
+              <h3 class="data end">End Date: <span class="value"><%= project.project_end_date %></span></h3>
+            </div>
+            <div class="buttons">
+              <form action="/projects/delete/<%= project.id %>" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+              <form action="/projects/edit/<%= project.id %>" method="GET">
+                <button type="submit">Edit</button>
+              </form>
+              <form action="/projects/open/<%= project.id %>" method="GET">
+                <button type="submit">Open</button>
+              </form>
+            </div>
+          </span>
+        <% }) %>
+      </div>
+      <div class="actionButtons">
+        <form action="/projects/new" method="GET">
+          <button type="submit">New</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

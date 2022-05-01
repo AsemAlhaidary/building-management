@@ -1,6 +1,6 @@
 const express = require('express');
 const security = require('../security/security');
-const session = require('express-session');
+const passport = require('passport');
 const router = express.Router();
 
 router.use(express.urlencoded({ extended: false }));
@@ -10,7 +10,7 @@ router.get('/', security.checkAuthenticated, (req, res) => {
 });
 
 router.get('/dashboard', security.checkAuthenticated, (req, res) => {
-  res.render('index', { name: req.body.username });
+  res.render('index', { user: passport.session.user });
 });
 
 router.delete('/logout', (req, res) => {

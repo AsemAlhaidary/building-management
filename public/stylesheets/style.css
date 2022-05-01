@@ -63,6 +63,8 @@
   --secondaryColor: #7cafb6;
   --semiTransparent: #adcdd1;
   --textColor: #290a1f;
+  --sitePadding: 8vw;
+  --navbarHeight: 4em;
   --siteFont: 'Poppins';
 }
 .formContainer {
@@ -140,4 +142,169 @@
 .formContainer .formBox .form .link:hover,
 .formContainer .formBox .form .link:focus {
   text-decoration: underline;
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.container .navigation {
+  padding: 0 var(--sitePadding);
+  width: 100%;
+  height: var(--navbarHeight);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--secondaryColor);
+}
+.container .navigation .navList {
+  display: flex;
+}
+.container .navigation .navList .list {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+.container .navigation .navList .list .navLink {
+  text-decoration: none;
+  color: var(--textColor);
+}
+.container .navigation .navList .list .navLink:hover {
+  text-decoration: underline;
+}
+.container .navigation .navList .list .arrow {
+  margin: 0 2em;
+  font-size: 0.8em;
+  color: var(--textColor);
+}
+.container .workspaceContainer {
+  display: flex;
+  width: 100%;
+  height: calc(100% - var(--navbarHeight));
+}
+.container .workspaceContainer .sideMenu {
+  padding: calc(var(--sitePadding) / 2);
+  padding-right: calc(var(--sitePadding) / 6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--secondaryColor);
+}
+.container .workspaceContainer .sideMenu .sideList {
+  width: 100%;
+}
+.container .workspaceContainer .sideMenu .sideList .list {
+  margin-bottom: 0.3em;
+  width: 100%;
+  list-style-type: none;
+}
+.container .workspaceContainer .sideMenu .sideList .list .listLink {
+  padding: 1em;
+  padding-left: calc(var(--sitePadding) - (var(--sitePadding) / 2));
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8em;
+  text-decoration: none;
+  color: var(--textColor);
+  transition: background-color 0.2s ease-in-out;
+}
+.container .workspaceContainer .sideMenu .sideList .list .listLink .arrow {
+  margin: 0 2em;
+  font-size: 0.8em;
+  color: var(--textColor);
+  transform: translateX(-100%);
+  transition: opacity, transform 0.2s ease-in-out;
+  opacity: 0;
+}
+.container .workspaceContainer .sideMenu .sideList .list .listLink:hover,
+.container .workspaceContainer .sideMenu .sideList .list .listLink:focus {
+  background-color: var(--primaryColor);
+}
+.container .workspaceContainer .sideMenu .sideList .list .listLink:hover .arrow,
+.container .workspaceContainer .sideMenu .sideList .list .listLink:focus .arrow {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.container .workspaceContainer .workspace {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+.container .workspaceContainer .workspace .info {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+.container .workspaceContainer .workspace .info .project {
+  padding: 0.5em;
+  display: block;
+  min-height: 3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: unset;
+  border: 1px solid var(--secondaryColor);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.container .workspaceContainer .workspace .info .project:hover,
+.container .workspaceContainer .workspace .info .project:focus-within {
+  background-color: var(--secondaryColor);
+}
+.container .workspaceContainer .workspace .info .project .infos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  flex-grow: 1;
+}
+.container .workspaceContainer .workspace .info .project .infos .data {
+  font-size: 0.8em;
+}
+.container .workspaceContainer .workspace .info .project .infos .data .value {
+  margin-left: 4px;
+  font-weight: 400;
+}
+.container .workspaceContainer .workspace .info .buttons {
+  display: flex;
+  gap: 0.5em;
+}
+.container .workspaceContainer .workspace .info .buttons button {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  color: var(--themeColor);
+  background-color: unset;
+  border: 1px solid var(--themeColor);
+  border-radius: 4em;
+}
+.container .workspaceContainer .workspace .info .buttons button:hover,
+.container .workspaceContainer .workspace .info .buttons button:focus {
+  background-color: var(--themeColor);
+  color: #fff;
+}
+.container .workspaceContainer .workspace .actionButtons {
+  padding: 1em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.container .workspaceContainer .workspace .actionButtons button {
+  display: inline-block;
+  padding: 0.5em 1.5em;
+  cursor: pointer;
+  background-color: var(--themeColor);
+  color: #fff;
+  border: 1px solid var(--themeColor);
+  border-radius: 5px;
+}
+.container .workspaceContainer .workspace .actionButtons button:hover,
+.container .workspaceContainer .workspace .actionButtons button:focus {
+  box-shadow: 0px 0px 8px var(--themeColor);
 }

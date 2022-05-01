@@ -1,0 +1,95 @@
+.workspace {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  .info {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    flex-grow: 1;
+    overflow-y: auto;
+
+    .project {
+      padding: 0.5em;
+      display: block;
+      min-height: 3em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: unset;
+      border: 1px solid var(--secondaryColor);
+      border-radius: 5px;
+      overflow: hidden;
+
+      &:hover,
+      &:focus-within {
+        background-color: var(--secondaryColor);
+      }
+
+      .infos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+        flex-grow: 1;
+
+        .data {
+          font-size: 0.8em;
+
+          .value {
+            margin-left: 4px;
+            // font-size: 0.6em;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 0.5em;
+
+      button {
+        display: inline-block;
+        padding: 0.4em 0.8em;
+        cursor: pointer;
+        color: var(--themeColor);
+        background-color: unset;
+        border: 1px solid var(--themeColor);
+        border-radius: 4em;
+
+        &:hover,
+        &:focus {
+          background-color: var(--themeColor);
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+
+  .actionButtons {
+    // height: 3em;
+    padding: 1em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button {
+      display: inline-block;
+      padding: 0.5em 1.5em;
+      cursor: pointer;
+      background-color: var(--themeColor);
+      color: #FFFFFF;
+      border: 1px solid var(--themeColor);
+      border-radius: 5px;
+
+      &:hover,
+      &:focus {
+        box-shadow: 0px 0px 8px var(--themeColor);
+      }
+    }
+  }
+}
