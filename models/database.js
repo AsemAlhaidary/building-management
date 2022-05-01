@@ -22,6 +22,21 @@ class DbService {
     return instance ? instance : new DbService();
   }
 
+  async runQuery(sql, params) {
+    try {
+      const result = await new Promise((resolve, reject) => {
+        con.query(sql, params, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
   async checkUsername(username) {
     const users = await this.getAllUsers();
 
@@ -32,128 +47,96 @@ class DbService {
     }
   }
 
-  async getAllUsers() {
-    try {
-      const result = await new Promise((resolve, reject) => {
-        let sql = "SELECT * FROM \`users\`";
-        con.query(sql, (err, result) => {
-          if (err) reject(new Error(err.message));
-          resolve(result);
-        });
-      });
+  async addNewUser(name, username, password) {
+    const sql = "INSERT INTO users (name, username, password) VALUES (?, ?, ?)";
+    const params = [name, username, password];
 
+    try {
+      const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
       throw new Error(error.message);
     }
   }
 
-  async addNewUser(name, username, password) {
+  async getAllUsers() {
+    const sql = "SELECT * FROM users";
+    const params = [];
+
     try {
-      if (this.checkUsername(username)) {
-        throw new Error('The user name is already exists');
-      }
-      await new Promise((resolve, reject) => {
-        let sql = "INSERT INTO users (name, username, password) VALUES (?, ?, ?)";
-        con.query(sql, [name, username, password], (err, result) => {
-          if (err) reject(new Error(err.message));
-          resolve(result);
-        });
-      });
-
-    } catch (error) {
-      throw new Error('The user name is already exists');
-    }
-  }
-
-  async addNewProject(projectName, projectAddress, projectStartDate, projectEndDate, userId) {
-    try {
-      await new Promise((resolve, reject) => {
-        let sql = "INSERT INTO projects (project_name, project_address, project_start_date, project_end_date, user_id) VALUES (?, ?, ?, ?, ?)";
-        con.query(sql, [projectName, projectAddress, projectStartDate, projectEndDate, userId], (err, result) => {
-          if (err) reject(new Error(err.message));
-          resolve(result);
-        });
-      });
-
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  }
-
-  async getUserByUserName(username) {
-    try {
-      const result = await new Promise((resolve, reject) => {
-        let sql = "SELECT * FROM users WHERE username = ?";
-        con.query(sql, [username], (err, result) => {
-          if (err) reject(new Error(err.message));
-          resolve(result);
-        });
-      });
-
-      return result[0];
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  }
-
-  async getProjectById(id) {
-    try {
-      const result = await new Promise((resolve, reject) => {
-        let sql = "SELECT FROM projects WHERE id = ?";
-        con.query(sql, [id], (err, result) => {
-          if (err) reject(new Error(err.message));
-          resolve(result);
-        });
-      });
-
-      return result[0];
+      const result = await this.runQuery(sql, params);
+      return result;
     } catch (error) {
       throw new Error(error.message);
     }
   }
 
   async getUserById(id) {
-    try {
-      const result = await new Promise((resolve, reject) => {
-        let sql = "SELECT * FROM users WHERE id = ?";
-        con.query(sql, [id], (err, result) => {
-          if (err) reject(new Error(err.message));
-          resolve(result);
-        });
-      });
+    const sql = "SELECT * FROM users WHERE id = ?";
+    const params = [id];
 
+    try {
+      const result = await this.runQuery(sql, params);
       return result[0];
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async getUserByUserName(username) {
+    const sql = "SELECT * FROM users WHERE username = ?";
+    const params = [username];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async addNewProject(projectName, projectAddress, projectStartDate, projectEndDate, userId) {
+    const sql = "INSERT INTO projects (project_name, project_address, project_start_date, project_end_date, user_id) VALUES (?, ?, ?, ?, ?)";
+    const params = [projectName, projectAddress, projectStartDate, projectEndDate, userId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async getAllProjects() {
+    const sql = "SELECT * FROM projects";
+    const params = [];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
     } catch (error) {
       throw new Error(error.message);
     }
   }
 
   async getProjectById(id) {
-    try {
-      const result = await new Promise((resolve, reject) => {
-        let sql = "SELECT * FROM projects WHERE id = ?";
-        con.query(sql, [id], (err, result) => {
-          if (err) reject(new Error(err.message));
-          resolve(result);
-        });
-      });
+    const sql = "SELECT FROM projects WHERE id = ?";
+    const params = [id];
 
+    try {
+      const result = await this.runQuery(sql, params);
       return result[0];
     } catch (error) {
       throw new Error(error.message);
     }
   }
-  async getAllProjects() {
-    try {
-      const result = await new Promise((resolve, reject) => {
-        let sql = "SELECT * FROM projects";
-        con.query(sql, (err, result) => {
-          if (err) reject(new Error(err.message));
-          resolve(result);
-        });
-      });
 
+  async editProjectById(id, nProjectName, nProjectAddress, nProjectStartDate, nProjectEndDate) {
+    const sql = "UPDATE projects SET project_name = ?, project_address = ?, project_start_date = ?, project_end_date = ? WHERE id = ?";
+    const params = [nProjectName, nProjectAddress,  nProjectStartDate, nProjectEndDate, id];
+
+    try {
+      const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
       throw new Error(error.message);
@@ -161,38 +144,23 @@ class DbService {
   }
 
   async deleteProjectById(id) {
-    try {
-      const result = await new Promise((resolve, reject) => {
-        let sql = "DELETE FROM projects WHERE id = ?";
-        con.query(sql, [id], (err, result) => {
-          if (err) reject(new Error(err.message));
-          resolve(result);
-        });
-      });
+    const sql = "DELETE FROM projects WHERE id = ?";
+    const params = [id];
 
+    try {
+      const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
       throw new Error(error.message);
     }
   }
 
-  async editProjectById(id, nProjectName, nProjectAddress, nProjectStartDate, nProjectEndDate) {
+  async getEmployeesByProjectId(id) {
+    const sql = "SELECT e.* FROM employees e RIGHT JOIN projects p ON e.project_id = ? WHERE e.project_id = ?";
+    const params = [id, id];
+
     try {
-      const result = await new Promise((resolve, reject) => {
-        let sql = "UPDATE projects SET project_name = ?, project_address = ?, project_start_date = ?, project_end_date = ? WHERE id = ?";
-
-        con.query(sql, [nProjectName, 
-                        nProjectAddress,  
-                        nProjectStartDate, 
-                        nProjectEndDate, 
-                        id], 
-                        (err, result) => {
-          if (err) reject(new Error(err.message));
-
-          resolve(result);
-        });
-      });
-
+      const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
       throw new Error(error.message);
