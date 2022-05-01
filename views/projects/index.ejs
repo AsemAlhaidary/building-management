@@ -5,7 +5,7 @@
     <div class="workspace">
       <div class="info">
         <% projects.forEach((project) => { %>
-          <span class="project">
+          <span class="infoContainer">
             <div class="infos">
               <h3 class="data name">Name: <span class="value"><%= project.project_name %></span></h3>
               <h3 class="data address">Address: <span class="value"><%= project.project_address %></span></h3>
@@ -19,7 +19,7 @@
               <form action="/projects/edit/<%= project.id %>" method="GET">
                 <button type="submit">Edit</button>
               </form>
-              <form action="/projects/open/<%= project.id %>" method="GET">
+              <form action="/projects/open/<%= project.id %>" method="POST">
                 <button type="submit">Open</button>
               </form>
             </div>

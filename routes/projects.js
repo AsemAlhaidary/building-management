@@ -23,7 +23,6 @@ router.post('/create', security.checkAuthenticated, async (req, res) => {
     const projectStartDate = req.body.projectStartDate;
     const projectEndDate = req.body.projectEndDate;
     const userId = passport.session.user.id;
-    console.log(projectName)
 
     await dbService.addNewProject(projectName, projectAddress, projectStartDate, projectEndDate, userId);
 
@@ -55,7 +54,6 @@ router.post('/edit/:id', security.checkAuthenticated, async (req, res) => {
     const nProjectEndDate = req.body.projectEndDate;
 
     const result = await dbService.editProjectById(id, nProjectName, nProjectAddress, nProjectStartDate, nProjectEndDate);
-    console.log(result)
 
     res.redirect('/projects');
   } catch (error) {
@@ -63,13 +61,11 @@ router.post('/edit/:id', security.checkAuthenticated, async (req, res) => {
   }
 });
 
-router.get('/open/:id', security.checkAuthenticated, async (req, res) => {
+router.post('/open/:id', security.checkAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
 
-    const project = await dbService.getProjectById(id);
-
-    res.render('employees/index', { project: project});
+    res.redirect('/employees/' + id );
   } catch (error) {
     console.log(error.message);
   }

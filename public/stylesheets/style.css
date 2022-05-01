@@ -242,7 +242,7 @@
   flex-grow: 1;
   overflow-y: auto;
 }
-.container .workspaceContainer .workspace .info .project {
+.container .workspaceContainer .workspace .info .infoContainer {
   padding: 0.5em;
   display: block;
   min-height: 3em;
@@ -254,20 +254,20 @@
   border-radius: 5px;
   overflow: hidden;
 }
-.container .workspaceContainer .workspace .info .project:hover,
-.container .workspaceContainer .workspace .info .project:focus-within {
+.container .workspaceContainer .workspace .info .infoContainer:hover,
+.container .workspaceContainer .workspace .info .infoContainer:focus-within {
   background-color: var(--secondaryColor);
 }
-.container .workspaceContainer .workspace .info .project .infos {
+.container .workspaceContainer .workspace .info .infoContainer .infos {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   flex-grow: 1;
 }
-.container .workspaceContainer .workspace .info .project .infos .data {
+.container .workspaceContainer .workspace .info .infoContainer .infos .data {
   font-size: 0.8em;
 }
-.container .workspaceContainer .workspace .info .project .infos .data .value {
+.container .workspaceContainer .workspace .info .infoContainer .infos .data .value {
   margin-left: 4px;
   font-weight: 400;
 }

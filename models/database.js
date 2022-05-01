@@ -155,9 +155,21 @@ class DbService {
     }
   }
 
+  async addNewEmployee(employeeName, employeeJob, employeePhoneNum, projectId) {
+    const sql = "INSERT INTO employees (employee_name, employee_job, employee_phone_num, project_id) VALUES (?, ?, ?, ?)";
+    const params = [employeeName, employeeJob, employeePhoneNum, projectId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
   async getEmployeesByProjectId(id) {
-    const sql = "SELECT e.* FROM employees e RIGHT JOIN projects p ON e.project_id = ? WHERE e.project_id = ?";
-    const params = [id, id];
+    const sql = "SELECT e.* FROM employees e LEFT JOIN projects p ON e.project_id = p.id WHERE p.id = ?";
+    const params = [id];
 
     try {
       const result = await this.runQuery(sql, params);
