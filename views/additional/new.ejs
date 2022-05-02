@@ -2,12 +2,12 @@
   <%- include('../partials/navbar') %>
   <%- include('../partials/sidebar') %>
   <div class="workspace">
-    <form action="/employees/new" method="POST" class="addForm">
-      <div class="field">
+    <form action="/employees/new" method="POST" class="form">
+      <div class="row">
         <label class="def" for="name">Name</label>
         <input type="text" id="name" class="input" name="name" placeholder="Ahmad" required>
       </div>
-      <div class="field">
+      <div class="row">
         <label class="def" for="job">Job</label>
         <select name="job" id="job">
           <option selected label="Job" value="Job">
@@ -15,7 +15,7 @@
           <option label="Job 2" value="Job 2">
         </select>
       </div>
-      <div class="field">
+      <div class="row">
         <label class="def" for="phone">Phone</label>
         <input type="tel" id="phone" class="input" name="phone" placeholder="32-6-2022" required>
       </div>
