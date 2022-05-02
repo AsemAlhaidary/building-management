@@ -236,12 +236,14 @@
   justify-content: space-between;
   flex-grow: 1;
 }
-.container .workspaceContainer .workspace.edit {
+.container .workspaceContainer .workspace.edit,
+.container .workspaceContainer .workspace.new {
   justify-content: center;
   align-items: center;
   flex-grow: 0;
 }
-.container .workspaceContainer .workspace.edit .formBox {
+.container .workspaceContainer .workspace.edit .formBox,
+.container .workspaceContainer .workspace.new .formBox {
   padding: var(--boxPadding);
   display: flex;
   gap: calc(var(--boxPadding) / 2);
@@ -250,34 +252,41 @@
   border-radius: 10px;
   background-color: var(--secondaryColor);
 }
-.container .workspaceContainer .workspace.edit .formBox .title {
+.container .workspaceContainer .workspace.edit .formBox .title,
+.container .workspaceContainer .workspace.new .formBox .title {
   color: var(--themeColor);
 }
-.container .workspaceContainer .workspace.edit .formBox .form {
+.container .workspaceContainer .workspace.edit .formBox .form,
+.container .workspaceContainer .workspace.new .formBox .form {
   display: flex;
   gap: calc(var(--boxPadding) / 2);
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.container .workspaceContainer .workspace.edit .formBox .form .row {
+.container .workspaceContainer .workspace.edit .formBox .form .row,
+.container .workspaceContainer .workspace.new .formBox .form .row {
   width: 100%;
   display: flex;
   gap: calc(var(--boxPadding) / 2);
   justify-content: space-between;
   align-items: center;
 }
-.container .workspaceContainer .workspace.edit .formBox .form .row:first-of-type {
+.container .workspaceContainer .workspace.edit .formBox .form .row:first-of-type,
+.container .workspaceContainer .workspace.new .formBox .form .row:first-of-type {
   margin-top: var(--boxPadding);
 }
-.container .workspaceContainer .workspace.edit .formBox .form .row:last-of-type {
+.container .workspaceContainer .workspace.edit .formBox .form .row:last-of-type,
+.container .workspaceContainer .workspace.new .formBox .form .row:last-of-type {
   margin-bottom: calc(var(--boxPadding) / 2);
 }
-.container .workspaceContainer .workspace.edit .formBox .form .row .def {
+.container .workspaceContainer .workspace.edit .formBox .form .row .def,
+.container .workspaceContainer .workspace.new .formBox .form .row .def {
   font-size: 1em;
   color: var(--textColor);
 }
-.container .workspaceContainer .workspace.edit .formBox .form .row .input {
+.container .workspaceContainer .workspace.edit .formBox .form .row .input,
+.container .workspaceContainer .workspace.new .formBox .form .row .input {
   padding: 0.5em 1em;
   font-size: 1em;
   color: var(--themeColor);
@@ -285,14 +294,16 @@
   border: unset;
   border-radius: 5px;
 }
-.container .workspaceContainer .workspace.edit .formBox .form .error {
+.container .workspaceContainer .workspace.edit .formBox .form .error,
+.container .workspaceContainer .workspace.new .formBox .form .error {
   margin-bottom: calc(var(--boxPadding) / 2);
   line-height: 0;
   color: #e61919;
   font-size: 0.8em;
   pointer-events: none;
 }
-.container .workspaceContainer .workspace.edit .formBox .form .button {
+.container .workspaceContainer .workspace.edit .formBox .form .button,
+.container .workspaceContainer .workspace.new .formBox .form .button {
   padding: 0.5em 1em;
   cursor: pointer;
   font-size: 1em;
@@ -301,11 +312,14 @@
   border: unset;
   border-radius: 5px;
 }
-.container .workspaceContainer .workspace.edit .formBox .form .link {
+.container .workspaceContainer .workspace.edit .formBox .form .link,
+.container .workspaceContainer .workspace.new .formBox .form .link {
   text-decoration: none;
 }
 .container .workspaceContainer .workspace.edit .formBox .form .link:hover,
-.container .workspaceContainer .workspace.edit .formBox .form .link:focus {
+.container .workspaceContainer .workspace.new .formBox .form .link:hover,
+.container .workspaceContainer .workspace.edit .formBox .form .link:focus,
+.container .workspaceContainer .workspace.new .formBox .form .link:focus {
   text-decoration: underline;
 }
 .container .workspaceContainer .workspace .info {

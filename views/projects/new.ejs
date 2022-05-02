@@ -1,28 +1,31 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <div class="workspace">
-      <form action="/projects/create" method="POST" class="form">
-        <div class="row">
-          <label class="def" for="name">Name</label>
-          <input type="text" id="name" class="input" name="projectName" placeholder="Someon's house" required>
-        </div>
-        <div class="row">
-          <label class="def" for="address">Address</label>
-          <input type="text" id="address" class="input" name="projectAddress" placeholder="Jamal street" required>
-        </div>
-        <div class="row">
-          <label class="def" for="startDate">Start Date</label>
-          <input type="date" id="startDate" class="input" name="projectStartDate" placeholder="32-6-2022" required>
-        </div>
-        <div class="row">
-          <label class="def" for="endDate">End Date</label>
-          <input type="date" id="endDate" class="input" name="projectEndDate" placeholder="32-6-2022" required>
-        </div>
-        <div class="actionButtons">
-          <button type="submit">Add</button>
-        </div>
-      </form>
+    <div class="workspace new">
+      <div class="formBox">
+        <h3 class="title">New Project</h3>
+        <form action="/projects/create" method="POST" class="form">
+          <div class="row">
+            <label class="def" for="name">Name</label>
+            <input type="text" id="name" class="input" name="projectName" placeholder="Someon's house" required>
+          </div>
+          <div class="row">
+            <label class="def" for="address">Address</label>
+            <input type="text" id="address" class="input" name="projectAddress" placeholder="Jamal street" required>
+          </div>
+          <div class="row">
+            <label class="def" for="startDate">Start Date</label>
+            <input type="date" id="startDate" class="input" name="projectStartDate" placeholder="32-6-2022" required>
+          </div>
+          <div class="row">
+            <label class="def" for="endDate">End Date</label>
+            <input type="date" id="endDate" class="input" name="projectEndDate" placeholder="32-6-2022" required>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Add</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
