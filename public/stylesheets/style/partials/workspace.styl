@@ -2,34 +2,37 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
 
-  &.edit,
-  &.new {
-    justify-content: center;
-    align-items: center;
+  &.projects {
     flex-grow: 0;
+  }
 
-    .formBox {
-      padding: var(--boxPadding);
-      display: flex;
-      gap: calc(var(--boxPadding) / 2);
-      flex-direction: column;
-      align-items: center;
-      border-radius: 10px;
-      background-color:  var(--secondaryColor);
+  &.index {
+    justify-content: space-between;
+  }
 
-      .title {
-        color: var(--themeColor);
-      }
+  .formBox {
+    padding: var(--boxPadding);
+    display: flex;
+    gap: calc(var(--boxPadding) / 2);
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    background-color:  var(--secondaryColor);
 
-      inputForm();
+    .title {
+      color: var(--themeColor);
     }
+
+    inputForm();
   }
 
   .info {
     padding: 1em;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
@@ -41,6 +44,7 @@
       display: block;
       min-height: 3em;
       display: flex;
+      gap: 1em;
       justify-content: space-between;
       align-items: center;
       background-color: unset;

@@ -2,7 +2,7 @@
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
     <%- include('../partials/sidebar') %>
-    <div class="workspace edit" style="flex-grow: 1;">
+    <div class="workspace">
       <div class="formBox">
         <h3 class="title">Edit Employee</h3>
         <form action="/employees/<%= projectId %>/edit/<%= employee.id %>" method="POST" class="form">
