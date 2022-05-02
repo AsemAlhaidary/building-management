@@ -191,6 +191,18 @@ class DbService {
     }
   }
 
+  async editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum) {
+    const sql = "UPDATE employees SET employee_name = ?, employee_job = ?, employee_phone_num = ? WHERE id = ?";
+    const params = [nEmployeeName, nEmployeeJob,  nEmployeePhoneNum, employeeId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
   async getEmployeeById(id) {
     const sql = "SELECT * FROM employees WHERE id = ?";
     const params = [id];

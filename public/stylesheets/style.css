@@ -243,6 +243,9 @@
 .container .workspaceContainer .workspace.index {
   justify-content: space-between;
 }
+.container .workspaceContainer .workspace.index .actionButtons {
+  align-self: flex-end;
+}
 .container .workspaceContainer .workspace .formBox {
   padding: var(--boxPadding);
   display: flex;

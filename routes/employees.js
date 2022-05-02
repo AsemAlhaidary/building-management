@@ -69,17 +69,16 @@ router.get('/:projectId/edit/:employeeId', security.checkAuthenticated, async (r
   }
 });
 
-router.post('/:projectId/edit', security.checkAuthenticated, async (req, res) => {
+router.post('/:projectId/edit/:employeeId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { projectId } = req.params;
-    const nProjectName = req.body.projectName;
-    const nProjectAddress = req.body.projectAddress;
-    const nProjectStartDate = req.body.projectStartDate;
-    const nProjectEndDate = req.body.projectEndDate;
+    const { projectId, employeeId } = req.params;
+    const nEmployeeName = req.body.employeeName;
+    const nEmployeeJob = req.body.employeeJob;
+    const nEmployeePhoneNum = req.body.employeePhoneNum;
 
-    const result = await dbService.editProjectById(projectId, nProjectName, nProjectAddress, nProjectStartDate, nProjectEndDate);
+    const result = await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum);
 
-    res.redirect('/projects');
+    res.redirect('/employees/' + projectId);
   } catch (error) {
     console.log(error.message);
   }
