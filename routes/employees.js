@@ -47,9 +47,23 @@ router.post('/:projectId/delete/:employeeId', security.checkAuthenticated, async
   }
 });
 
-router.post('/:projectId/open', security.checkAuthenticated, async (req, res) => {
+router.get('/:projectId/info/:employeeId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { projectId } = req.params;
+    const { projectId, employeeId } = req.params;
+
+    const employee = await dbService.getEmployeeById(employeeId);
+
+    res.render('employees/info', { employee: employee, projectId: projectId } );
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
+router.post('/:projectId/info/:employeeId', security.checkAuthenticated, async (req, res) => {
+  try {
+    const { projectId, employeeId } = req.params;
+
+    const employee = await dbService.getEmployeeById(employeeId);
 
     res.redirect('/employees/' + projectId );
   } catch (error) {
@@ -75,6 +89,18 @@ router.post('/:projectId/edit/:employeeId', security.checkAuthenticated, async (
     const nEmployeeName = req.body.employeeName;
     const nEmployeeJob = req.body.employeeJob;
     const nEmployeePhoneNum = req.body.employeePhoneNum;
+
+    const result = await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum);
+
+    res.redirect('/employees/' + projectId);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
+router.post('/:projectId/report/:employeeId', security.checkAuthenticated, async (req, res) => {
+  try {
+    const { projectId, employeeId } = req.params;
 
     const result = await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum);
 
