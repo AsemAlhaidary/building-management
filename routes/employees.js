@@ -5,33 +5,33 @@ const router = express.Router();
 
 const dbService = database.getDbServiceInstance();
 
-router.get('/:id/', security.checkAuthenticated, async (req, res) => {
-  const { id } = req.params;
+router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
+  const { projectId } = req.params;
 
-  const employees = await dbService.getEmployeesByProjectId(id);
+  const employees = await dbService.getEmployeesByProjectId(projectId);
 
-  res.render('employees/index', { employees: employees, projectId: id });
+  res.render('employees/index', { employees: employees, projectId: projectId });
 });
 
-router.get('/:id/new', security.checkAuthenticated, (req, res) => {
-  const { id } = req.params;
+router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
+  const { projectId } = req.params;
 
-  res.render('employees/new', { projectId: id });
+  res.render('employees/new', { projectId: projectId });
 });
 
-router.post('/:id/create', security.checkAuthenticated, async (req, res) => {
+router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
   try {
     const employeeName = req.body.employeeName;
     const employeeJob = req.body.employeeJob;
     const employeePhoneNum = req.body.employeePhoneNum;
-    const { id } = req.params;
+    const { projectId } = req.params;
 
-    await dbService.addNewEmployee(employeeName, employeeJob, employeePhoneNum, id);
+    await dbService.addNewEmployee(employeeName, employeeJob, employeePhoneNum, projectId);
 
-    res.redirect('/employees/' + id);
+    res.redirect('/employees/' + projectId);
   } catch (error) {
     console.log(error.message);
-    res.redirect('/employees/' + id + '/new');
+    res.redirect('/employees/' + projectId + '/new');
   }
 });
 
@@ -47,11 +47,11 @@ router.post('/:projectId/delete/:employeeId', security.checkAuthenticated, async
   }
 });
 
-router.post('/:id/open', security.checkAuthenticated, async (req, res) => {
+router.post('/:projectId/open', security.checkAuthenticated, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { projectId } = req.params;
 
-    res.redirect('/employees/' + id );
+    res.redirect('/employees/' + projectId );
   } catch (error) {
     console.log(error.message);
   }
@@ -69,15 +69,15 @@ router.get('/:projectId/edit/:employeeId', security.checkAuthenticated, async (r
   }
 });
 
-router.post('/:id/edit', security.checkAuthenticated, async (req, res) => {
+router.post('/:projectId/edit', security.checkAuthenticated, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { projectId } = req.params;
     const nProjectName = req.body.projectName;
     const nProjectAddress = req.body.projectAddress;
     const nProjectStartDate = req.body.projectStartDate;
     const nProjectEndDate = req.body.projectEndDate;
 
-    const result = await dbService.editProjectById(id, nProjectName, nProjectAddress, nProjectStartDate, nProjectEndDate);
+    const result = await dbService.editProjectById(projectId, nProjectName, nProjectAddress, nProjectStartDate, nProjectEndDate);
 
     res.redirect('/projects');
   } catch (error) {
