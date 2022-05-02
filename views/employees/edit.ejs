@@ -1,24 +1,28 @@
 <div class="container">
   <%- include('../partials/navbar') %>
-  <%- include('../partials/sidebar') %>
-  <div class="workspace">
-    <form action="/employees/<%= projectId %>/edit/<%= employee.id %>" method="POST" class="form">
-      <div class="row">
-        <label class="def" for="name">Name</label>
-        <input type="text" id="name" class="input" name="employeeName" value="<%= employee.employee_name %>" placeholder="First Last" required>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar') %>
+    <div class="workspace edit" style="flex-grow: 1;">
+      <div class="formBox">
+        <h3 class="title">Edit Employee</h3>
+        <form action="/employees/<%= projectId %>/edit/<%= employee.id %>" method="POST" class="form">
+          <div class="row">
+            <label class="def" for="name">Name</label>
+            <input type="text" id="name" class="input" name="employeeName" value="<%= employee.employee_name %>" placeholder="First Last" required>
+          </div>
+          <div class="row">
+            <label class="def" for="job">Job</label>
+            <input type="text" id="job" class="input" name="employeeJob" value="<%= employee.employee_job %>" placeholder="Carpenter" required>
+          </div>
+          <div class="row">
+            <label class="def" for="phoneNum">Phone Number</label>
+            <input type="tel" id="phoneNum" class="input" name="employeePhoneNum" value="<%= employee.employee_phone_num %>" placeholder="777777777" required>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Edit</button>
+          </div>
+        </form>
       </div>
-      <div class="row">
-        <label class="def" for="job">Job</label>
-        <input type="text" id="job" class="input" name="employeeJob" value="<%= employee.employee_job %>" placeholder="Carpenter" required>
-      </div>
-      <div class="row">
-        <label class="def" for="phoneNum">Phone Number</label>
-        <input type="tel" id="phoneNum" class="input" name="employeePhoneNum" value="<%= employee.employee_phone_num %>" placeholder="777777777" required>
-      </div>
-      
-      <div class="actionButtons">
-        <button type="submit">Edit</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
