@@ -7,7 +7,9 @@ const router = express.Router();
 const dbService = database.getDbServiceInstance();
 
 router.get('/', security.checkAuthenticated, async (req, res) => {
-  const projects = await dbService.getAllProjects();
+  const userId = passport.session.user.id;
+
+  const projects = await dbService.getProjectsByUserId(userId);
 
   res.render('projects/index', { projects: projects });
 });

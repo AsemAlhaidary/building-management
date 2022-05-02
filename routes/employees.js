@@ -9,7 +9,6 @@ router.get('/:id/', security.checkAuthenticated, async (req, res) => {
   const { id } = req.params;
 
   const employees = await dbService.getEmployeesByProjectId(id);
-  console.log(employees)
 
   res.render('employees/index', { employees: employees, projectId: id });
 });
@@ -47,6 +46,7 @@ router.post('/:projectId/delete/:employeeId', security.checkAuthenticated, async
     console.log(error.message);
   }
 });
+
 router.post('/:id/open', security.checkAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;

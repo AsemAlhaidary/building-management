@@ -107,9 +107,9 @@ class DbService {
     }
   }
 
-  async getAllProjects() {
-    const sql = "SELECT * FROM projects";
-    const params = [];
+  async getProjectsByUserId(id) {
+    const sql = "SELECT p.* FROM projects p LEFT JOIN users u ON p.user_id = u.id WHERE u.id = ?";
+    const params = [id];
 
     try {
       const result = await this.runQuery(sql, params);
@@ -197,7 +197,7 @@ class DbService {
 
     try {
       const result = await this.runQuery(sql, params);
-      return result;
+      return result[0];
     } catch (error) {
       throw new Error(error.message);
     }

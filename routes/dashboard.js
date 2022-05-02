@@ -6,7 +6,8 @@ const router = express.Router();
 router.use(express.urlencoded({ extended: false }));
 
 router.get('/', security.checkAuthenticated, (req, res) => {
-  res.redirect('/dashboard');
+  res.redirect('/projects');
+  // res.redirect('/dashboard');
 });
 
 router.get('/dashboard', security.checkAuthenticated, (req, res) => {
