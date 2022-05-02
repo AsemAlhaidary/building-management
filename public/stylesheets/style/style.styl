@@ -1,5 +1,6 @@
 @import "partials/universal";
 @import "partials/variables";
+@import "partials/mixins";
 @import "partials/login";
 
 .container {
@@ -10,8 +11,10 @@
   @import "partials/navbar";
 
   .workspaceContainer {
-    display: flex;
+    padding: 0 var(--sitePadding);
     width: 100%;
+    display: flex;
+    justify-content: center;
     height: calc(100% - var(--navbarHeight));
 
     @import "partials/sidebar";

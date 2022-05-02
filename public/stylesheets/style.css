@@ -65,6 +65,7 @@
   --textColor: #290a1f;
   --sitePadding: 8vw;
   --navbarHeight: 4em;
+  --boxPadding: 2em;
   --siteFont: 'Poppins';
 }
 .formContainer {
@@ -74,7 +75,6 @@
   place-items: center;
 }
 .formContainer .formBox {
-  --boxPadding: 2em;
   padding: var(--boxPadding);
   max-width: 60%;
   max-height: 80%;
@@ -178,8 +178,10 @@
   color: var(--textColor);
 }
 .container .workspaceContainer {
-  display: flex;
+  padding: 0 var(--sitePadding);
   width: 100%;
+  display: flex;
+  justify-content: center;
   height: calc(100% - var(--navbarHeight));
 }
 .container .workspaceContainer .sideMenu {
@@ -233,6 +235,78 @@
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
+}
+.container .workspaceContainer .workspace.edit {
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0;
+}
+.container .workspaceContainer .workspace.edit .formBox {
+  padding: var(--boxPadding);
+  display: flex;
+  gap: calc(var(--boxPadding) / 2);
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  background-color: var(--secondaryColor);
+}
+.container .workspaceContainer .workspace.edit .formBox .title {
+  color: var(--themeColor);
+}
+.container .workspaceContainer .workspace.edit .formBox .form {
+  display: flex;
+  gap: calc(var(--boxPadding) / 2);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container .workspaceContainer .workspace.edit .formBox .form .row {
+  width: 100%;
+  display: flex;
+  gap: calc(var(--boxPadding) / 2);
+  justify-content: space-between;
+  align-items: center;
+}
+.container .workspaceContainer .workspace.edit .formBox .form .row:first-of-type {
+  margin-top: var(--boxPadding);
+}
+.container .workspaceContainer .workspace.edit .formBox .form .row:last-of-type {
+  margin-bottom: calc(var(--boxPadding) / 2);
+}
+.container .workspaceContainer .workspace.edit .formBox .form .row .def {
+  font-size: 1em;
+  color: var(--textColor);
+}
+.container .workspaceContainer .workspace.edit .formBox .form .row .input {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  color: var(--themeColor);
+  background-color: var(--semiTransparent);
+  border: unset;
+  border-radius: 5px;
+}
+.container .workspaceContainer .workspace.edit .formBox .form .error {
+  margin-bottom: calc(var(--boxPadding) / 2);
+  line-height: 0;
+  color: #e61919;
+  font-size: 0.8em;
+  pointer-events: none;
+}
+.container .workspaceContainer .workspace.edit .formBox .form .button {
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 1em;
+  color: #fff;
+  background-color: var(--themeColor);
+  border: unset;
+  border-radius: 5px;
+}
+.container .workspaceContainer .workspace.edit .formBox .form .link {
+  text-decoration: none;
+}
+.container .workspaceContainer .workspace.edit .formBox .form .link:hover,
+.container .workspaceContainer .workspace.edit .formBox .form .link:focus {
+  text-decoration: underline;
 }
 .container .workspaceContainer .workspace .info {
   padding: 1em;

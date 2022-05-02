@@ -5,7 +5,6 @@
   place-items: center;
 
   .formBox {
-    --boxPadding: 2em;
     padding: var(--boxPadding);
     max-width: 60%;
     max-height: 80%;
@@ -20,69 +19,6 @@
       color: var(--themeColor);
     }
 
-    .form {
-      display: flex;
-      gap: calc(var(--boxPadding) / 2);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      .row {
-        width: 100%;
-        display: flex;
-        gap: calc(var(--boxPadding) / 2);
-        justify-content: space-between;
-        align-items: center;
-
-        &:first-of-type {
-          margin-top: var(--boxPadding);
-        }
-
-        &:last-of-type {
-          margin-bottom: calc(var(--boxPadding) / 2);
-        }
-
-        .def {
-          font-size: 1em;
-          color: var(--textColor);
-        }
-
-        .input {
-          padding: 0.5em 1em;
-          font-size: 1em;
-          color: var(--themeColor);
-          background-color: var(--semiTransparent);
-          border: unset;
-          border-radius: 5px;
-        }
-      }
-
-      .error {
-        margin-bottom: calc(var(--boxPadding) / 2);
-        line-height: 0;
-        color: hsl(0, 80%, 50%);
-        font-size: 0.8em;
-        pointer-events: none;
-      }
-
-      .button {
-        padding: 0.5em 1em;
-        cursor: pointer;
-        font-size: 1em;
-        color: hsl(320, 60%, 100%);
-        background-color: var(--themeColor);
-        border: unset;
-        border-radius: 5px;
-      }
-
-      .link {
-        text-decoration: none;
-
-        &:hover,
-        &:focus {
-          text-decoration: underline;
-        }
-      }
-    }
+    inputForm();
   }
 }

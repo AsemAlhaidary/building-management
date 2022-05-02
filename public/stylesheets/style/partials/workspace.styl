@@ -5,6 +5,28 @@
   justify-content: space-between;
   flex-grow: 1;
 
+  &.edit {
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+
+    .formBox {
+      padding: var(--boxPadding);
+      display: flex;
+      gap: calc(var(--boxPadding) / 2);
+      flex-direction: column;
+      align-items: center;
+      border-radius: 10px;
+      background-color:  var(--secondaryColor);
+
+      .title {
+        color: var(--themeColor);
+      }
+
+      inputForm();
+    }
+  }
+
   .info {
     padding: 1em;
     display: flex;
