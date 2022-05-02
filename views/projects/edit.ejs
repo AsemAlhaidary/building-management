@@ -1,27 +1,31 @@
 <div class="container">
   <%- include('../partials/navbar') %>
-  <%- include('../partials/sidebar') %>
-  <div class="workspace">
-    <form action="/projects/edit/<%= project.id %>" method="POST" class="addForm">
-      <div class="field">
-        <label class="def" for="name">Name</label>
-        <input type="text" id="name" class="input" name="projectName" value="<%= project.project_name %>" placeholder="Someon's house" required>
+  <div class="workspaceContainer">
+    <div class="workspace edit">
+      <div class="formBox">
+        <h3 class="title">Edit Project</h3>
+        <form action="/projects/edit/<%= project.id %>" method="POST" class="form">
+          <div class="row">
+            <label class="def" for="name">Name</label>
+            <input type="text" id="name" class="input" name="projectName" value="<%= project.project_name %>" placeholder="Someon's house" required>
+          </div>
+          <div class="row">
+            <label class="def" for="address">Address</label>
+            <input type="text" id="address" class="input" name="projectAddress" value="<%= project.project_address %>" placeholder="Jamal street" required>
+          </div>
+          <div class="row">
+            <label class="def" for="startDate">Start Date</label>
+            <input type="date" id="startDate" class="input" name="projectStartDate" value="<%= project.project_start_date %>" placeholder="32-6-2022" required>
+          </div>
+          <div class="row">
+            <label class="def" for="endDate">End Date</label>
+            <input type="date" id="endDate" class="input" name="projectEndDate" value="<%= project.project_end_date %>" placeholder="32-6-2022" required>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Edit</button>
+          </div>
+        </form>
       </div>
-      <div class="field">
-        <label class="def" for="address">Address</label>
-        <input type="text" id="address" class="input" name="projectAddress" value="<%= project.project_address %>" placeholder="Jamal street" required>
-      </div>
-      <div class="field">
-        <label class="def" for="startDate">Start Date</label>
-        <input type="date" id="startDate" class="input" name="projectStartDate" value="<%= project.project_start_date %>" placeholder="32-6-2022" required>
-      </div>
-      <div class="field">
-        <label class="def" for="endDate">End Date</label>
-        <input type="date" id="endDate" class="input" name="projectEndDate" value="<%= project.project_end_date %>" placeholder="32-6-2022" required>
-      </div>
-      <div class="actionButtons">
-        <button type="submit">Edit</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
