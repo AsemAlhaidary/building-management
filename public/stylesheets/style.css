@@ -389,3 +389,28 @@
 .container .workspaceContainer .workspace .actionButtons button:focus {
   box-shadow: 0px 0px 8px var(--themeColor);
 }
+.container .workspaceContainer .workspace .infoBox {
+  padding: var(--boxPadding);
+  width: 80%;
+  display: grid;
+  grid-auto-columns: repeat(2, 2fr);
+  grid-gap: 1em;
+}
+.container .workspaceContainer .workspace .infoBox .title {
+  text-align: center;
+  color: var(--themeColor);
+}
+.container .workspaceContainer .workspace .infoBox .field .info {
+  font-size: 0.8em;
+  display: flex;
+  gap: 0.5em;
+  justify-content: space-between;
+  flex-direction: unset;
+  color: var(--textColor);
+}
+.container .workspaceContainer .workspace .infoBox .field .info span {
+  display: inline-block;
+}
+.container .workspaceContainer .workspace .infoBox .actionButtons {
+  justify-content: center;
+}

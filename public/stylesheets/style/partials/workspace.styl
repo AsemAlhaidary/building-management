@@ -121,4 +121,37 @@
       }
     }
   }
+
+  .infoBox {
+    padding: var(--boxPadding);
+    width: 80%;
+    display: grid;
+    grid-auto-columns: repeat(2, 2fr);
+    grid-gap: 1em;
+    // box-shadow: 0 0 8px #000000;
+
+    .title {
+      text-align: center;
+      color: var(--themeColor);
+    }
+
+    .field {
+      .info {
+        font-size: 0.8em;
+        display: flex;
+        gap: 0.5em;
+        justify-content: space-between
+        flex-direction: unset;
+        color: var(--textColor);
+
+        span {
+          display: inline-block;
+        }
+      }
+    }
+
+    .actionButtons {
+      justify-content: center;
+    }
+  }
 }
