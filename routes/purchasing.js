@@ -81,7 +81,7 @@ router.get('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (r
 
     const purchase = await dbService.gePpurchaseById(purchaseId);
 
-    res.render('purchasing/edit', { purchase: purchase, projectId: projectId});
+    res.render('purchasing/edit', { purchase: purchase, projectId: projectId, label: false });
   } catch (error) {
     console.log(error.message);
   }
@@ -89,12 +89,16 @@ router.get('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (r
 
 router.post('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (req, res) => {
   try {
+    const purchaseName = req.body.purchaseName;
+    const purchaseUnit = req.body.purchaseUnit;
+    const purchaseUnitPrice = req.body.purchaseUnitPrice;
+    const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
+    const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
+    const purchaseType = req.body.purchaseType;
+    const purchaseDetails = req.body.purchaseDetails;
     const { projectId, purchaseId } = req.params;
-    const npurchaseName = req.body.purchaseName;
-    const npurchaseJob = req.body.purchaseJob;
-    const npurchasePhoneNum = req.body.purchasePhoneNum;
 
-    const result = await dbService.editPurchaseById(purchaseId, npurchaseName, npurchaseJob, npurchasePhoneNum);
+    const result = await dbService.editPurchaseById(purchaseName, purchaseUnit, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, purchaseId);
 
     res.redirect('/purchasing/' + projectId);
   } catch (error) {

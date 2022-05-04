@@ -262,6 +262,18 @@ class DbService {
       throw new Error(error.message);
     }
   }
+
+  async editPurchaseById(name, unit, unitPrice, quantity, total, type, details, id) {
+    const sql = "UPDATE purchases SET purchase_name = ?, purchase_details = ?, purchase_type = ?, purchase_unit = ?, purchase_unit_price = ?, purchase_unit_quantity = ?, purchase_total = ? WHERE id = ?";
+    const params = [name, details, type, unit, unitPrice, quantity, total, id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
 
 module.exports = DbService;

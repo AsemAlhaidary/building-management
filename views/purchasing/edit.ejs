@@ -1,22 +1,53 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar') %>
+    <%- include('../partials/sidebar', { active: 'purchases', projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">Edit Employee</h3>
-        <form action="/employees/<%= projectId %>/edit/<%= employee.id %>" method="POST" class="form">
+        <h3 class="title">Edit Purchase</h3>
+        <form action="/purchasing/<%= projectId %>/edit/<%= purchase.id %>" method="POST" class="form grid">
           <div class="row">
-            <label class="def" for="name">Name</label>
-            <input type="text" id="name" class="input" name="employeeName" value="<%= employee.employee_name %>" placeholder="First Last" required>
+            <% if (label) { %>
+              <label class="def" for="name">Name</label>
+            <% } %>
+            <input type="text" id="name" class="input" name="purchaseName" value="<%= purchase.purchase_name %>" placeholder="Name">
           </div>
           <div class="row">
-            <label class="def" for="job">Job</label>
-            <input type="text" id="job" class="input" name="employeeJob" value="<%= employee.employee_job %>" placeholder="Carpenter" required>
+            <% if (label) { %>
+              <label class="def" for="unit">Unit</label>
+            <% } %>
+            <input type="text" id="unit" class="input" name="purchaseUnit" value="<%= purchase.purchase_unit %>" placeholder="Unit">
           </div>
           <div class="row">
-            <label class="def" for="phoneNum">Phone Number</label>
-            <input type="tel" id="phoneNum" class="input" name="employeePhoneNum" value="<%= employee.employee_phone_num %>" placeholder="777777777" required>
+            <% if (label) { %>
+              <label class="def" for="unitPrice">Unit Price</label>
+            <% } %>
+            <input type="number" id="unitPrice" class="input" name="purchaseUnitPrice" value="<%= purchase.purchase_unit_price %>" placeholder="Unit Price">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="quantity">Quantity</label>
+            <% } %>
+            <input type="number" id="quantity" class="input" name="purchaseUnitQuantity" value="<%= purchase.purchase_unit_quantity %>" placeholder="Quantity">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="phoneNum">Type</label>
+            <% } %>
+            <select id="type" class="input" name="purchaseType" size="1">
+              <option value="postponed" <% if (purchase.purchase_type == 'postponed') { %>
+                selected
+              <% } %>>Postponed</option>
+              <option value="cash" <% if (purchase.purchase_type == 'cash') { %>
+                selected
+              <% } %>>Cash</option>
+            </select>
+          </div>
+          <div class="row spanTwo">
+            <% if (label) { %>
+              <label class="def" for="details">Details</label>
+            <% } %>
+            <textarea name="purchaseDetails" class="input" id="details" cols="30" rows="10" placeholder="Details"><%= purchase.purchase_details %></textarea>
           </div>
           <div class="actionButtons">
             <button type="submit">Edit</button>
