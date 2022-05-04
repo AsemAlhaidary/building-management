@@ -1,0 +1,28 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar') %>
+    <div class="workspace">
+      <div class="formBox">
+        <h3 class="title">New Deposit</h3>
+        <form action="/deposits/<%= projectId %>/create" method="POST" class="form">
+          <div class="row">
+            <label class="def" for="name">Name</label>
+            <input type="text" id="name" class="input" name="depositName" placeholder="First Last" required>
+          </div>
+          <div class="row">
+            <label class="def" for="time">Job</label>
+            <input type="text" id="time" class="input" name="depositTime" placeholder="deposit_time" required>
+          </div>
+          <div class="row">
+            <label class="def" for="deposit_time_price ">deposit_time_price </label>
+            <input type="tel" id="deposit_time_price " class="input" name="deposittimeprice " placeholder="777777777" required>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

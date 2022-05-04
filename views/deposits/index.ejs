@@ -1,0 +1,35 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'deposits', projectId: projectId }) %>
+    <div class="workspace index">
+      <div class="info">
+        <% extras.forEach((deposit) => { %>
+          <span class="infoContainer">
+            <div class="infos">
+              <h3 class="data name">Name: <span class="value"><%= deposit.deposit_name %></span></h3>
+              <h3 class="data Time">Job: <span class="value"><%= deposit.deposit_time %></span></h3>
+              <h3 class="data phoneNum">Time Price: <span class="value"><%= deposit.deposit_time_price %></span></h3>
+            </div>
+            <div class="buttons">
+              <form action="/deposits/<%= projectId %>/delete/<%= deposit.id %>" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+              <form action="/deposits/<%= projectId %>/edit/<%= deposit.id %>" method="GET">
+                <button type="submit">Edit</button>
+              </form>
+              <form action="/deposits/<%= projectId %>/info/<%= deposit.id %>" method="GET">
+                <button type="submit">Info</button>
+              </form>
+            </div>
+          </span>
+        <% }) %>
+      </div>
+      <div class="actionButtons">
+        <form action="/deposits/<%= projectId %>/new" method="GET">
+          <button type="submit">New</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
