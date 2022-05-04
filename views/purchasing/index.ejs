@@ -8,8 +8,9 @@
           <span class="infoContainer">
             <div class="infos">
               <h3 class="data name">Name: <span class="value"><%= purchase.purchase_name %></span></h3>
-              <h3 class="data job">Job: <span class="value"><%= purchase.purchase_job %></span></h3>
-              <h3 class="data phoneNum">Phone Number: <span class="value"><%= purchase.purchase_phone_num %></span></h3>
+              <h3 class="data price">Unit Price: <span class="value"><%= purchase.purchase_unit_price %></span></h3>
+              <h3 class="data quantity">Unit Quantity: <span class="value"><%= purchase.purchase_unit_quantity %></span></h3>
+              <h3 class="data total">Total Price: <span class="value"><%= purchase.purchase_total %></span></h3>
             </div>
             <div class="buttons">
               <form action="/purchasing/<%= projectId %>/delete/<%= purchase.id %>" method="POST">

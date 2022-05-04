@@ -8,7 +8,7 @@ const dbService = database.getDbServiceInstance();
 router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
-  const purchasing = await dbService.getPurchasingByProjectId(projectId);
+  const purchasing = await dbService.getPurchasesByProjectId(projectId);
 
   res.render('purchasing/index', { purchasing: purchasing, projectId: projectId });
 });
@@ -22,11 +22,15 @@ router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
   try {
     const purchaseName = req.body.purchaseName;
-    const purchaseJob = req.body.purchaseJob;
-    const purchasePhoneNum = req.body.purchasePhoneNum;
+    const purchaseUnit = req.body.purchaseUnit;
+    const purchaseUnitPrice = req.body.purchaseUnitPrice;
+    const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
+    const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
+    const purchaseType = req.body.purchaseType;
+    const purchaseDetails = req.body.purchaseDetails;
     const { projectId } = req.params;
 
-    await dbService.addNewpurchase(purchaseName, purchaseJob, purchasePhoneNum, projectId);
+    await dbService.addNewpurchase(purchaseName, purchaseUnit, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, projectId);
 
     res.redirect('/purchasing/' + projectId);
   } catch (error) {

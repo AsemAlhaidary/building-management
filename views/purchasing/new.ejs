@@ -5,7 +5,7 @@
     <div class="workspace">
       <div class="formBox">
         <h3 class="title">New Purchase</h3>
-        <form action="/employees/<%= projectId %>/create" method="POST" class="form grid">
+        <form action="/purchasing/<%= projectId %>/create" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
               <label class="def" for="name">Name</label>
@@ -22,7 +22,7 @@
             <% if (label) { %>
               <label class="def" for="unitPrice">Unit Price</label>
             <% } %>
-            <input type="number" id="unitPrice" class="input" name="purchaseUnitQuantity" placeholder="Unit Price">
+            <input type="number" id="unitPrice" class="input" name="purchaseUnitPrice" placeholder="Unit Price">
           </div>
           <div class="row">
             <% if (label) { %>

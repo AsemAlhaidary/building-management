@@ -347,7 +347,7 @@
   color: var(--primaryTextColor);
 }
 .container .workspaceContainer .workspace .formBox .form.grid .row .input {
-  font-size: 0.6em;
+  font-size: 0.8em;
 }
 .container .workspaceContainer .workspace .formBox .form.grid .actionButtons {
   grid-column: span 2;

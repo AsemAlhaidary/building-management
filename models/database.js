@@ -215,13 +215,49 @@ class DbService {
     }
   }
 
-  async getPurchasingByProjectId(id) {
+  async getPurchasesByProjectId(id) {
     const sql = "SELECT r.* FROM purchases r LEFT JOIN projects p ON r.project_id = p.id WHERE p.id = ?";
     const params = [id];
 
     try {
       const result = await this.runQuery(sql, params);
       return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async addNewpurchase(name, unit, unitPrice, quantity, total, type, details, id) {
+    const sql = "INSERT INTO purchases (purchase_name, purchase_details, purchase_type, purchase_unit, purchase_unit_price, purchase_unit_quantity, purchase_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    const params = [name, details, type, unit, unitPrice, quantity, total, id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async deletePurchaseById(id) {
+    const sql = "DELETE FROM purchases WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async gePpurchaseById(id) {
+    const sql = "SELECT * FROM purchases WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
     } catch (error) {
       throw new Error(error.message);
     }
