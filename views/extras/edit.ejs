@@ -1,0 +1,28 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'extras', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="formBox">
+        <h3 class="title">Edit Extra</h3>
+        <form action="/extras/<%= projectId %>/edit/<%= extra.id %>" method="POST" class="form">
+          <div class="row">
+            <label class="def" for="name">Name</label>
+            <input type="text" id="name" class="input" name="extraName" value="<%= extra.extra_name %>" placeholder="First Last" required>
+          </div>
+          <div class="row">
+            <label class="def" for="time">Time</label>
+            <input type="text" id="time" class="input" name="extraTime" value="<%= extra.extra_time %>" placeholder="extra_time" required>
+          </div>
+          <div class="row">
+            <label class="def" for="">Time Price</label>
+            <input type="tel" id="extra_time_price" class="input" name="extratimeprice" value="<%= extra.extra_time_price%>" placeholder="" required>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Edit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
