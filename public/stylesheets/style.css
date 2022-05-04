@@ -86,7 +86,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  background-color: var(--secondaryColor);
+  background-color: var(--accentColor);
 }
 .formContainer .formBox .title {
   color: var(--themeColor);
@@ -255,12 +255,14 @@
 }
 .container .workspaceContainer .workspace .formBox {
   padding: var(--boxPadding);
+  max-width: 80%;
   display: flex;
   gap: calc(var(--boxPadding) / 2);
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
   background-color: var(--accentColor);
+  overflow: hidden;
 }
 .container .workspaceContainer .workspace .formBox .title {
   color: var(--textColor);
@@ -319,6 +321,37 @@
 .container .workspaceContainer .workspace .formBox .form .link:hover,
 .container .workspaceContainer .workspace .formBox .form .link:focus {
   text-decoration: underline;
+}
+.container .workspaceContainer .workspace .formBox .form.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+}
+.container .workspaceContainer .workspace .formBox .form.grid .row {
+  align-items: flex-start;
+}
+.container .workspaceContainer .workspace .formBox .form.grid .row:first-of-type {
+  margin-top: unset;
+}
+.container .workspaceContainer .workspace .formBox .form.grid .row:last-of-type {
+  margin-bottom: unset;
+}
+.container .workspaceContainer .workspace .formBox .form.grid .row.spanTwo {
+  grid-column: span 2;
+}
+.container .workspaceContainer .workspace .formBox .form.grid .row.spanTwo textarea {
+  width: 100%;
+}
+.container .workspaceContainer .workspace .formBox .form.grid .row .def {
+  font-size: 0.8em;
+  color: var(--primaryTextColor);
+}
+.container .workspaceContainer .workspace .formBox .form.grid .row .input {
+  font-size: 0.6em;
+}
+.container .workspaceContainer .workspace .formBox .form.grid .actionButtons {
+  grid-column: span 2;
+  justify-content: center;
 }
 .container .workspaceContainer .workspace .info {
   padding: 1em;
@@ -387,6 +420,7 @@
   display: inline-block;
   padding: 0.5em 1.5em;
   cursor: pointer;
+  font-size: 0.8em;
   background-color: var(--themeColor);
   color: #fff;
   border: 1px solid var(--themeColor);
