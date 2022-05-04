@@ -69,6 +69,32 @@ INSERT INTO `employees` VALUES (1,'Asem','Programmer','+967775690990',NULL,9),(2
 UNLOCK TABLES;
 
 --
+-- Table structure for table `extras`
+--
+
+DROP TABLE IF EXISTS `extras`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `extras` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `extra_time` decimal(10,2) DEFAULT NULL,
+  `extra_time_price` decimal(10,2) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `employee_id_extras` (`employee_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `extras`
+--
+
+LOCK TABLES `extras` WRITE;
+/*!40000 ALTER TABLE `extras` DISABLE KEYS */;
+/*!40000 ALTER TABLE `extras` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `projects`
 --
 
@@ -197,4 +223,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-04 21:27:50
+-- Dump completed on 2022-05-04 22:05:46
