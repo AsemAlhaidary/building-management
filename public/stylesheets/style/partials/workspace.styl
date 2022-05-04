@@ -20,18 +20,62 @@
 
   .formBox {
     padding: var(--boxPadding);
+    max-width: 80%;
     display: flex;
     gap: calc(var(--boxPadding) / 2);
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
     background-color:  var(--accentColor);
+    overflow: hidden;
 
     .title {
       color: var(--textColor);
     }
 
     inputForm();
+
+    .form {
+      &.grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: start;
+
+        .row {
+          align-items: flex-start;
+
+          &:first-of-type {
+            margin-top: unset;
+          }
+
+          &:last-of-type {
+            margin-bottom: unset;
+          }
+
+          &.spanTwo {
+            grid-column: span 2;
+
+            textarea {
+              width: 100%;
+            }
+          }
+
+          .def {
+            font-size: 0.8em;
+            color: var(--primaryTextColor);
+          }
+
+          .input {
+            font-size: 0.6em;
+          }
+        }
+
+        .actionButtons {
+          grid-column: span 2;
+          justify-content: center;
+        }
+      }
+    }
   }
 
   .info {
@@ -110,6 +154,7 @@
       display: inline-block;
       padding: 0.5em 1.5em;
       cursor: pointer;
+      font-size: 0.8em;
       background-color: var(--themeColor);
       color: #FFFFFF;
       border: 1px solid var(--themeColor);

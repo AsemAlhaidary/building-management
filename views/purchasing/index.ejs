@@ -1,39 +1,35 @@
 <div class="container">
   <%- include('../partials/navbar') %>
-  <%- include('../partials/sidebar') %>
-  <div class="workspace">
-    <div class="info">
-      <%# purchasing.forEach((purchase) => { %>
-        <!-- <a class="purchase">
-          <div class="infos">
-            <h3 class="info name">Name: <%#= purchase.name %></h3>
-            <h3 class="info date">Date: <%#= purchase.date %></h3>
-            <h3 class="info count">Count: <%#= purchase.count %></h3>
-            <h3 class="info price">Price: <%#= purchase.price %></h3>
-          </div>
-          <div class="buttons">
-            <button type="submit">Delete</button>
-            <button type="submit">Edit</button>
-            <button type="submit">Info</button>
-          </div>
-        </a> -->
-      <%# }) %>
-      <a class="purchase">
-        <div class="infos">
-          <h3 class="info name">Name: purchase</h3>
-          <h3 class="info date">Date: date</h3>
-          <h3 class="info count">Count: +967777777777</h3>
-          <h3 class="info price">Price: +967777777777</h3>
-        </div>
-        <div class="buttons">
-          <button type="submit">Delete</button>
-          <button type="submit">Edit</button>
-          <button type="submit">Info</button>
-        </div>
-      </a>
-    </div>
-    <div class="actionButtons">
-      <button type="submit">Add New purchase</button>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'purchasing', projectId: projectId }) %>
+    <div class="workspace index">
+      <div class="info">
+        <% purchasing.forEach((purchase) => { %>
+          <span class="infoContainer">
+            <div class="infos">
+              <h3 class="data name">Name: <span class="value"><%= purchase.purchase_name %></span></h3>
+              <h3 class="data job">Job: <span class="value"><%= purchase.purchase_job %></span></h3>
+              <h3 class="data phoneNum">Phone Number: <span class="value"><%= purchase.purchase_phone_num %></span></h3>
+            </div>
+            <div class="buttons">
+              <form action="/purchasing/<%= projectId %>/delete/<%= purchase.id %>" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+              <form action="/purchasing/<%= projectId %>/edit/<%= purchase.id %>" method="GET">
+                <button type="submit">Edit</button>
+              </form>
+              <form action="/purchasing/<%= projectId %>/info/<%= purchase.id %>" method="GET">
+                <button type="submit">Info</button>
+              </form>
+            </div>
+          </span>
+        <% }) %>
+      </div>
+      <div class="actionButtons">
+        <form action="/purchasing/<%= projectId %>/new" method="GET">
+          <button type="submit">New</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

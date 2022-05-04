@@ -1,27 +1,55 @@
 <div class="container">
   <%- include('../partials/navbar') %>
-  <%- include('../partials/sidebar') %>
-  <div class="workspace">
-    <form action="/employees/new" method="POST" class="form">
-      <div class="row">
-        <label class="def" for="name">Name</label>
-        <input type="text" id="name" class="input" name="name" placeholder="Ahmad" required>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'purchasing' , projectId: projectId }) %>
+    <div class="workspace">
+      <div class="formBox">
+        <h3 class="title">New Purchase</h3>
+        <form action="/employees/<%= projectId %>/create" method="POST" class="form grid">
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="name">Name</label>
+            <% } %>
+            <input type="text" id="name" class="input" name="purchaseName" placeholder="Name">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="unit">Unit</label>
+            <% } %>
+            <input type="text" id="unit" class="input" name="purchaseUnit" placeholder="Unit">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="unitPrice">Unit Price</label>
+            <% } %>
+            <input type="number" id="unitPrice" class="input" name="purchaseUnitQuantity" placeholder="Unit Price">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="quantity">Quantity</label>
+            <% } %>
+            <input type="number" id="quantity" class="input" name="purchaseUnitQuantity" placeholder="Quantity">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="phoneNum">Type</label>
+            <% } %>
+            <select id="type" class="input" name="purchaseType" size="1">
+              <option value="postponed">Postponed</option>
+              <option value="cash">Cash</option>
+            </select>
+          </div>
+          <div class="row spanTwo">
+            <% if (label) { %>
+              <label class="def" for="details">Details</label>
+            <% } %>
+            <textarea name="purchaseDetails" class="input" id="details" cols="30" rows="10" placeholder="Details"></textarea>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Add</button>
+          </div>
+        </form>
       </div>
-      <div class="row">
-        <label class="def" for="job">Job</label>
-        <select name="job" id="job">
-          <option selected label="Job" value="Job">
-          <option label="Job 1" value="Job 1">
-          <option label="Job 2" value="Job 2">
-        </select>
-      </div>
-      <div class="row">
-        <label class="def" for="phone">Phone</label>
-        <input type="tel" id="phone" class="input" name="phone" placeholder="32-6-2022" required>
-      </div>
-      <div class="actionButtons">
-        <button type="submit">Add</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

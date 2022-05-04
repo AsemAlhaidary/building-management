@@ -35,11 +35,11 @@ router.post('/create', security.checkAuthenticated, async (req, res) => {
   }
 });
 
-router.get('/edit/:id', security.checkAuthenticated, async (req, res) => {
+router.get('/edit/:projectId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { projectId } = req.params;
 
-    const project = await dbService.getProjectById(id);
+    const project = await dbService.getProjectById(projectId);
 
     res.render('projects/edit', { project: project});
   } catch (error) {
@@ -47,15 +47,15 @@ router.get('/edit/:id', security.checkAuthenticated, async (req, res) => {
   }
 });
 
-router.post('/edit/:id', security.checkAuthenticated, async (req, res) => {
+router.post('/edit/:projectId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { projectId } = req.params;
     const nProjectName = req.body.projectName;
     const nProjectAddress = req.body.projectAddress;
     const nProjectStartDate = req.body.projectStartDate;
     const nProjectEndDate = req.body.projectEndDate;
 
-    const result = await dbService.editProjectById(id, nProjectName, nProjectAddress, nProjectStartDate, nProjectEndDate);
+    const result = await dbService.editProjectById(projectId, nProjectName, nProjectAddress, nProjectStartDate, nProjectEndDate);
 
     res.redirect('/projects');
   } catch (error) {
@@ -63,21 +63,21 @@ router.post('/edit/:id', security.checkAuthenticated, async (req, res) => {
   }
 });
 
-router.post('/open/:id', security.checkAuthenticated, async (req, res) => {
+router.post('/open/:projectId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { projectId } = req.params;
 
-    res.redirect('/employees/' + id );
+    res.redirect('/employees/' + projectId );
   } catch (error) {
     console.log(error.message);
   }
 });
 
-router.post('/delete/:id', security.checkAuthenticated, async (req, res) => {
+router.post('/delete/:projectId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { projectId } = req.params;
 
-    const result = await dbService.deleteProjectById(id);
+    const result = await dbService.deleteProjectById(projectId);
 
     if (result) res.redirect('/projects');
   } catch (error) {

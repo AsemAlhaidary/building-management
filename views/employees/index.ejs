@@ -1,7 +1,7 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar') %>
+    <%- include('../partials/sidebar', { active: 'employees', projectId: projectId }) %>
     <div class="workspace index">
       <div class="info">
         <% employees.forEach((employee) => { %>

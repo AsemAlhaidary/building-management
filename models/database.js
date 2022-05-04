@@ -214,6 +214,18 @@ class DbService {
       throw new Error(error.message);
     }
   }
+
+  async getPurchasingByProjectId(id) {
+    const sql = "SELECT r.* FROM purchases r LEFT JOIN projects p ON r.project_id = p.id WHERE p.id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
 
 module.exports = DbService;
