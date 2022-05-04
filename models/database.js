@@ -251,7 +251,7 @@ class DbService {
     }
   }
 
-  async gePpurchaseById(id) {
+  async getPurchaseById(id) {
     const sql = "SELECT * FROM purchases WHERE id = ?";
     const params = [id];
 

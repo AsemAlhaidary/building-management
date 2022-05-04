@@ -1,21 +1,33 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar') %>
+    <%- include('../partials/sidebar', { active: 'purchasing', projectId: projectId }) %>
     <div class="workspace">
       <div class="infoBox">
-        <h3 class="title">Info <%= employee.employee_name %></h3>
+        <h3 class="title">Info <%= purchase.purchase_name %></h3>
         <div class="field">
-          <h3 class="info">Name: <span><%= employee.employee_name %></span></h3>
+          <h3 class="info">Name: <span><%= purchase.purchase_name %></span></h3>
         </div>
         <div class="field">
-          <h3 class="info">Job: <span><%= employee.employee_job %></span></h3>
+          <h3 class="info">Unit: <span><%= purchase.purchase_unit %></span></h3>
         </div>
         <div class="field">
-          <h3 class="info">Phone Number: <span><%= employee.employee_phone_num %></span></h3>
+          <h3 class="info">Unit Price: <span><%= purchase.purchase_unit_price %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Quantity: <span><%= purchase.purchase_unit_quantity %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Type: <span><%= purchase.purchase_type %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Total Price: <span><%= purchase.purchase_total %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Details: <span><%= purchase.purchase_details %></span></h3>
         </div>
         <div class="actionButtons">
-          <form action="/employees/<%= projectId %>/report/<%= employee.id %>" method="post">
+          <form action="/purchasing/<%= projectId %>/report/<%= purchase.id %>" method="post">
             <button type="submit">Report</button>
           </form>
         </div>

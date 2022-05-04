@@ -79,7 +79,7 @@ router.get('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (r
   try {
     const { projectId ,purchaseId } = req.params;
 
-    const purchase = await dbService.gePpurchaseById(purchaseId);
+    const purchase = await dbService.getPurchaseById(purchaseId);
 
     res.render('purchasing/edit', { purchase: purchase, projectId: projectId, label: false });
   } catch (error) {
