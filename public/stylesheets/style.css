@@ -58,11 +58,14 @@
   background-color: var(--primaryColor);
 }
 :root {
-  --themeColor: #7e205f;
-  --primaryColor: #adcdd1;
-  --secondaryColor: #7cafb6;
-  --semiTransparent: #adcdd1;
-  --textColor: #290a1f;
+  --themeColorDark: #5d4037;
+  --themeColor: #795548;
+  --primaryColor: #d7ccc8;
+  --textColor: #fff;
+  --accentColor: #9e9e9e;
+  --primaryTextColor: #212121;
+  --secondaryTextColor: #757575;
+  --dividerColor: #bdbdbd;
   --sitePadding: 8vw;
   --navbarHeight: 4em;
   --boxPadding: 2em;
@@ -110,13 +113,13 @@
 }
 .formContainer .formBox .form .row .def {
   font-size: 1em;
-  color: var(--textColor);
+  color: var(--primaryTextColor);
 }
 .formContainer .formBox .form .row .input {
   padding: 0.5em 1em;
   font-size: 1em;
   color: var(--themeColor);
-  background-color: var(--semiTransparent);
+  background-color: var(--primaryColor);
   border: unset;
   border-radius: 5px;
 }
@@ -155,7 +158,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(--secondaryColor);
+  background-color: var(--themeColorDark);
 }
 .container .navigation .navList {
   display: flex;
@@ -190,7 +193,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  background-color: var(--secondaryColor);
+  background-color: var(--accentColor);
 }
 .container .workspaceContainer .sideMenu .sideList {
   width: 100%;
@@ -220,13 +223,17 @@
   transition: opacity, transform 0.2s ease-in-out;
   opacity: 0;
 }
+.container .workspaceContainer .sideMenu .sideList .list .listLink.active,
 .container .workspaceContainer .sideMenu .sideList .list .listLink:hover,
 .container .workspaceContainer .sideMenu .sideList .list .listLink:focus {
   background-color: var(--primaryColor);
+  color: var(--primaryTextColor);
 }
+.container .workspaceContainer .sideMenu .sideList .list .listLink.active .arrow,
 .container .workspaceContainer .sideMenu .sideList .list .listLink:hover .arrow,
 .container .workspaceContainer .sideMenu .sideList .list .listLink:focus .arrow {
   opacity: 1;
+  color: var(--primaryTextColor);
   transform: translateX(0%);
 }
 .container .workspaceContainer .workspace {
@@ -253,10 +260,10 @@
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  background-color: var(--secondaryColor);
+  background-color: var(--accentColor);
 }
 .container .workspaceContainer .workspace .formBox .title {
-  color: var(--themeColor);
+  color: var(--textColor);
 }
 .container .workspaceContainer .workspace .formBox .form {
   display: flex;
@@ -280,13 +287,13 @@
 }
 .container .workspaceContainer .workspace .formBox .form .row .def {
   font-size: 1em;
-  color: var(--textColor);
+  color: var(--primaryTextColor);
 }
 .container .workspaceContainer .workspace .formBox .form .row .input {
   padding: 0.5em 1em;
   font-size: 1em;
   color: var(--themeColor);
-  background-color: var(--semiTransparent);
+  background-color: var(--primaryColor);
   border: unset;
   border-radius: 5px;
 }
@@ -331,13 +338,13 @@
   justify-content: space-between;
   align-items: center;
   background-color: unset;
-  border: 1px solid var(--secondaryColor);
+  border: 1px solid var(--accentColor);
   border-radius: 5px;
   overflow: hidden;
 }
 .container .workspaceContainer .workspace .info .infoContainer:hover,
 .container .workspaceContainer .workspace .info .infoContainer:focus-within {
-  background-color: var(--secondaryColor);
+  background-color: var(--accentColor);
 }
 .container .workspaceContainer .workspace .info .infoContainer .infos {
   display: flex;
@@ -406,10 +413,11 @@
   gap: 0.5em;
   justify-content: space-between;
   flex-direction: unset;
-  color: var(--textColor);
+  color: var(--primaryTextColor);
 }
 .container .workspaceContainer .workspace .infoBox .field .info span {
   display: inline-block;
+  color: var(--secondaryTextColor);
 }
 .container .workspaceContainer .workspace .infoBox .actionButtons {
   justify-content: center;

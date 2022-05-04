@@ -25,10 +25,10 @@
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
-    background-color:  var(--secondaryColor);
+    background-color:  var(--accentColor);
 
     .title {
-      color: var(--themeColor);
+      color: var(--textColor);
     }
 
     inputForm();
@@ -52,13 +52,13 @@
       justify-content: space-between;
       align-items: center;
       background-color: unset;
-      border: 1px solid var(--secondaryColor);
+      border: 1px solid var(--accentColor);
       border-radius: 5px;
       overflow: hidden;
 
       &:hover,
       &:focus-within {
-        background-color: var(--secondaryColor);
+        background-color: var(--accentColor);
       }
 
       .infos {
@@ -128,7 +128,6 @@
     display: grid;
     grid-auto-columns: repeat(2, 2fr);
     grid-gap: 1em;
-    // box-shadow: 0 0 8px #000000;
 
     .title {
       text-align: center;
@@ -142,10 +141,11 @@
         gap: 0.5em;
         justify-content: space-between
         flex-direction: unset;
-        color: var(--textColor);
+        color: var(--primaryTextColor);
 
         span {
           display: inline-block;
+          color: var(--secondaryTextColor);
         }
       }
     }

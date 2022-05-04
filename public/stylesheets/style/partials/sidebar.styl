@@ -2,11 +2,9 @@
   padding: calc(var(--sitePadding) / 2);
   padding-right: calc(var(--sitePadding) / 6);
   height: 100%;
-  // width: max-content;
-  // max-width: 20%;
   display: flex;
   align-items: center;
-  background-color: var(--secondaryColor);
+  background-color: var(--accentColor);
 
   .sideList {
     width: 100%;
@@ -37,12 +35,15 @@
           opacity: 0;
         }
 
+        &.active,
         &:hover,
         &:focus {
           background-color: var(--primaryColor);
+          color: var(--primaryTextColor);
 
           .arrow {
             opacity: 1;
+            color: var(--primaryTextColor);
             transform: translateX(0%);
           }
         }
