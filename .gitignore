@@ -1,3 +1,5 @@
 .env
 node_modules/
 request.rest
+db/database model.mwb
+db/database model.mwb.bak

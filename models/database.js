@@ -14,7 +14,7 @@ const con = mysql.createConnection({
 });
 
 con.connect(err => {
-  if (err) throw err.message;
+  if (err) throw (new Error('Filed to connect the database')).message;
 });
 
 class DbService {
@@ -227,7 +227,7 @@ class DbService {
     }
   }
 
-  async addNewpurchase(name, unit, unitPrice, quantity, total, type, details, id) {
+  async addNewPurchase(name, unit, unitPrice, quantity, total, type, details, id) {
     const sql = "INSERT INTO purchases (purchase_name, purchase_details, purchase_type, purchase_unit, purchase_unit_price, purchase_unit_quantity, purchase_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     const params = [name, details, type, unit, unitPrice, quantity, total, id];
 
@@ -266,6 +266,68 @@ class DbService {
   async editPurchaseById(name, unit, unitPrice, quantity, total, type, details, id) {
     const sql = "UPDATE purchases SET purchase_name = ?, purchase_details = ?, purchase_type = ?, purchase_unit = ?, purchase_unit_price = ?, purchase_unit_quantity = ?, purchase_total = ? WHERE id = ?";
     const params = [name, details, type, unit, unitPrice, quantity, total, id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async getExtrasByProjectId(id) {
+    const sql = "SELECT e.*, m.employee_name FROM extras e LEFT JOIN employees m ON e.employee_id = m.id WHERE m.project_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async addNewExtraTime(extraTime, extraTimePrice, extraTotalPrice, employeeId) {
+    const sql = "INSERT INTO extras (extra_time, extra_time_price, extra_total_price, employee_id) VALUES (?, ?, ?, ?)";
+    const params = [extraTime, extraTimePrice, extraTotalPrice, employeeId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      console.log(result)
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async deleteExtraById(id) {
+    const sql = "DELETE FROM extras WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async getExtraById(id) {
+    const sql = "SELECT e.*, m.employee_name FROM extras e LEFT JOIN employees m ON e.employee_id = m.id WHERE e.id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async editExtraTimeById(nExtraTime, nExtraTimePrice, nExtraTotalPrice, employeeId, extraId) {
+    // const sql = "INSERT INTO extras (extra_time, extra_time_price, extra_total_price, employee_id) VALUES (?, ?, ?, ?)";
+    const sql = "UPDATE extras SET extra_time = ?, extra_time_price = ?, extra_total_price = ?, employee_id = ? WHERE id = ?";
+    const params = [nExtraTime, nExtraTimePrice, nExtraTotalPrice, employeeId, extraId];
 
     try {
       const result = await this.runQuery(sql, params);

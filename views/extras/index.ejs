@@ -7,9 +7,10 @@
         <% extras.forEach((extra) => { %>
           <span class="infoContainer">
             <div class="infos">
-              <h3 class="data name">Name: <span class="value"><%= extra.extra_name %></span></h3>
-              <h3 class="data Time">Job: <span class="value"><%= extra.extra_time %></span></h3>
+              <h3 class="data Time">Employee Name: <span class="value"><%= extra.employee_name %></span></h3>
+              <h3 class="data Time">Extra Time: <span class="value"><%= extra.extra_time %></span></h3>
               <h3 class="data phoneNum">Time Price: <span class="value"><%= extra.extra_time_price %></span></h3>
+              <h3 class="data phoneNum">Total Price: <span class="value"><%= extra.extra_total_price %></span></h3>
             </div>
             <div class="buttons">
               <form action="/extras/<%= projectId %>/delete/<%= extra.id %>" method="POST">

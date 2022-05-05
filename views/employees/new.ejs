@@ -1,7 +1,7 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar') %>
+    <%- include('../partials/sidebar', { active: 'employees', projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
         <h3 class="title">New Employee</h3>

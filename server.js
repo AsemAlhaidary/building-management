@@ -14,8 +14,8 @@ const signinRouter = require('./routes/signin');
 const dashboardRouter = require('./routes/dashboard');
 const projectsRouter = require('./routes/projects');
 const employeesRouter = require('./routes/employees');
-const purchasingRouter = require('./routes/purchasing');
-const additionalRouter = require('./routes/additional');
+const purchasesRouter = require('./routes/purchases');
+const extrasRouter = require('./routes/extras');
 const depordisRouter = require('./routes/depordis');
 const reportsRouter = require('./routes/reports');
 
@@ -45,8 +45,8 @@ app.use('/signin', signinRouter);
 app.use('/', dashboardRouter);
 app.use('/projects', projectsRouter);
 app.use('/employees', employeesRouter);
-app.use('/purchasing', purchasingRouter);
-app.use('/additional', additionalRouter);
+app.use('/purchases', purchasesRouter);
+app.use('/extras', extrasRouter);
 app.use('/depordis', depordisRouter);
 app.use('/reports', reportsRouter);
 

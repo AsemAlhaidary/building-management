@@ -1,11 +1,11 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar', { active: 'purchasing' , projectId: projectId }) %>
+    <%- include('../partials/sidebar', { active: 'purchases' , projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
         <h3 class="title">New Purchase</h3>
-        <form action="/purchasing/<%= projectId %>/create" method="POST" class="form grid">
+        <form action="/purchases/<%= projectId %>/create" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
               <label class="def" for="name">Name</label>

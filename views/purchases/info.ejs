@@ -1,7 +1,7 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar', { active: 'purchasing', projectId: projectId }) %>
+    <%- include('../partials/sidebar', { active: 'purchases', projectId: projectId }) %>
     <div class="workspace">
       <div class="infoBox">
         <h3 class="title">Info <%= purchase.purchase_name %></h3>
@@ -27,7 +27,7 @@
           <h3 class="info">Details: <span><%= purchase.purchase_details %></span></h3>
         </div>
         <div class="actionButtons">
-          <form action="/purchasing/<%= projectId %>/report/<%= purchase.id %>" method="post">
+          <form action="/purchases/<%= projectId %>/report/<%= purchase.id %>" method="post">
             <button type="submit">Report</button>
           </form>
         </div>

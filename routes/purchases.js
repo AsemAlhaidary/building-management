@@ -8,15 +8,15 @@ const dbService = database.getDbServiceInstance();
 router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
-  const purchasing = await dbService.getPurchasesByProjectId(projectId);
+  const purchases = await dbService.getPurchasesByProjectId(projectId);
 
-  res.render('purchasing/index', { purchasing: purchasing, projectId: projectId });
+  res.render('purchases/index', { purchases: purchases, projectId: projectId });
 });
 
 router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
   const { projectId } = req.params;
 
-  res.render('purchasing/new', { projectId: projectId, label: false });
+  res.render('purchases/new', { projectId: projectId, label: false });
 });
 
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
@@ -30,12 +30,12 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const purchaseDetails = req.body.purchaseDetails;
     const { projectId } = req.params;
 
-    await dbService.addNewpurchase(purchaseName, purchaseUnit, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, projectId);
+    await dbService.addNewPurchase(purchaseName, purchaseUnit, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, projectId);
 
-    res.redirect('/purchasing/' + projectId);
+    res.redirect('/purchases/' + projectId);
   } catch (error) {
     console.log(error.message);
-    res.redirect('/purchasing/' + projectId + '/new');
+    res.redirect('/purchases/' + projectId + '/new');
   }
 });
 
@@ -45,7 +45,7 @@ router.post('/:projectId/delete/:purchaseId', security.checkAuthenticated, async
 
     const result = await dbService.deletePurchaseById(purchaseId);
 
-    if (result) res.redirect('/purchasing/' + projectId);
+    if (result) res.redirect('/purchases/' + projectId);
   } catch (error) {
     console.log(error.message);
   }
@@ -57,7 +57,7 @@ router.get('/:projectId/info/:purchaseId', security.checkAuthenticated, async (r
 
     const purchase = await dbService.getPurchaseById(purchaseId);
 
-    res.render('purchasing/info', { purchase: purchase, projectId: projectId } );
+    res.render('purchases/info', { purchase: purchase, projectId: projectId } );
   } catch (error) {
     console.log(error.message);
   }
@@ -69,7 +69,7 @@ router.post('/:projectId/info/:purchaseId', security.checkAuthenticated, async (
 
     const purchase = await dbService.getPurchaseById(purchaseId);
 
-    res.redirect('/purchasing/' + projectId );
+    res.redirect('/purchases/' + projectId );
   } catch (error) {
     console.log(error.message);
   }
@@ -81,7 +81,7 @@ router.get('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (r
 
     const purchase = await dbService.getPurchaseById(purchaseId);
 
-    res.render('purchasing/edit', { purchase: purchase, projectId: projectId, label: false });
+    res.render('purchases/edit', { purchase: purchase, projectId: projectId, label: false });
   } catch (error) {
     console.log(error.message);
   }
@@ -100,7 +100,7 @@ router.post('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (
 
     const result = await dbService.editPurchaseById(purchaseName, purchaseUnit, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, purchaseId);
 
-    res.redirect('/purchasing/' + projectId);
+    res.redirect('/purchases/' + projectId);
   } catch (error) {
     console.log(error.message);
   }
@@ -112,7 +112,7 @@ router.post('/:projectId/report/:purchaseId', security.checkAuthenticated, async
 
     const result = await dbService.editPurchaseById(purchaseId, npurchaseName, npurchaseJob, npurchasePhoneNum);
 
-    res.redirect('/purchasing/' + projectId);
+    res.redirect('/purchases/' + projectId);
   } catch (error) {
     console.log(error.message);
   }
