@@ -25,7 +25,9 @@ DROP TABLE IF EXISTS `contractors`;
 CREATE TABLE `contractors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contractor_name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `project_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_contractors_projects1_idx` (`project_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,11 +53,11 @@ CREATE TABLE `employees` (
   `employee_job` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `employee_phone_num` varchar(13) CHARACTER SET utf8 DEFAULT NULL,
   `employee_day_price` decimal(11,2) DEFAULT NULL,
-  `project_id` int(11) DEFAULT NULL,
+  `project_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_employees_project_id` (`project_id`),
-  CONSTRAINT `project_id` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  KEY `fk_employees_projects1_idx` (`project_id`),
+  CONSTRAINT `fk_employees_projects1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +66,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'Asem','Programmer','+967775690990',NULL,9),(2,'Father','You','+966564080144',NULL,9),(4,'Waheeb Tawfeeq','Programmer','5555555555',NULL,NULL);
+INSERT INTO `employees` VALUES (6,'Asem','Programmer','+967775690990',NULL,10),(7,'Ehab','Man','+966564080144',NULL,10);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,10 +81,12 @@ CREATE TABLE `extras` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `extra_time` decimal(10,2) DEFAULT NULL,
   `extra_time_price` decimal(10,2) DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL,
+  `extra_total_price` decimal(10,2) DEFAULT NULL,
+  `employee_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `employee_id_extras` (`employee_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  KEY `fk_extras_employees1_idx` (`employee_id`),
+  CONSTRAINT `fk_extras_employees1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,6 +95,7 @@ CREATE TABLE `extras` (
 
 LOCK TABLES `extras` WRITE;
 /*!40000 ALTER TABLE `extras` DISABLE KEYS */;
+INSERT INTO `extras` VALUES (2,5.00,3000.00,15000.00,6),(4,43.00,433.00,18619.00,6),(5,6.00,5000.00,30000.00,7);
 /*!40000 ALTER TABLE `extras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,10 +112,10 @@ CREATE TABLE `projects` (
   `project_address` varchar(40) DEFAULT NULL,
   `project_start_date` varchar(40) DEFAULT NULL,
   `project_end_date` varchar(40) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(5) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id_idx` (`user_id`),
-  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_projects_users_idx` (`user_id`),
+  CONSTRAINT `fk_projects_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -120,7 +125,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (9,'Asem\'s house','King Faisal Rd','2022-05-13','2022-05-25',8);
+INSERT INTO `projects` VALUES (10,'Asem\'s house','King Faisal Rd','2022-05-03','2022-06-01',9);
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,11 +145,11 @@ CREATE TABLE `purchases` (
   `purchase_unit_price` decimal(20,2) DEFAULT NULL,
   `purchase_unit_quantity` int(11) DEFAULT NULL,
   `purchase_total` decimal(20,2) DEFAULT NULL,
-  `project_id` int(11) DEFAULT NULL,
+  `project_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_project_id` (`project_id`),
-  CONSTRAINT `pur_project_id` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  KEY `fk_purchases_projects1_idx` (`project_id`),
+  CONSTRAINT `fk_purchases_projects1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +158,7 @@ CREATE TABLE `purchases` (
 
 LOCK TABLES `purchases` WRITE;
 /*!40000 ALTER TABLE `purchases` DISABLE KEYS */;
-INSERT INTO `purchases` VALUES (4,'Car','اشتريتلي وحدة مليييييييح اعجبانا ررررة','cash','Car plus devide',30000.00,4,120000.00,9);
+INSERT INTO `purchases` VALUES (8,'Asem','nhfgjgdj','cash','hopa',31.00,231321,7170951.00,10);
 /*!40000 ALTER TABLE `purchases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,12 +174,12 @@ CREATE TABLE `statements` (
   `statement_unit` varchar(45) DEFAULT NULL,
   `statement_unit_price` decimal(20,2) DEFAULT NULL,
   `statement_unit_quantity` varchar(45) DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL,
   `contractor_id` int(11) DEFAULT NULL,
+  `employee_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `employee_id_idx` (`employee_id`),
   KEY `contractor_id_idx` (`contractor_id`),
-  CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_statements_employees1_idx` (`employee_id`),
+  CONSTRAINT `fk_statements_employees1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -199,9 +204,8 @@ CREATE TABLE `users` (
   `name` varchar(50) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +214,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (8,'Asem','asem@alhaidary','$2b$10$9wGowLr7q7sophjd0LXBqetp3qwWFwqCqt5oHKJczZbOzE2cFl5wC');
+INSERT INTO `users` VALUES (9,'Asem','asem@alhaidary','$2b$10$tbD1S.2PcxtPOblQ6wwRZ.KdMJtBIhvpEEam4M8tcmRgoyBsYONHu');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -223,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-04 22:05:46
+-- Dump completed on 2022-05-05 23:26:13
