@@ -14,9 +14,10 @@ const signinRouter = require('./routes/signin');
 const dashboardRouter = require('./routes/dashboard');
 const projectsRouter = require('./routes/projects');
 const employeesRouter = require('./routes/employees');
+const contractorsRouter = require('./routes/contractors');
 const purchasesRouter = require('./routes/purchases');
 const extrasRouter = require('./routes/extras');
-const depordisRouter = require('./routes/depordis');
+const deportesRouter = require('./routes/deportes');
 const reportsRouter = require('./routes/reports');
 
 const app = express();
@@ -45,9 +46,10 @@ app.use('/signin', signinRouter);
 app.use('/', dashboardRouter);
 app.use('/projects', projectsRouter);
 app.use('/employees', employeesRouter);
+app.use('/contractors', contractorsRouter);
 app.use('/purchases', purchasesRouter);
 app.use('/extras', extrasRouter);
-app.use('/depordis', depordisRouter);
+app.use('/deportes', deportesRouter);
 app.use('/reports', reportsRouter);
 
 app.listen(process.env.PORT || process.env.LISTEN_PORT);
