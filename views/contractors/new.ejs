@@ -1,0 +1,28 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'employees', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="formBox">
+        <h3 class="title">New Employee</h3>
+        <form action="/employees/<%= projectId %>/create" method="POST" class="form">
+          <div class="row">
+            <label class="def" for="name">Name</label>
+            <input type="text" id="name" class="input" name="employeeName" placeholder="First Last" required>
+          </div>
+          <div class="row">
+            <label class="def" for="job">Job</label>
+            <input type="text" id="job" class="input" name="employeeJob" placeholder="Carpenter" required>
+          </div>
+          <div class="row">
+            <label class="def" for="phoneNum">Phone Number</label>
+            <input type="tel" id="phoneNum" class="input" name="employeePhoneNum" placeholder="777777777" required>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

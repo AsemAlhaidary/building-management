@@ -1,0 +1,35 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'employees', projectId: projectId }) %>
+    <div class="workspace index">
+      <div class="info">
+        <% employees.forEach((employee) => { %>
+          <span class="infoContainer">
+            <div class="infos">
+              <h3 class="data name">Name: <span class="value"><%= employee.employee_name %></span></h3>
+              <h3 class="data job">Job: <span class="value"><%= employee.employee_job %></span></h3>
+              <h3 class="data phoneNum">Phone Number: <span class="value"><%= employee.employee_phone_num %></span></h3>
+            </div>
+            <div class="buttons">
+              <form action="/employees/<%= projectId %>/delete/<%= employee.id %>" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+              <form action="/employees/<%= projectId %>/edit/<%= employee.id %>" method="GET">
+                <button type="submit">Edit</button>
+              </form>
+              <form action="/employees/<%= projectId %>/info/<%= employee.id %>" method="GET">
+                <button type="submit">Info</button>
+              </form>
+            </div>
+          </span>
+        <% }) %>
+      </div>
+      <div class="actionButtons">
+        <form action="/employees/<%= projectId %>/new" method="GET">
+          <button type="submit">New</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
