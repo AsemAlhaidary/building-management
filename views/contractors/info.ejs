@@ -1,21 +1,34 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar', { active: 'employees', projectId: projectId }) %>
+    <%- include('../partials/sidebar', { active: 'contractors', projectId: projectId }) %>
     <div class="workspace">
       <div class="infoBox">
-        <h3 class="title">Info <%= employee.employee_name %></h3>
+        <h3 class="title">Info <%= contractor.contractor_name %></h3>
         <div class="field">
-          <h3 class="info">Name: <span><%= employee.employee_name %></span></h3>
+          <h3 class="info">Name: <span><%= contractor.contractor_name %></span></h3>
         </div>
         <div class="field">
-          <h3 class="info">Job: <span><%= employee.employee_job %></span></h3>
+          <h3 class="info">Details: <span><%= contractor.contractor_work_details %></span></h3>
         </div>
         <div class="field">
-          <h3 class="info">Phone Number: <span><%= employee.employee_phone_num %></span></h3>
+          <h3 class="info">Work Unit: <span><%= contractor.contractor_work_unit %></span></h3>
+        </div>
+        <% if (contractor.contractor_work_quantity) { %>
+          <div class="field">
+            <h3 class="info">Quantity: <span><%= contractor.contractor_work_quantity %></span></h3>
+          </div>
+        <% } %>
+        <% if (contractor.contractor_unit_price) { %>
+          <div class="field">
+            <h3 class="info">Unit Price: <span><%= contractor.contractor_unit_price %></span></h3>
+          </div>
+        <% } %>
+        <div class="field">
+          <h3 class="info">Total Price: <span><%= contractor.contractor_work_total %></span></h3>
         </div>
         <div class="actionButtons">
-          <form action="/employees/<%= projectId %>/report/<%= employee.id %>" method="post">
+          <form action="/contractors/<%= projectId %>/report/<%= contractor.id %>" method="post">
             <button type="submit">Report</button>
           </form>
         </div>

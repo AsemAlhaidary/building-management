@@ -335,6 +335,67 @@ class DbService {
       throw new Error(error.message);
     }
   }
+
+  async getContractorsByProjectId(id) {
+    const sql = "SELECT * FROM contractors WHERE project_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async addNewContractor(contractorName, contractorDetails, contractorWorkUnit, contractorWorkQuantity, contractorUnitPrice, contractorWorkTotal, projectId) {
+    const sql = "INSERT INTO contractors (contractor_name, contractor_work_details, contractor_work_unit, contractor_work_quantity, contractor_unit_price, contractor_work_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    const params = [contractorName, contractorDetails, contractorWorkUnit, contractorWorkQuantity, contractorUnitPrice, contractorWorkTotal, projectId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      console.log(result)
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async deleteContractorById(id) {
+    const sql = "DELETE FROM contractors WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async getContractorById(id) {
+    const sql = "SELECT * FROM contractors WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async editContractorById(nContractorName, nContractorDetails, nContractorWorkUnit, nContractorWorkQuantity, nContractorUnitPrice, nContractorWorkTotal, contractorId) {
+    const sql = "UPDATE contractors SET contractor_name = ?, contractor_work_details = ?, contractor_work_unit = ?, contractor_work_quantity = ?, contractor_unit_price = ?, contractor_work_total = ? WHERE id = ?";
+    const params = [nContractorName, nContractorDetails, nContractorWorkUnit, nContractorWorkQuantity, nContractorUnitPrice, nContractorWorkTotal, contractorId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
 
 module.exports = DbService;
