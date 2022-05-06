@@ -25,10 +25,15 @@ DROP TABLE IF EXISTS `contractors`;
 CREATE TABLE `contractors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contractor_name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `contractor_work_details` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `contractor_work_unit` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `contractor_work_quantity` int(11) DEFAULT NULL,
+  `contractor_unit_price` decimal(10,2) DEFAULT NULL,
+  `contractor_work_total` decimal(10,2) DEFAULT NULL,
   `project_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_contractors_projects1_idx` (`project_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +42,7 @@ CREATE TABLE `contractors` (
 
 LOCK TABLES `contractors` WRITE;
 /*!40000 ALTER TABLE `contractors` DISABLE KEYS */;
+INSERT INTO `contractors` VALUES (1,'Ehab','صبة 50 متر','متر مربع',50,20000.00,1000000.00,10),(2,'عاصم','بناء 5 دور','مقطوعية',NULL,NULL,235345.00,10);
 /*!40000 ALTER TABLE `contractors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +147,6 @@ CREATE TABLE `purchases` (
   `purchase_name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `purchase_details` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `purchase_type` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  `purchase_unit` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `purchase_unit_price` decimal(20,2) DEFAULT NULL,
   `purchase_unit_quantity` int(11) DEFAULT NULL,
   `purchase_total` decimal(20,2) DEFAULT NULL,
@@ -158,7 +163,7 @@ CREATE TABLE `purchases` (
 
 LOCK TABLES `purchases` WRITE;
 /*!40000 ALTER TABLE `purchases` DISABLE KEYS */;
-INSERT INTO `purchases` VALUES (8,'Asem','nhfgjgdj','cash','hopa',31.00,231321,7170951.00,10);
+INSERT INTO `purchases` VALUES (8,'Asem','nhfgjgdj','cash',31.00,231321,7170951.00,10);
 /*!40000 ALTER TABLE `purchases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,4 +232,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-05 23:26:13
+-- Dump completed on 2022-05-06 23:45:37
