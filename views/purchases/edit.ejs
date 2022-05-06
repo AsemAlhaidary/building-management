@@ -14,12 +14,6 @@
           </div>
           <div class="row">
             <% if (label) { %>
-              <label class="def" for="unit">Unit</label>
-            <% } %>
-            <input type="text" id="unit" class="input" name="purchaseUnit" value="<%= purchase.purchase_unit %>" placeholder="Unit">
-          </div>
-          <div class="row">
-            <% if (label) { %>
               <label class="def" for="unitPrice">Unit Price</label>
             <% } %>
             <input type="number" id="unitPrice" class="input" name="purchaseUnitPrice" value="<%= purchase.purchase_unit_price %>" placeholder="Unit Price">

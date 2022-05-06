@@ -22,7 +22,6 @@ router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
   try {
     const purchaseName = req.body.purchaseName;
-    const purchaseUnit = req.body.purchaseUnit;
     const purchaseUnitPrice = req.body.purchaseUnitPrice;
     const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
     const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
@@ -30,7 +29,7 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const purchaseDetails = req.body.purchaseDetails;
     const { projectId } = req.params;
 
-    await dbService.addNewPurchase(purchaseName, purchaseUnit, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, projectId);
+    await dbService.addNewPurchase(purchaseName, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, projectId);
 
     res.redirect('/purchases/' + projectId);
   } catch (error) {
@@ -90,7 +89,6 @@ router.get('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (r
 router.post('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (req, res) => {
   try {
     const purchaseName = req.body.purchaseName;
-    const purchaseUnit = req.body.purchaseUnit;
     const purchaseUnitPrice = req.body.purchaseUnitPrice;
     const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
     const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
