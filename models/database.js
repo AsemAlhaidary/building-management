@@ -155,9 +155,9 @@ class DbService {
     }
   }
 
-  async addNewEmployee(employeeName, employeeJob, employeePhoneNum, projectId) {
-    const sql = "INSERT INTO employees (employee_name, employee_job, employee_phone_num, project_id) VALUES (?, ?, ?, ?)";
-    const params = [employeeName, employeeJob, employeePhoneNum, projectId];
+  async addNewEmployee(employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, projectId) {
+    const sql = "INSERT INTO employees (employee_name, employee_job, employee_phone_num, employee_day_price, employee_start_date, employee_end_date, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    const params = [employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, projectId];
 
     try {
       const result = await this.runQuery(sql, params);

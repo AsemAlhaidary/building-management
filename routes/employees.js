@@ -16,7 +16,7 @@ router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
 router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
   const { projectId } = req.params;
 
-  res.render('employees/new', { projectId: projectId });
+  res.render('employees/new', { projectId: projectId, label: false });
 });
 
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
@@ -24,9 +24,12 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const employeeName = req.body.employeeName;
     const employeeJob = req.body.employeeJob;
     const employeePhoneNum = req.body.employeePhoneNum;
+    const employeeDayPrice = req.body.employeeDayPrice;
+    const employeeWorkStart = req.body.employeeWorkStart;
+    const employeeWorkEnd = req.body.employeeWorkEnd;
     const { projectId } = req.params;
 
-    await dbService.addNewEmployee(employeeName, employeeJob, employeePhoneNum, projectId);
+    await dbService.addNewEmployee(employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, projectId);
 
     res.redirect('/employees/' + projectId);
   } catch (error) {
@@ -77,7 +80,7 @@ router.get('/:projectId/edit/:employeeId', security.checkAuthenticated, async (r
 
     const employee = await dbService.getEmployeeById(employeeId);
 
-    res.render('employees/edit', { employee: employee, projectId: projectId});
+    res.render('employees/edit', { employee: employee, projectId: projectId, label: false });
   } catch (error) {
     console.log(error.message);
   }
