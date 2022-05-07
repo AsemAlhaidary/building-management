@@ -1,0 +1,28 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'managers', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="infoBox">
+        <h3 class="title">Info <%= manager.manager_name %></h3>
+        <div class="field">
+          <h3 class="info">Name: <span><%= manager.manager_name %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Details: <span><%= manager.manager_outlay_details %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Amount: <span><%= manager.manager_outlay_amount %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Date: <span><%= manager.manager_outlay_date %></span></h3>
+        </div>
+        <div class="actionButtons">
+          <form action="/managers/<%= projectId %>/report/<%= manager.id %>" method="post">
+            <button type="submit">Report</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

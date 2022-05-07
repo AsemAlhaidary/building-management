@@ -396,6 +396,67 @@ class DbService {
       throw new Error(error.message);
     }
   }
+
+  async getManagersByProjectId(id) {
+    const sql = "SELECT * FROM managers WHERE project_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async addNewManager(managerName, managerOutlayDetails, managerOutlayAmount, managerOutlayDate, projectId) {
+    const sql = "INSERT INTO managers (manager_name, manager_outlay_details, manager_outlay_amount, manager_outlay_date, project_id) VALUES (?, ?, ?, ?, ?)";
+    const params = [managerName, managerOutlayDetails, managerOutlayAmount, managerOutlayDate, projectId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      console.log(result)
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async getManagerById(id) {
+    const sql = "SELECT * FROM managers WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async deleteManagerById(id) {
+    const sql = "DELETE FROM managers WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async editManagerById(nManagerName, nManagerOutlayDetails, nManagerOutlayAmount, nManagerOutlayDate, managerId) {
+    const sql = "UPDATE managers SET manager_name = ?, manager_outlay_details = ?, manager_outlay_amount = ?, manager_outlay_date = ? WHERE id = ?";
+    const params = [nManagerName, nManagerOutlayDetails, nManagerOutlayAmount, nManagerOutlayDate, managerId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
 
 module.exports = DbService;

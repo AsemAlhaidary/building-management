@@ -11,6 +11,11 @@
       <% } %>">Contractors<span class="arrow">►</span></a>
     </li>
     <li class="list">
+      <a href="/managers/<%= projectId %>" class="listLink <% if (active == 'managers') { %>
+      active
+      <% } %>">Managers<span class="arrow">►</span></a>
+    </li>
+    <li class="list">
       <a href="/purchases/<%= projectId %>" class="listLink <% if (active == 'purchases') { %>
       active
       <% } %>">Purchases<span class="arrow">►</span></a>

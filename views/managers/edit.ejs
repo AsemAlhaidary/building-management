@@ -1,0 +1,40 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'managers', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="formBox">
+        <h3 class="title">Edit manager</h3>
+        <form action="/managers/<%= projectId %>/edit/<%= manager.id %>" method="POST" class="form grid">
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="managerName">Name</label>
+            <% } %>
+            <input type="text" id="managerName" class="input" name="nManagerName" value="<%= manager.manager_name %>" placeholder="Name" required>
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="managerOutlayDetails">Details</label>
+            <% } %>
+            <input type="text" id="managerOutlayDetails" class="input" name="nManagerOutlayDetails" value="<%= manager.manager_outlay_details %>" placeholder="Details" required>
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="managerOutlayAmount">Amount</label>
+            <% } %>
+            <input type="number" id="managerOutlayAmount" class="input" name="nManagerOutlayAmount" value="<%= manager.manager_outlay_amount %>" placeholder="Amount">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="managerOutlayDate">Date</label>
+            <% } %>
+            <input type="date" id="managerOutlayDate" class="input" name="nManagerOutlayDate" value="<%= manager.manager_outlay_date %>" placeholder="Date">
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Edit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

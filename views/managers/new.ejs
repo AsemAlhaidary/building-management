@@ -1,0 +1,40 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'managers', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="formBox">
+        <h3 class="title">New Manager</h3>
+        <form action="/managers/<%= projectId %>/create" method="POST" class="form grid">
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="managerName">Name</label>
+            <% } %>
+            <input type="text" id="managerName" class="input" name="managerName" placeholder="Name" required>
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="managerOutlayDetails">Details</label>
+            <% } %>
+            <input type="text" id="managerOutlayDetails" class="input" name="managerOutlayDetails" placeholder="Details" required>
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="managerOutlayAmount">Amount</label>
+            <% } %>
+            <input type="number" id="managerOutlayAmount" class="input" name="managerOutlayAmount" placeholder="Amount">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="managerOutlayDate">Date</label>
+            <% } %>
+            <input type="date" id="managerOutlayDate" class="input" name="managerOutlayDate" placeholder="Date">
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
