@@ -33,7 +33,7 @@ CREATE TABLE `contractors` (
   `project_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_contractors_projects1_idx` (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,11 +59,13 @@ CREATE TABLE `employees` (
   `employee_job` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `employee_phone_num` varchar(13) CHARACTER SET utf8 DEFAULT NULL,
   `employee_day_price` decimal(11,2) DEFAULT NULL,
+  `employee_start_date` date DEFAULT NULL,
+  `employee_end_date` date DEFAULT NULL,
   `project_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_employees_projects1_idx` (`project_id`),
   CONSTRAINT `fk_employees_projects1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +74,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (6,'Asem','Programmer','+967775690990',NULL,10),(7,'Ehab','Man','+966564080144',NULL,10);
+INSERT INTO `employees` VALUES (6,'Asem','Programmer','+967775690990',NULL,NULL,NULL,10),(7,'Ehab','Man','+966564080144',NULL,NULL,NULL,10),(8,'Asem','Programmer','+967775690990',3000.00,'2022-05-09','2022-05-17',10);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,6 +105,36 @@ LOCK TABLES `extras` WRITE;
 /*!40000 ALTER TABLE `extras` DISABLE KEYS */;
 INSERT INTO `extras` VALUES (2,5.00,3000.00,15000.00,6),(4,43.00,433.00,18619.00,6),(5,6.00,5000.00,30000.00,7);
 /*!40000 ALTER TABLE `extras` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `managers`
+--
+
+DROP TABLE IF EXISTS `managers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `managers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manager_name` varchar(45) DEFAULT NULL,
+  `manager_outlay_details` varchar(200) DEFAULT NULL,
+  `manager_outlay_amount` decimal(10,2) DEFAULT NULL,
+  `manager_outlay_date` date DEFAULT NULL,
+  `project_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_managers_outlays_projects1_idx` (`project_id`),
+  CONSTRAINT `fk_managers_outlays_projects1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `managers`
+--
+
+LOCK TABLES `managers` WRITE;
+/*!40000 ALTER TABLE `managers` DISABLE KEYS */;
+INSERT INTO `managers` VALUES (1,'Asemhrth','hdfhfshfd',666666.00,'2022-05-09',10);
+/*!40000 ALTER TABLE `managers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -222,6 +254,10 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (9,'Asem','asem@alhaidary','$2b$10$tbD1S.2PcxtPOblQ6wwRZ.KdMJtBIhvpEEam4M8tcmRgoyBsYONHu');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'building_management'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -232,4 +268,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-06 23:45:37
+-- Dump completed on 2022-05-07 23:50:26
