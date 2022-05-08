@@ -1,0 +1,34 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'invoices', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="infoBox">
+        <h3 class="title">Info <%= invoice.invoice_name %></h3>
+        <div class="field">
+          <h3 class="info">Name: <span><%= invoice.invoice_name %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Unit Price: <span><%= invoice.invoice_unit_price %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Quantity: <span><%= invoice.invoice_unit_quantity %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Type: <span><%= invoice.invoice_type %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Total Price: <span><%= invoice.invoice_total %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Details: <span><%= invoice.invoice_details %></span></h3>
+        </div>
+        <div class="actionButtons">
+          <form action="/invoices/<%= projectId %>/report/<%= invoice.id %>" method="post">
+            <button type="submit">Report</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
