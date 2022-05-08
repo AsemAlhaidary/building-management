@@ -54,4 +54,6 @@ app.use('/extras', extrasRouter);
 app.use('/deportes', deportesRouter);
 app.use('/reports', reportsRouter);
 
-app.listen(process.env.PORT || process.env.LISTEN_PORT);
+app.listen(process.env.PORT || process.env.LISTEN_PORT, () => {
+  console.log('app is listening on: http://localhost:3000/');
+});

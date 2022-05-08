@@ -155,9 +155,9 @@ class DbService {
     }
   }
 
-  async addNewEmployee(employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, projectId) {
-    const sql = "INSERT INTO employees (employee_name, employee_job, employee_phone_num, employee_day_price, employee_start_date, employee_end_date, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    const params = [employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, projectId];
+  async addNewEmployee(employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, employeeTotal, projectId) {
+    const sql = "INSERT INTO employees (employee_name, employee_job, employee_phone_num, employee_day_price, employee_start_date, employee_end_date, employee_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    const params = [employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, employeeTotal, projectId];
 
     try {
       const result = await this.runQuery(sql, params);
@@ -191,9 +191,9 @@ class DbService {
     }
   }
 
-  async editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum) {
-    const sql = "UPDATE employees SET employee_name = ?, employee_job = ?, employee_phone_num = ? WHERE id = ?";
-    const params = [nEmployeeName, nEmployeeJob,  nEmployeePhoneNum, employeeId];
+  async editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum, nEmployeeDayPrice, nEmployeeWorkStart, nEmployeeWorkEnd, nEmployeeTotal) {
+    const sql = "UPDATE employees SET employee_name = ?, employee_job = ?, employee_phone_num = ?, employee_day_price = ?, employee_start_date = ?, employee_end_date = ?, employee_total = ? WHERE id = ?";
+    const params = [nEmployeeName, nEmployeeJob, nEmployeePhoneNum, nEmployeeDayPrice, nEmployeeWorkStart, nEmployeeWorkEnd, nEmployeeTotal, employeeId];
 
     try {
       const result = await this.runQuery(sql, params);
@@ -228,7 +228,7 @@ class DbService {
   }
 
   async addNewPurchase(name, unitPrice, quantity, total, type, details, id) {
-    const sql = "INSERT INTO purchases (purchase_name, purchase_details, purchase_type, purchase_unit_price, purchase_unit_quantity, purchase_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    const sql = "INSERT INTO purchases (purchase_name, purchase_details, purchase_type, purchase_unit_price, purchase_unit_quantity, purchase_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const params = [name, details, type, unitPrice, quantity, total, id];
 
     try {

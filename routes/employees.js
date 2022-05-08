@@ -27,9 +27,10 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const employeeDayPrice = req.body.employeeDayPrice;
     const employeeWorkStart = req.body.employeeWorkStart;
     const employeeWorkEnd = req.body.employeeWorkEnd;
+    const employeeTotal = getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) * employeeDayPrice;
     const { projectId } = req.params;
 
-    await dbService.addNewEmployee(employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, projectId);
+    await dbService.addNewEmployee(employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, employeeTotal, projectId);
 
     res.redirect('/employees/' + projectId);
   } catch (error) {
@@ -92,12 +93,16 @@ router.post('/:projectId/edit/:employeeId', security.checkAuthenticated, async (
     const nEmployeeName = req.body.employeeName;
     const nEmployeeJob = req.body.employeeJob;
     const nEmployeePhoneNum = req.body.employeePhoneNum;
+    const nEmployeeDayPrice = req.body.employeeDayPrice;
+    const nEmployeeWorkStart = req.body.employeeWorkStart;
+    const nEmployeeWorkEnd = req.body.employeeWorkEnd;
+    const nEmployeeTotal = getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) * nEmployeeDayPrice;
 
-    const result = await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum);
+    await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum, nEmployeeDayPrice, nEmployeeWorkStart, nEmployeeWorkEnd, nEmployeeTotal);
 
     res.redirect('/employees/' + projectId);
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 });
 
@@ -113,5 +118,15 @@ router.post('/:projectId/report/:employeeId', security.checkAuthenticated, async
   }
 });
 
+function getPeriod (fDate, sDate) {
+  const firstDate = new Date(fDate);
+  const lastDate = new Date(sDate);
+
+  const periodMs = lastDate.getTime() - firstDate.getTime();
+
+  period = Math.floor(periodMs / 1000 / 60 / 60 / 24);
+
+  return period;
+}
 
 module.exports = router;
