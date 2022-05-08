@@ -108,6 +108,38 @@ INSERT INTO `extras` VALUES (2,5.00,3000.00,15000.00,6),(4,43.00,433.00,18619.00
 UNLOCK TABLES;
 
 --
+-- Table structure for table `invoices`
+--
+
+DROP TABLE IF EXISTS `invoices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `invoices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `invoice_name` varchar(200) DEFAULT NULL,
+  `invoice_details` varchar(200) DEFAULT NULL,
+  `invoice_number` int(11) DEFAULT NULL,
+  `invoice_unit` varchar(200) DEFAULT NULL,
+  `invoice_unit_price` decimal(20,2) DEFAULT NULL,
+  `invoice_unit_qantity` int(11) DEFAULT NULL,
+  `invoice_total` decimal(20,2) DEFAULT NULL,
+  `projects_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_invoices_projects1_idx` (`projects_id`),
+  CONSTRAINT `fk_invoices_projects1` FOREIGN KEY (`projects_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `invoices`
+--
+
+LOCK TABLES `invoices` WRITE;
+/*!40000 ALTER TABLE `invoices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `invoices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `managers`
 --
 
