@@ -1,0 +1,36 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'invoices', projectId: projectId }) %>
+    <div class="workspace index">
+      <div class="info">
+        <% purchases.forEach((invoice) => { %>
+          <span class="infoContainer">
+            <div class="infos">
+              <h3 class="data name">Name: <span class="value"><%= invoice.invoice_name %></span></h3>
+              <h3 class="data price">Unit Price: <span class="value"><%= invoice.invoice_unit_price %></span></h3>
+              <h3 class="data quantity">Unit Quantity: <span class="value"><%= invoice.invoice_unit_quantity %></span></h3>
+              <h3 class="data total">Total Price: <span class="value"><%= invoice.invoice_total %></span></h3>
+            </div>
+            <div class="buttons">
+              <form action="/invoices/<%= projectId %>/delete/<%= invoice.id %>" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+              <form action="/invoices/<%= projectId %>/edit/<%= invoice.id %>" method="GET">
+                <button type="submit">Edit</button>
+              </form>
+              <form action="/invoices/<%= projectId %>/info/<%= invoice.id %>" method="GET">
+                <button type="submit">Info</button>
+              </form>
+            </div>
+          </span>
+        <% }) %>
+      </div>
+      <div class="actionButtons">
+        <form action="/invoices/<%= projectId %>/new" method="GET">
+          <button type="submit">New</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
