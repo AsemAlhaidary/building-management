@@ -15,7 +15,7 @@ router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
 
 router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
   const { projectId } = req.params;
-  const workTypes = ['مقطوعية', 'متر مربع', 'متر مسطح'];
+  const workTypes = ['مقطوعية', 'متر مربع', 'متر مكعب','المتر الطولي'];
 
   res.render('contractors/new', { projectId: projectId, workTypes: workTypes, label: false });
 });
