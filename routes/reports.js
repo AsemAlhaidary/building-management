@@ -4,6 +4,7 @@ const fs = require('fs');
 const pdf = require('pdf-creator-node');
 const path = require('path');
 const database = require('../models/database');
+const logo = require('../models/base64');
 const router = express.Router();
 
 const dbService = database.getDbServiceInstance();
@@ -17,16 +18,11 @@ const reportOptions = {
   border: '8mm',
   header: {
     height: '15mm',
-    contents: '<h4 style="color: red; font-size: 20px; font-weight: 800; text-align: center;">CUSTOMER INVOICE</h4>'
+    contents: '<h4 style="color: red; font-size: 20px; font-weight: 800; text-align: center;">بسم الله الرحمن الرحيم</h4>'
   },
   footer: {
     height: '20mm',
-    contents: {
-      first: 'Cover page',
-      2: 'Second page',
-      default: '<span>{{page}}</span>/<span>{{pages}}</span>',
-      last: 'Last page'
-    }
+    contents: {}
   }
 }
 
@@ -54,13 +50,13 @@ router.post('/employeesreport/:projectId', security.checkAuthenticated, async (r
     };
     nEmployees.push(employee);
   })
-  console.log(nEmployees)
 
   const document = {
     html: html,
     data: {
       items: nEmployees,
-      total: finalTotal
+      total: finalTotal,
+      logoImg: logo
     },
     path: './docs/' + filename
   };
@@ -72,7 +68,7 @@ router.post('/employeesreport/:projectId', security.checkAuthenticated, async (r
 
 function getStandardDate(date) {
   let today = new Date(date);
-  return (today.getDate()) + ' - ' + (today.getMonth() + 1) + ' - ' + (today.getFullYear());
+  return (today.getDate()) + '/' + (today.getMonth() + 1) + '/' + (today.getFullYear());
 }
 
 module.exports = router;

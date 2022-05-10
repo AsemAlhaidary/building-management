@@ -51,7 +51,7 @@
     <table>
       <tr>
         <td align="center">
-          <img src="logo.jpg" alt="Logo">
+          <img src="{{logoImg}}" alt="Logo">
         </td>
         <td align="center">
           <h3>بسم الله الرحمن الرحيم</h3>
@@ -68,7 +68,7 @@
   <hr>
 
   <main>
-    <h2 class="title">كشف المشتريات</h2>
+    <h2 class="title">كشف العمال</h2>
     <table>
       <tr>
         <th>المجموع</th>
@@ -87,22 +87,13 @@
         <td>{{this.job}}</td>
         <td>{{this.name}}</td>
       </tr>
-      <tr>
-        <td>{{this.total}}</td>
-        <td>{{this.endDate}}</td>
-        <td>{{this.startDate}}</td>
-        <td>{{this.dayPrice}}</td>
-        <td>{{this.job}}</td>
-        <td>{{this.name}}</td>
-      </tr>
       {{/each}}
+      <tr>
+        <th>{{total.tot}}</th>
+        <th colspan="5">المجموع الكلي</th>
+      </tr>
     </table>
   </main>
-
-  <footer>
-    <h4>{{total.tot}}</h4>
-    <h3>المجموع الكلي</h3>
-  </footer>
 </body>
 
 </html>
