@@ -26,11 +26,11 @@
         <% }) %>
       </div>
       <div class="actionButtons">
+        <form action="/reports/employeesreport/<%= projectId %>" method="POST">
+          <button type="submit">Report</button>
+        </form>
         <form action="/employees/<%= projectId %>/new" method="GET">
           <button type="submit">New</button>
-        </form>
-        <form action="/reports/emreport/<%= projectId %>" method="POST">
-          <button type="submit">Report</button>
         </form>
       </div>
     </div>

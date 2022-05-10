@@ -30,20 +30,19 @@ const reportOptions = {
   }
 }
 
-router.post('/emreport/:projectId', security.checkAuthenticated, async (req, res) => {
+router.post('/employeesreport/:projectId', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
-  // const sql = 'SELECT * FROM employees WHERE id = ?';
-  // const params = [employeeId];
   const sql = 'SELECT SUM(employee_total) tot FROM employees WHERE project_id = ?';
   const params = [projectId];
 
   const employees = await dbService.getEmployeesByProjectId(projectId);
   const total = await dbService.runQuery(sql, params);
-  // const employees = await dbService.runQuery(sql, params);
-  // const purchases = await dbService.getPurchasesByProjectId(projectId);
+  
+  const finalTotal = JSON.parse(JSON.stringify(total[0]));
+  
   let nEmployees = [];
-
+  
   employees.forEach(e => {
     let employee = {
       name: e.employee_name,
@@ -55,9 +54,7 @@ router.post('/emreport/:projectId', security.checkAuthenticated, async (req, res
     };
     nEmployees.push(employee);
   })
-
   console.log(nEmployees)
-  const finalTotal = JSON.parse(JSON.stringify(total[0]));
 
   const document = {
     html: html,
@@ -75,7 +72,7 @@ router.post('/emreport/:projectId', security.checkAuthenticated, async (req, res
 
 function getStandardDate(date) {
   let today = new Date(date);
-  return (today.getDate()) + '/' + (today.getMonth() + 1) + '/' + (today.getFullYear());
+  return (today.getDate()) + ' - ' + (today.getMonth() + 1) + ' - ' + (today.getFullYear());
 }
 
 module.exports = router;
