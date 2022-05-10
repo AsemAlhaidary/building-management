@@ -5,7 +5,8 @@ const database = require('../models/database');
 const router = express.Router();
 
 router.get('/', security.checkNotAuthenticated, (req, res) => {
-  res.render('signin');
+  res.redirect('/login');
+  // res.render('signin');
 });
 
 router.post('/addUser', security.checkNotAuthenticated, async (req, res) => {
