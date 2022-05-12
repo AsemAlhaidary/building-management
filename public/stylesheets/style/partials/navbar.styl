@@ -3,7 +3,7 @@
   width: 100%;
   height: var(--navbarHeight);
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   background-color: var(--themeColorDark);
 
@@ -28,6 +28,24 @@
         margin: 0 2em;
         font-size: 0.8em;
         color: var(--textColor);
+      }
+    }
+  }
+
+  .buttons {
+    .logout {
+      display: inline-block;
+      padding: 0.5em 1em;
+      color: var(--primaryColor);
+      background-color: unset;
+      border: 1px solid var(--primaryColor);
+      transition: box-shadow 0.3s ease-in-out;
+      border-radius: 5em;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        box-shadow: 0 0 6px var(--primaryColor);
       }
     }
   }

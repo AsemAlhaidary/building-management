@@ -2,14 +2,21 @@ const express = require('express');
 const security = require('../security/security');
 const passport = require('passport');
 const database = require('../models/database');
+const usefulTools = require('../public/js/tools');
 const router = express.Router();
 
 const dbService = database.getDbServiceInstance();
+const tools = usefulTools.getToolsInstance();
 
 router.get('/', security.checkAuthenticated, async (req, res) => {
   const userId = passport.session.user.id;
 
-  const projects = await dbService.getProjectsByUserId(userId);
+  let projects = await dbService.getProjectsByUserId(userId);
+
+  projects.forEach(project => {
+    project.project_start_date = tools.getStandardDate(project.project_start_date);
+    project.project_end_date = tools.getStandardDate(project.project_end_date);
+  });
 
   res.render('projects/index', { projects: projects });
 });

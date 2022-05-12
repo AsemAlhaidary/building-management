@@ -1,9 +1,11 @@
 const express = require('express');
 const security = require('../security/security');
 const database = require('../models/database');
+const usefulTools = require('../public/js/tools');
 const router = express.Router();
 
 const dbService = database.getDbServiceInstance();
+const tools = usefulTools.getToolsInstance();
 
 router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
@@ -27,7 +29,7 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const employeeDayPrice = req.body.employeeDayPrice;
     const employeeWorkStart = req.body.employeeWorkStart;
     const employeeWorkEnd = req.body.employeeWorkEnd;
-    const employeeTotal = getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) * employeeDayPrice;
+    const employeeTotal = tools.getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) * employeeDayPrice;
     const { projectId } = req.params;
 
     await dbService.addNewEmployee(employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, employeeTotal, projectId);
@@ -55,21 +57,12 @@ router.get('/:projectId/info/:employeeId', security.checkAuthenticated, async (r
   try {
     const { projectId, employeeId } = req.params;
 
-    const employee = await dbService.getEmployeeById(employeeId);
+    let employee = await dbService.getEmployeeById(employeeId);
+
+    employee.employee_start_date = tools.getStandardDate(employee.employee_start_date);
+    employee.employee_end_date = tools.getStandardDate(employee.employee_end_date);
 
     res.render('employees/info', { employee: employee, projectId: projectId } );
-  } catch (error) {
-    console.log(error.message);
-  }
-});
-
-router.post('/:projectId/info/:employeeId', security.checkAuthenticated, async (req, res) => {
-  try {
-    const { projectId, employeeId } = req.params;
-
-    const employee = await dbService.getEmployeeById(employeeId);
-
-    res.redirect('/employees/' + projectId );
   } catch (error) {
     console.log(error.message);
   }
@@ -96,7 +89,7 @@ router.post('/:projectId/edit/:employeeId', security.checkAuthenticated, async (
     const nEmployeeDayPrice = req.body.employeeDayPrice;
     const nEmployeeWorkStart = req.body.employeeWorkStart;
     const nEmployeeWorkEnd = req.body.employeeWorkEnd;
-    const nEmployeeTotal = getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) * nEmployeeDayPrice;
+    const nEmployeeTotal = tools.getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) * nEmployeeDayPrice;
 
     await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum, nEmployeeDayPrice, nEmployeeWorkStart, nEmployeeWorkEnd, nEmployeeTotal);
 
@@ -117,16 +110,5 @@ router.post('/:projectId/report/:employeeId', security.checkAuthenticated, async
     console.log(error.message);
   }
 });
-
-function getPeriod (fDate, sDate) {
-  const firstDate = new Date(fDate);
-  const lastDate = new Date(sDate);
-
-  const periodMs = lastDate.getTime() - firstDate.getTime();
-
-  period = Math.floor(periodMs / 1000 / 60 / 60 / 24);
-
-  return period;
-}
 
 module.exports = router;

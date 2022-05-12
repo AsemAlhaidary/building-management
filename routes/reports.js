@@ -4,10 +4,12 @@ const fs = require('fs');
 const pdf = require('pdf-creator-node');
 const path = require('path');
 const database = require('../models/database');
-const logo = require('../models/base64');
+const usefulTools = require('../public/js/tools');
+const logo = require('../public/js/base64');
 const router = express.Router();
 
 const dbService = database.getDbServiceInstance();
+const tools = usefulTools.getToolsInstance();
 
 const html = fs.readFileSync(path.join(__dirname, '../views/reports/template.html'), 'utf-8');
 const filename = 'report' + Math.random() + '_doc' + '.pdf';
@@ -29,33 +31,30 @@ const reportOptions = {
 router.post('/employeesreport/:projectId', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
-  const sql = 'SELECT SUM(employee_total) tot FROM employees WHERE project_id = ?';
-  const params = [projectId];
+  const totalSql = 'SELECT SUM(employee_total) sum FROM employees WHERE project_id = ?';
+  const totalParams = [projectId];
 
-  const employees = await dbService.getEmployeesByProjectId(projectId);
-  const total = await dbService.runQuery(sql, params);
-  
-  const finalTotal = JSON.parse(JSON.stringify(total[0]));
-  
-  let nEmployees = [];
-  
-  employees.forEach(e => {
-    let employee = {
-      name: e.employee_name,
-      job: e.employee_job,
-      dayPrice: e.employee_day_price,
-      startDate: getStandardDate(e.employee_start_date),
-      endDate: getStandardDate(e.employee_end_date),
-      total: e.employee_total
-    };
-    nEmployees.push(employee);
-  })
+  const projectSql = 'SELECT * FROM projects WHERE id = ?';
+  const projectParams = [projectId];
+
+  let employees = await dbService.getEmployeesByProjectId(projectId);
+  let total = await dbService.runQuery(totalSql, totalParams);
+  let project = await dbService.runQuery(projectSql, projectParams);
+
+  total = JSON.parse(JSON.stringify(total[0]));
+  project = JSON.parse(JSON.stringify(project[0]));
+
+  employees.forEach(employee => {
+    employee.employee_start_date = tools.getStandardDate(employee.employee_start_date);
+    employee.employee_end_date = tools.getStandardDate(employee.employee_end_date);
+  });
 
   const document = {
     html: html,
     data: {
-      items: nEmployees,
-      total: finalTotal,
+      project: project,
+      items: employees,
+      total: total,
       logoImg: logo
     },
     path: './docs/' + filename
@@ -65,10 +64,5 @@ router.post('/employeesreport/:projectId', security.checkAuthenticated, async (r
     .then(res.redirect('/employees/' + projectId))
     .catch(err => { console.log(err) });
 });
-
-function getStandardDate(date) {
-  let today = new Date(date);
-  return (today.getDate()) + '/' + (today.getMonth() + 1) + '/' + (today.getFullYear());
-}
 
 module.exports = router;
