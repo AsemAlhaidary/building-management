@@ -3,3 +3,4 @@ request.rest
 db/database model.mwb
 db/database model.mwb.bak
 *.pdf
+.env
