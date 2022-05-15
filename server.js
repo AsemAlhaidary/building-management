@@ -18,6 +18,7 @@ const contractorsRouter = require('./routes/contractors');
 const managersRouter = require('./routes/managers');
 const purchasesRouter = require('./routes/purchases');
 const extrasRouter = require('./routes/extras');
+const depositsRouter = require('./routes/deposits');
 const deportesRouter = require('./routes/deportes');
 const reportsRouter = require('./routes/reports');
 
@@ -51,6 +52,7 @@ app.use('/contractors', contractorsRouter);
 app.use('/managers', managersRouter);
 app.use('/purchases', purchasesRouter);
 app.use('/extras', extrasRouter);
+app.use('/deposits', depositsRouter);
 app.use('/deportes', deportesRouter);
 app.use('/reports', reportsRouter);
 

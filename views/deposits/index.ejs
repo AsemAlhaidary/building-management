@@ -4,12 +4,12 @@
     <%- include('../partials/sidebar', { active: 'deposits', projectId: projectId }) %>
     <div class="workspace index">
       <div class="info">
-        <% extras.forEach((deposit) => { %>
+        <% deposits.forEach((deposit) => { %>
           <span class="infoContainer">
             <div class="infos">
               <h3 class="data name">Name: <span class="value"><%= deposit.deposit_name %></span></h3>
-              <h3 class="data Time">Job: <span class="value"><%= deposit.deposit_time %></span></h3>
-              <h3 class="data phoneNum">Time Price: <span class="value"><%= deposit.deposit_time_price %></span></h3>
+              <h3 class="data Time">Date of Deposit: <span class="value"><%= deposit.deposit_date %></span></h3>
+              <h3 class="data phoneNum">Price of Deposit: <span class="value"><%= deposit.deposit_amount %></span></h3>
             </div>
             <div class="buttons">
               <form action="/deposits/<%= projectId %>/delete/<%= deposit.id %>" method="POST">
