@@ -17,6 +17,7 @@ const employeesRouter = require('./routes/employees');
 const contractorsRouter = require('./routes/contractors');
 const managersRouter = require('./routes/managers');
 const purchasesRouter = require('./routes/purchases');
+const invoicesRouter = require('./routes/invoices');
 const extrasRouter = require('./routes/extras');
 const depositsRouter = require('./routes/deposits');
 const deportesRouter = require('./routes/deportes');
@@ -53,6 +54,7 @@ app.use('/managers', managersRouter);
 app.use('/purchases', purchasesRouter);
 app.use('/extras', extrasRouter);
 app.use('/deposits', depositsRouter);
+app.use('/invoices',invoicesRouter);
 app.use('/deportes', deportesRouter);
 app.use('/reports', reportsRouter);
 

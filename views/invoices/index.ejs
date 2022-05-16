@@ -4,7 +4,7 @@
     <%- include('../partials/sidebar', { active: 'invoices', projectId: projectId }) %>
     <div class="workspace index">
       <div class="info">
-        <% purchases.forEach((invoice) => { %>
+        <% invoices.forEach((invoice) => { %>
           <span class="infoContainer">
             <div class="infos">
               <h3 class="data name">Name: <span class="value"><%= invoice.invoice_name %></span></h3>

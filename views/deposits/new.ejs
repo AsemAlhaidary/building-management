@@ -15,19 +15,16 @@
                 <option value="<%= employee.id %>"><%= employee.employee_name %></option>
               <% }) %>
             </select>
-            <select id="depositType" class="input" name="depositType" size="1">
-              <% depositTypes.forEach(depositType => { %>
-                <option value="<%= depositType %>"><%= depositType %></option>
-              <% }) %>
-            </select>
+           
           </div>
+          
           <div class="row">
-            <label class="def" for="time">Job</label>
+            <label class="def" for="time">Deposit Unit</label>
             <input type="text" id="time" class="input" name="depositTime" placeholder="Deposit time" required>
           </div>
           <div class="row">
-            <label class="def" for="deposit_time_price ">deposit_time_price </label>
-            <input type="tel" id="deposit_time_price " class="input" name="deposittimeprice " placeholder="777777777" required>
+            <label class="def" for="deposit_price ">deposit_price </label>
+            <input type="tel" id="deposit_price " class="input" name="depositprice " placeholder="777777777" required>
           </div>
           <div class="actionButtons">
             <button type="submit">Add</button>

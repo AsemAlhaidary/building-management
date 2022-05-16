@@ -8,9 +8,9 @@ const dbService = database.getDbServiceInstance();
 router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
-  const purchases = await dbService.getPurchasesByProjectId(projectId);
+  const invoices = await dbService.getPurchasesByProjectId(projectId);
 
-  res.render('invoices/index', { purchases: invoices, projectId: projectId });
+  res.render('invoices/index', { invoices: invoices, projectId: projectId });
 });
 
 router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
@@ -21,15 +21,15 @@ router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
 
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
   try {
-    const invoice_name = req.body.purchaseName;
+    const invoice_name = req.body.invoiceName;
     const invoice_unit_price = req.body.invoiceunitprice;
     const invoice_unit_qantity = req.body.invoiceunitqantity;
     const invoice_total = invoice_unit_price * invoice_unit_qantity;
     const purchaseType = req.body.purchaseType;
-    const purchaseDetails = req.body.purchaseDetails;
+    const purchaseDetails = req.body.invoiceDetails;
     const { projectId } = req.params;
 
-    await dbService.addNewPurchase(invoice_name,invoice_details,invoice_number, invoice_unit, invoice_unit_price, invoice_unit_qantity,invoice_total,  projectId);
+    await dbService.addNewinvoice(invoice_name,invoice_details,invoice_number, invoice_unit, invoice_unit_price, invoice_unit_qantity,invoice_total,  projectId);
 
     res.redirect('/invoices/' + projectId);
   } catch (error) {
@@ -50,7 +50,7 @@ router.post('/:projectId/delete/:invoiceId', security.checkAuthenticated, async 
   }
 });
 
-router.get('/:projectId/info/:purchaseId', security.checkAuthenticated, async (req, res) => {
+router.get('/:projectId/info/:invoiceId', security.checkAuthenticated, async (req, res) => {
   try {
     const { projectId, invoiceId } = req.params;
 
@@ -80,7 +80,7 @@ router.get('/:projectId/edit/:invoiceId', security.checkAuthenticated, async (re
 
     const purchase = await dbService.getinvoiceById(invoiceId);
 
-    res.render('purchases/edit', { invoice: invoice, projectId: projectId, label: false });
+    res.render('invoices/edit', { invoice: invoice, projectId: projectId, label: false });
   } catch (error) {
     console.log(error.message);
   }
@@ -88,15 +88,15 @@ router.get('/:projectId/edit/:invoiceId', security.checkAuthenticated, async (re
 
 router.post('/:projectId/edit/:invoiceId', security.checkAuthenticated, async (req, res) => {
   try {
-    const invoice_name = req.body.purchaseName;
-    const purchaseUnitPrice = req.body.purchaseUnitPrice;
-    const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
-    const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
-    const purchaseType = req.body.purchaseType;
-    const purchaseDetails = req.body.purchaseDetails;
-    const { projectId, purchaseId } = req.params;
+    const invoice_name = req.body.invoiceName;
+    const invoiceUnitPrice = req.body.invoiceUnitPrice;
+    const invoiceUnitQuantity = req.body.invoiceUnitQuantity;
+    const invoiceTotal = invoiceUnitPrice * invoiceUnitQuantity;
+    const invoiceType = req.body.invoiceType;
+    const invoiceDetails = req.body.purchaseDetails;
+    const { projectId,invoiceId } = req.params;
 
-    const result = await dbService.editPurchaseById(purchaseName, purchaseUnit, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, purchaseId);
+    const result = await dbService.editinvoiceById(purchaseName, purchaseUnit, invoiceUnitPrice, invoiceUnitQuantity, invoiceTotal,invoiceType, invoiceetails, purchaseId);
 
     res.redirect('/invoices/' + projectId);
   } catch (error) {
@@ -108,7 +108,7 @@ router.post('/:projectId/report/:invoiceId', security.checkAuthenticated, async 
   try {
     const { projectId, invoiceId } = req.params;
 
-    const result = await dbService.editPurchaseById(purchaseId, npurchaseName, npurchaseJob, npurchasePhoneNum);
+    const result = await dbService.editinvoiceById(invoiceId, ninvoiceName, npurchaseJob, npurchasePhoneNum);
 
     res.redirect('/invoices/' + projectId);
   } catch (error) {
