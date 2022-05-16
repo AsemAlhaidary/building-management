@@ -1,18 +1,29 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar') %>
+    <%- include('../partials/sidebar', { active: 'deposits', projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
         <h3 class="title">New Deposit</h3>
         <form action="/deposits/<%= projectId %>/create" method="POST" class="form">
           <div class="row">
-            <label class="def" for="name">Name</label>
-            <input type="text" id="name" class="input" name="depositName" placeholder="First Last" required>
+            <% if (label) { %>
+              <label class="def" for="employee">Employee</label>
+            <% } %>
+            <select id="employee" class="input" name="employeeId" size="1">
+              <% employees.forEach(employee => { %>
+                <option value="<%= employee.id %>"><%= employee.employee_name %></option>
+              <% }) %>
+            </select>
+            <select id="depositType" class="input" name="depositType" size="1">
+              <% depositTypes.forEach(depositType => { %>
+                <option value="<%= depositType %>"><%= depositType %></option>
+              <% }) %>
+            </select>
           </div>
           <div class="row">
             <label class="def" for="time">Job</label>
-            <input type="text" id="time" class="input" name="depositTime" placeholder="deposit_time" required>
+            <input type="text" id="time" class="input" name="depositTime" placeholder="Deposit time" required>
           </div>
           <div class="row">
             <label class="def" for="deposit_time_price ">deposit_time_price </label>

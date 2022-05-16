@@ -9,14 +9,23 @@ router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
   const deposits = await dbService.getDepositsByProjectId(projectId);
+  // const deposits = [{
+  //   id: 4,
+  //   deposit_name: 'Ehab',
+  //   deposit_date: '32/6/2022',
+  //   deposit_amount: 5000,
+  //   }
+  // ];
 
   res.render('deposits/index', { deposits: deposits, projectId: projectId });
 });
 
-router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
+router.get('/:projectId/new', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
-  res.render('purchases/new', { projectId: projectId, label: false });
+  const employees = await dbService.getEmployeesByProjectId(projectId);
+
+  res.render('deposits/new', { employees: employees, projectId: projectId, label: false });
 });
 
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
@@ -29,12 +38,12 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const purchaseDetails = req.body.purchaseDetails;
     const { projectId } = req.params;
 
-    await dbService.addNewPurchase(purchaseName, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, projectId);
+    await dbService.addNewdeposits(purchaseName, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, projectId);
 
-    res.redirect('/purchases/' + projectId);
+    res.redirect('/deposits/' + projectId);
   } catch (error) {
     console.log(error.message);
-    res.redirect('/purchases/' + projectId + '/new');
+    res.redirect('/deposits/' + projectId + '/new');
   }
 });
 
@@ -44,8 +53,8 @@ router.post('/:projectId/delete/:purchaseId', security.checkAuthenticated, async
 
     const result = await dbService.deletePurchaseById(purchaseId);
 
-    if (result) res.redirect('/purchases/' + projectId);
-  } catch (error) {
+    if (result) res.redirect('/depositss/' + projectId);
+  } catch (error) {deposits
     console.log(error.message);
   }
 });

@@ -457,6 +457,18 @@ class DbService {
       throw new Error(error.message);
     }
   }
+
+  async getDepositsByProjectId(id) {
+    const sql = "SELECT d.*, e.employee_name FROM deposits d LEFT JOIN employees e ON d.employee_id = e.id WHERE e.project_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
 
 module.exports = DbService;
