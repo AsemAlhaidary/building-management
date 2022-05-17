@@ -33,7 +33,7 @@ class DbService {
 
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -55,7 +55,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -67,7 +67,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -79,7 +79,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result[0];
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -91,7 +91,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result[0];
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -103,7 +103,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -115,7 +115,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -127,7 +127,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result[0];
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -139,7 +139,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -151,7 +151,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -163,7 +163,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -175,7 +175,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -187,7 +187,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -199,7 +199,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -211,7 +211,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result[0];
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -223,7 +223,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -235,7 +235,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -247,7 +247,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -259,7 +259,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result[0];
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -271,7 +271,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -283,7 +283,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -296,7 +296,7 @@ class DbService {
       console.log(result)
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -308,7 +308,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -320,7 +320,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result[0];
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -332,7 +332,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -344,7 +344,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -357,7 +357,7 @@ class DbService {
       console.log(result)
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -369,7 +369,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -381,7 +381,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result[0];
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -393,7 +393,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -405,7 +405,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -418,7 +418,7 @@ class DbService {
       console.log(result)
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -430,7 +430,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result[0];
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -442,7 +442,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -454,7 +454,7 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     }
   }
 
@@ -466,7 +466,20 @@ class DbService {
       const result = await this.runQuery(sql, params);
       return result;
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
+    }
+  }
+
+  async addNewDeposit(depositDate, depositTime, depositTimePrice, depositTotalPrice, employeeId) {
+    const sql = "INSERT INTO deposits (deposit_date, deposit_time, deposit_time_price, deposit_total_price, employee_id) VALUES (?, ?, ?, ?, ?)";
+    const params = [depositDate, depositTime, depositTimePrice, depositTotalPrice, employeeId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      console.log(result)
+      return result;
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

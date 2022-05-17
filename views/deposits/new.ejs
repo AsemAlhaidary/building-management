@@ -1,7 +1,7 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar', { active: 'deposits', projectId: projectId }) %>
+    <%- include('../partials/sidebar', { active: 'deposits' , projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
         <h3 class="title">New Deposit</h3>
@@ -11,20 +11,30 @@
               <label class="def" for="employee">Employee</label>
             <% } %>
             <select id="employee" class="input" name="employeeId" size="1">
-              <% employees.forEach(employee => { %>
-                <option value="<%= employee.id %>"><%= employee.employee_name %></option>
+              <% employees.forEach(employee=> { %>
+                <option value="<%= employee.id %>">
+                  <%= employee.employee_name %>
+                </option>
               <% }) %>
             </select>
-           
-          </div>
-          
-          <div class="row">
-            <label class="def" for="time">Deposit Unit</label>
-            <input type="text" id="time" class="input" name="depositTime" placeholder="Deposit time" required>
           </div>
           <div class="row">
-            <label class="def" for="deposit_price ">deposit_price </label>
-            <input type="tel" id="deposit_price " class="input" name="depositprice " placeholder="777777777" required>
+            <% if (label) { %>
+              <label class="def" for="depositDate">Date</label>
+            <% } %>
+            <input type="date" id="depositDate" class="input" name="depositDate" placeholder="Date" required>
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="depositTime">Time</label>
+            <% } %>
+            <input type="number" id="depositTime" class="input" name="depositTime" placeholder="Time" required>
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="depositTimePrice">Price</label>
+            <% } %>
+            <input type="number" id="depositTimePrice" class="input" name="depositTimePrice" placeholder="Price" required>
           </div>
           <div class="actionButtons">
             <button type="submit">Add</button>

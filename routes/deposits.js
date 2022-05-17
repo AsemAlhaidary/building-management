@@ -9,13 +9,6 @@ router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
   const deposits = await dbService.getDepositsByProjectId(projectId);
-  // const deposits = [{
-  //   id: 4,
-  //   deposit_name: 'Ehab',
-  //   deposit_date: '32/6/2022',
-  //   deposit_amount: 5000,
-  //   }
-  // ];
 
   res.render('deposits/index', { deposits: deposits, projectId: projectId });
 });
@@ -30,19 +23,18 @@ router.get('/:projectId/new', security.checkAuthenticated, async (req, res) => {
 
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
   try {
-    const purchaseName = req.body.purchaseName;
-    const purchaseUnitPrice = req.body.purchaseUnitPrice;
-    const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
-    const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
-    const purchaseType = req.body.purchaseType;
-    const purchaseDetails = req.body.purchaseDetails;
+    const employeeId = req.body.employeeId;
+    const depositDate = req.body.depositDate;
+    const depositTime = req.body.depositTime;
+    const depositTimePrice = req.body.depositTimePrice;
+    const depositTotalPrice = depositTime * depositTimePrice;
     const { projectId } = req.params;
 
-    await dbService.addNewdeposits(purchaseName, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, projectId);
+    await dbService.addNewDeposit(depositDate, depositTime, depositTimePrice, depositTotalPrice, employeeId);
 
     res.redirect('/deposits/' + projectId);
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.redirect('/deposits/' + projectId + '/new');
   }
 });
