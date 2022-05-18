@@ -39,11 +39,11 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
   }
 });
 
-router.post('/:projectId/delete/:purchaseId', security.checkAuthenticated, async (req, res) => {
+router.post('/:projectId/delete/:depositId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { projectId ,purchaseId } = req.params;
+    const { projectId ,depositId } = req.params;
 
-    const result = await dbService.deletePurchaseById(purchaseId);
+    const result = await dbService.deletedepositById(depositId);
 
     if (result) res.redirect('/depositss/' + projectId);
   } catch (error) {deposits
@@ -51,67 +51,67 @@ router.post('/:projectId/delete/:purchaseId', security.checkAuthenticated, async
   }
 });
 
-router.get('/:projectId/info/:purchaseId', security.checkAuthenticated, async (req, res) => {
+router.get('/:projectId/info/:depositId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { projectId, purchaseId } = req.params;
+    const { projectId, depositId } = req.params;
 
-    const purchase = await dbService.getPurchaseById(purchaseId);
+    const deposit = await dbService.getPurchaseById(depositId);
 
-    res.render('purchases/info', { purchase: purchase, projectId: projectId } );
+    res.render('deposits/info', { deposit: deposit, projectId: projectId } );
   } catch (error) {
     console.log(error.message);
   }
 });
 
-router.post('/:projectId/info/:purchaseId', security.checkAuthenticated, async (req, res) => {
+router.post('/:projectId/info/:depositId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { projectId, purchaseId } = req.params;
+    const { projectId, depositId } = req.params;
 
-    const purchase = await dbService.getPurchaseById(purchaseId);
+    const deposit = await dbService.getdepositById(depositId);
 
-    res.redirect('/purchases/' + projectId );
+    res.redirect('/deposits/' + projectId );
   } catch (error) {
     console.log(error.message);
   }
 });
 
-router.get('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (req, res) => {
+router.get('/:projectId/edit/:depositId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { projectId ,purchaseId } = req.params;
+    const { projectId ,depositId } = req.params;
 
-    const purchase = await dbService.getPurchaseById(purchaseId);
+    constdeposit = await dbService.getdepositById(depositId);
 
-    res.render('purchases/edit', { purchase: purchase, projectId: projectId, label: false });
+    res.render('deposits/edit', { deposit: deposit, projectId: projectId, label: false });
   } catch (error) {
     console.log(error.message);
   }
 });
 
-router.post('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (req, res) => {
+router.post('/:projectId/edit/:depositId', security.checkAuthenticated, async (req, res) => {
   try {
-    const purchaseName = req.body.purchaseName;
-    const purchaseUnitPrice = req.body.purchaseUnitPrice;
-    const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
-    const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
-    const purchaseType = req.body.purchaseType;
-    const purchaseDetails = req.body.purchaseDetails;
-    const { projectId, purchaseId } = req.params;
+    const depositName = req.body.depositName;
+    const depositUnitPrice = req.body.getdepositByIdUnitPrice;
+    constdepositUnitQuantity = req.body.getdepositByIdUnitQuantity;
+    const depositTotal = depositUnitPrice * depositUnitQuantity;
+    constdepositType = req.body.depositType;
+    const depositDetails = req.body.depositeDetails;
+    const { projectId, depositId } = req.params;
 
-    const result = await dbService.editPurchaseById(purchaseName, purchaseUnit, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails, purchaseId);
+    const result = await dbService.editdepositById(depositName, depositUnit, depositeUnitPrice, depositUnitQuantity, depositTotal,depositType,depositDetails, depositId);
 
-    res.redirect('/purchases/' + projectId);
+    res.redirect('/deposits/' + projectId);
   } catch (error) {
     console.log(error.message);
   }
 });
 
-router.post('/:projectId/report/:purchaseId', security.checkAuthenticated, async (req, res) => {
+router.post('/:projectId/report/:depositId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { projectId, purchaseId } = req.params;
+    const { projectId,depositId } = req.params;
 
-    const result = await dbService.editPurchaseById(purchaseId, npurchaseName, npurchaseJob, npurchasePhoneNum);
+    const result = await dbService.editdepositById(depositId, ndepositName, ndepositeJob, ndepositPhoneNum);
 
-    res.redirect('/purchases/' + projectId);
+    res.redirect('/deposits/' + projectId);
   } catch (error) {
     console.log(error.message);
   }

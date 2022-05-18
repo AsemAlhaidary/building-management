@@ -8,7 +8,7 @@ const dbService = database.getDbServiceInstance();
 router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
-  const invoices = await dbService.getPurchasesByProjectId(projectId);
+  const invoices = await dbService.getInvoicesByProjectId(projectId);
 
   res.render('invoices/index', { invoices: invoices, projectId: projectId });
 });
@@ -22,11 +22,11 @@ router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
   try {
     const invoice_name = req.body.invoiceName;
-    const invoice_unit_price = req.body.invoiceunitprice;
-    const invoice_unit_qantity = req.body.invoiceunitqantity;
+    const invoice_details = req.body.invoiceDetails;
+    const invoice_number = req.body.invoicenumber;
+    const invoice_unit_price= req.body.invoiceunitprice;
+    const invoice_unit_qantity= req.body.invoiceunitqantity;
     const invoice_total = invoice_unit_price * invoice_unit_qantity;
-    const purchaseType = req.body.purchaseType;
-    const purchaseDetails = req.body.invoiceDetails;
     const { projectId } = req.params;
 
     await dbService.addNewinvoice(invoice_name,invoice_details,invoice_number, invoice_unit, invoice_unit_price, invoice_unit_qantity,invoice_total,  projectId);
