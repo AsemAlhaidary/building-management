@@ -46,12 +46,14 @@ DROP TABLE IF EXISTS `deposits`;
 CREATE TABLE `deposits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `deposit_date` date DEFAULT NULL,
-  `deposit_amount` decimal(50,2) DEFAULT NULL,
+  `deposit_time` decimal(50,2) DEFAULT NULL,
+  `deposit_time_price` decimal(50,2) DEFAULT NULL,
+  `deposit_total_price` decimal(50,2) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +95,7 @@ CREATE TABLE `extras` (
   PRIMARY KEY (`id`),
   KEY `fk_extras_employees1_idx` (`employee_id`),
   CONSTRAINT `fk_extras_employees1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,13 +112,14 @@ CREATE TABLE `invoices` (
   `invoice_number` int(11) DEFAULT NULL,
   `invoice_unit` varchar(100) DEFAULT NULL,
   `invoice_unit_price` decimal(50,2) DEFAULT NULL,
-  `invoice_unit_qantity` int(11) DEFAULT NULL,
+  `invoice_unit_quantity` int(11) DEFAULT NULL,
+  `invoice_type` varchar(100) DEFAULT NULL,
   `invoice_total` decimal(50,2) DEFAULT NULL,
   `project_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_invoices_projects1_idx` (`project_id`),
   CONSTRAINT `fk_invoices_projects1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,4 +234,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-15 21:35:32
+-- Dump completed on 2022-05-20  0:47:17
