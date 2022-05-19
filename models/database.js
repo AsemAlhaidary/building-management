@@ -458,6 +458,67 @@ class DbService {
     }
   }
 
+  async getInvoicesByProjectId(id) {
+    const sql = "SELECT * FROM invoices WHERE project_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async addNewinvoice(invoiceName, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, projectId) {
+    const sql = "INSERT INTO invoices (invoice_name, invoice_details, invoice_number, invoice_unit, invoice_unit_price, invoice_unit_quantity, invoice_type, invoice_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const params = [invoiceName, invoiceDetails, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceTotal, projectId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      console.log(result)
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getInvoiceById(id) {
+    const sql = "SELECT * FROM invoices WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async editInvoiceById(invoiceName, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, id) {
+    const sql = "UPDATE invoices SET invoice_name = ?, invoice_details = ?, invoice_number = ?, invoice_unit = ?, invoice_unit_price = ?, invoice_unit_quantity = ?, invoice_type = ?, invoice_total = ? WHERE id = ?";
+    const params = [invoiceName, invoiceDetails, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceTotal, id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async deleteInvoiceById(id) {
+    const sql = "DELETE FROM invoices WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async getDepositsByProjectId(id) {
     const sql = "SELECT d.*, e.employee_name FROM deposits d LEFT JOIN employees e ON d.employee_id = e.id WHERE e.project_id = ?";
     const params = [id];

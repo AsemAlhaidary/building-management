@@ -14,21 +14,33 @@
           </div>
           <div class="row">
             <% if (label) { %>
+              <label class="def" for="number">Number</label>
+            <% } %>
+            <input type="number" id="number" class="input" name="invoiceNumber" placeholder="Invoice Number">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="unit">Unit</label>
+            <% } %>
+            <input type="text" id="unit" class="input" name="invoiceUnit" placeholder="Unit">
+          </div>
+          <div class="row">
+            <% if (label) { %>
               <label class="def" for="unitPrice">Unit Price</label>
             <% } %>
-            <input type="number" id="unitPrice" class="input" name="invoiceunitprice placeholder="Unit Price">
+            <input type="number" id="unitPrice" class="input" name="invoiceUnitPrice" placeholder="Unit Price">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="quantity">Quantity</label>
             <% } %>
-            <input type="number" id="quantity" class="input" name="invoiceunitqantity" placeholder="Quantity">
+            <input type="number" id="quantity" class="input" name="invoiceQuantity" placeholder="Quantity">
           </div>
           <div class="row">
             <% if (label) { %>
-              <label class="def" for="">Type</label>
+              <label class="def" for="invoiceType">Type</label>
             <% } %>
-            <select id="type" class="input" name="invoiceType" size="1">
+            <select id="invoiceType" class="input" name="invoiceType" size="1">
               <option value="postponed">Postponed</option>
               <option value="cash">Cash</option>
             </select>
