@@ -29,7 +29,7 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const employeeDayPrice = req.body.employeeDayPrice;
     const employeeWorkStart = req.body.employeeWorkStart;
     const employeeWorkEnd = req.body.employeeWorkEnd;
-    const employeeTotal = tools.getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) * employeeDayPrice;
+    const employeeTotal = (tools.getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) + 1) * employeeDayPrice;
     const { projectId } = req.params;
 
     await dbService.addNewEmployee(employeeName, employeeJob, employeePhoneNum, employeeDayPrice, employeeWorkStart, employeeWorkEnd, employeeTotal, projectId);

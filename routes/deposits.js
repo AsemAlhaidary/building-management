@@ -1,14 +1,20 @@
 const express = require('express');
 const security = require('../security/security');
 const database = require('../models/database');
+const usefulTools = require('../public/js/tools');
 const router = express.Router();
 
 const dbService = database.getDbServiceInstance();
+const tools = usefulTools.getToolsInstance();
 
 router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
-  const deposits = await dbService.getDepositsByProjectId(projectId);
+  let deposits = await dbService.getDepositsByProjectId(projectId);
+
+  deposits.forEach(deposit => {
+    deposit.deposit_date = tools.getStandardDate(deposit.deposit_date);
+  });
 
   res.render('deposits/index', { deposits: deposits, projectId: projectId });
 });
@@ -18,21 +24,43 @@ router.get('/:projectId/new', security.checkAuthenticated, async (req, res) => {
 
   const employees = await dbService.getEmployeesByProjectId(projectId);
 
-  res.render('deposits/new', { employees: employees, projectId: projectId, label: false });
+  const methods = ['صرف', 'قبض'];
+
+  res.render('deposits/new', { employees: employees, methods: methods, projectId: projectId, label: false });
 });
 
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
   try {
     const employeeId = req.body.employeeId;
+    const depositMethod = req.body.depositMethod;
     const depositDate = req.body.depositDate;
-    const depositTime = req.body.depositTime;
-    const depositTimePrice = req.body.depositTimePrice;
-    const depositTotalPrice = depositTime * depositTimePrice;
+    let depositPrice = req.body.depositPrice;
     const { projectId } = req.params;
 
-    await dbService.addNewDeposit(depositDate, depositTime, depositTimePrice, depositTotalPrice, employeeId);
+    const employeeBalance = (await dbService.getEmployeeById(employeeId)).employee_total;
+    const depositsSum = (await dbService.calculateDepositsByEmployeeId(employeeId)).sum;
+    const totalEmployeeBalance = employeeBalance + depositsSum;
 
-    res.redirect('/deposits/' + projectId);
+    console.log(totalEmployeeBalance)
+    console.log(depositPrice)
+    console.log(totalEmployeeBalance - depositPrice)
+
+    if (depositMethod == 'صرف') {
+      depositPrice *= -1;
+
+      if (totalEmployeeBalance - (depositPrice * -1) >= 0) {
+        await dbService.addNewDeposit(depositMethod, depositDate, depositPrice, employeeId);
+        res.redirect('/deposits/' + projectId);
+      } else {
+        req.flash('error', 'لقد تجاوزت المبلغ المتاح لك')
+        res.redirect('/deposits/' + projectId + '/new');
+      }
+
+    } else {
+      await dbService.addNewDeposit(depositMethod, depositDate, depositPrice, employeeId);
+      res.redirect('/deposits/' + projectId);
+    }
+
   } catch (error) {
     console.log(error);
     res.redirect('/deposits/' + projectId + '/new');
@@ -41,12 +69,12 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
 
 router.post('/:projectId/delete/:depositId', security.checkAuthenticated, async (req, res) => {
   try {
-    const { projectId ,depositId } = req.params;
+    const { projectId, depositId } = req.params;
 
-    const result = await dbService.deletedepositById(depositId);
+    const result = await dbService.deleteDepositById(depositId);
 
-    if (result) res.redirect('/depositss/' + projectId);
-  } catch (error) {deposits
+    if (result) res.redirect('/deposits/' + projectId);
+  } catch (error) {
     console.log(error.message);
   }
 });

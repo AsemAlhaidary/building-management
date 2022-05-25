@@ -32,6 +32,7 @@ app.set('layout', 'layouts/layout');
 // Let the server know we are are getting informations from forms
 // to able to access them isnide 'req' variable
 app.use(express.urlencoded({ extended: false }));
+// app.use(express.cookieParser('keyboard cat'));
 app.use(flash());
 app.use(session({
   secret: process.env.SESSION_SECRET,

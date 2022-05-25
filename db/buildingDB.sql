@@ -45,15 +45,14 @@ DROP TABLE IF EXISTS `deposits`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `deposits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `deposit_method` varchar(100) DEFAULT NULL,
   `deposit_date` date DEFAULT NULL,
-  `deposit_time` decimal(50,2) DEFAULT NULL,
-  `deposit_time_price` decimal(50,2) DEFAULT NULL,
-  `deposit_total_price` decimal(50,2) DEFAULT NULL,
+  `deposit_price` decimal(50,2) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +75,7 @@ CREATE TABLE `employees` (
   PRIMARY KEY (`id`),
   KEY `fk_employees_projects1_idx` (`project_id`),
   CONSTRAINT `fk_employees_projects1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,4 +233,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-20  0:47:17
+-- Dump completed on 2022-05-26  1:13:16

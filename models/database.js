@@ -531,14 +531,38 @@ class DbService {
     }
   }
 
-  async addNewDeposit(depositDate, depositTime, depositTimePrice, depositTotalPrice, employeeId) {
-    const sql = "INSERT INTO deposits (deposit_date, deposit_time, deposit_time_price, deposit_total_price, employee_id) VALUES (?, ?, ?, ?, ?)";
-    const params = [depositDate, depositTime, depositTimePrice, depositTotalPrice, employeeId];
+  async addNewDeposit(depositMethod, depositDate, depositPrice, employeeId) {
+    const sql = "INSERT INTO deposits (deposit_method, deposit_date, deposit_price, employee_id) VALUES (?, ?, ?, ?)";
+    const params = [depositMethod, depositDate, depositPrice, employeeId];
 
     try {
       const result = await this.runQuery(sql, params);
       console.log(result)
       return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async deleteDepositById(id) {
+    const sql = "DELETE FROM deposits WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async calculateDepositsByEmployeeId(id) {
+    const sql = "SELECT sum(deposit_price) sum FROM deposits WHERE employee_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
     } catch (error) {
       throw new Error(error);
     }
