@@ -1,0 +1,28 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'contractorsdepo', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="infoBox">
+        <h3 class="title">Info <%= contractorDeposit.contractor_name %></h3>
+        <div class="field">
+          <h3 class="info">Name: <span><%= contractorDeposit.contractor_name %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Method: <span><%= contractorDeposit.deposit_method %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Date: <span><%= contractorDeposit.deposit_date %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Price: <span><%= contractorDeposit.deposit_price %></span></h3>
+        </div>
+        <div class="actionButtons">
+          <form action="/contractorsdepo/<%= projectId %>/report/<%= contractorDeposit.id %>" method="post">
+            <button type="submit">Report</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

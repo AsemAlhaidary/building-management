@@ -1,19 +1,21 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar', { active: 'deposits' , projectId: projectId }) %>
+    <%- include('../partials/sidebar', { active: 'contractorsdepo', projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">New Deposit</h3>
-        <form action="/deposits/<%= projectId %>/create" method="POST" class="form grid">
+        <h3 class="title">Edit Deposit</h3>
+        <form action="/contractorsdepo/<%= projectId %>/edit/<%= contractorDeposit.id %>" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
-              <label class="def" for="employee">Employee</label>
+              <label class="def" for="contractor">Contractor</label>
             <% } %>
-            <select id="employee" class="input" name="employeeId" size="1">
-              <% employees.forEach(employee => { %>
-                <option value="<%= employee.id %>">
-                  <%= employee.employee_name %>
+            <select id="contractor" class="input" name="contractorId" size="1">
+              <% contractors.forEach(contractor => { %>
+                <option value="<%= contractor.id %>" <% if (contractor.id == contractorDeposit.contractor_id) { %>
+                  selected
+                <% } %>>
+                  <%= contractor.contractor_name %>
                 </option>
               <% }) %>
             </select>
@@ -24,7 +26,9 @@
             <% } %>
             <select id="method" class="input" name="depositMethod" size="1">
               <% methods.forEach(method => { %>
-                <option value="<%= method %>">
+                <option value="<%= method %>" <% if (contractorDeposit.deposit_method == method) { %>
+                  selected
+                <% } %>>
                   <%= method %>
                 </option>
               <% }) %>
@@ -34,13 +38,13 @@
             <% if (label) { %>
               <label class="def" for="depositDate">Date</label>
             <% } %>
-            <input type="date" id="depositDate" class="input" name="depositDate" placeholder="Date" required>
+            <input type="date" id="depositDate" class="input" name="depositDate" placeholder="Date" value="<%= contractorDeposit.deposit_date %>" required>
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="depositPrice">Price</label>
             <% } %>
-            <input type="number" id="depositPrice" class="input" name="depositPrice" placeholder="Price" min="0" required>
+            <input type="number" id="depositPrice" class="input" name="depositPrice" placeholder="Price" min="0" value="<%= contractorDeposit.deposit_price %>" required>
           </div>
           <p class="error">
             <% if (messages.error) { %>
@@ -48,7 +52,7 @@
             <% } %>
           </p>
           <div class="actionButtons">
-            <button type="submit">Add</button>
+            <button type="submit">Edit</button>
           </div>
         </form>
       </div>

@@ -11,6 +11,11 @@
       <% } %>">Contractors<span class="arrow">►</span></a>
     </li>
     <li class="list">
+      <a href="/contractorsdepo/<%= projectId %>" class="listLink <% if (active == 'contractorsdepo') { %>
+      active
+      <% } %>">Contractors Deposits<span class="arrow">►</span></a>
+    </li>
+    <li class="list">
       <a href="/managers/<%= projectId %>" class="listLink <% if (active == 'managers') { %>
       active
       <% } %>">Managers<span class="arrow">►</span></a>
@@ -33,7 +38,7 @@
     <li class="list">
       <a href="/deposits/<%= projectId %>" class="listLink <% if (active == 'deposits') { %>
       active
-      <% } %>">Deposits<!-- and Disbursement--><span class="arrow">►</span></a>
+      <% } %>">Employees Deposits<!-- and Disbursement--><span class="arrow">►</span></a>
     </li>
     <li class="list">
       <a href="/reports/<%= projectId %>" class="listLink <% if (active == 'reports') { %>

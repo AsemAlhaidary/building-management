@@ -1,19 +1,19 @@
 <div class="container">
   <%- include('../partials/navbar') %>
   <div class="workspaceContainer">
-    <%- include('../partials/sidebar', { active: 'deposits' , projectId: projectId }) %>
+    <%- include('../partials/sidebar', { active: 'contractorsdepo' , projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">New Deposit</h3>
-        <form action="/deposits/<%= projectId %>/create" method="POST" class="form grid">
+        <h3 class="title">New Contractor Deposit</h3>
+        <form action="/contractorsdepo/<%= projectId %>/create" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
-              <label class="def" for="employee">Employee</label>
+              <label class="def" for="contractor">Contractor</label>
             <% } %>
-            <select id="employee" class="input" name="employeeId" size="1">
-              <% employees.forEach(employee => { %>
-                <option value="<%= employee.id %>">
-                  <%= employee.employee_name %>
+            <select id="contractor" class="input" name="contractorId" size="1">
+              <% contractors.forEach(contractor => { %>
+                <option value="<%= contractor.id %>">
+                  <%= contractor.contractor_name %>
                 </option>
               <% }) %>
             </select>

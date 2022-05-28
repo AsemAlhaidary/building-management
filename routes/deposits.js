@@ -41,10 +41,6 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const depositsSum = (await dbService.calculateDepositsByEmployeeId(employeeId)).sum;
     const totalEmployeeBalance = employeeBalance + depositsSum;
 
-    console.log(totalEmployeeBalance)
-    console.log(depositPrice)
-    console.log(totalEmployeeBalance - depositPrice)
-
     if (depositMethod == 'صرف') {
       depositPrice *= -1;
 
@@ -83,23 +79,12 @@ router.get('/:projectId/info/:depositId', security.checkAuthenticated, async (re
   try {
     const { projectId, depositId } = req.params;
 
-    const deposit = await dbService.getPurchaseById(depositId);
+    let deposit = await dbService.getDepositBytId(depositId);
+    deposit.deposit_date = tools.getStandardDate(deposit.deposit_date);
 
     res.render('deposits/info', { deposit: deposit, projectId: projectId } );
   } catch (error) {
-    console.log(error.message);
-  }
-});
-
-router.post('/:projectId/info/:depositId', security.checkAuthenticated, async (req, res) => {
-  try {
-    const { projectId, depositId } = req.params;
-
-    const deposit = await dbService.getdepositById(depositId);
-
-    res.redirect('/deposits/' + projectId );
-  } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 });
 

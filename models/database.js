@@ -531,6 +531,18 @@ class DbService {
     }
   }
 
+  async getDepositBytId(id) {
+    const sql = "SELECT d.*, e.employee_name FROM deposits d LEFT JOIN employees e ON d.employee_id = e.id WHERE d.id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async addNewDeposit(depositMethod, depositDate, depositPrice, employeeId) {
     const sql = "INSERT INTO deposits (deposit_method, deposit_date, deposit_price, employee_id) VALUES (?, ?, ?, ?)";
     const params = [depositMethod, depositDate, depositPrice, employeeId];
@@ -558,6 +570,79 @@ class DbService {
 
   async calculateDepositsByEmployeeId(id) {
     const sql = "SELECT sum(deposit_price) sum FROM deposits WHERE employee_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getContractorsDepoByProjectId(id) {
+    const sql = "SELECT c.*, o.contractor_name FROM contractorsdeposits c LEFT JOIN contractors o ON c.contractor_id = o.id WHERE o.project_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getContractorDepoById(id) {
+    const sql = "SELECT c.*, o.contractor_name FROM contractorsdeposits c LEFT JOIN contractors o ON c.contractor_id = o.id WHERE c.id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async addNewContractorDepo(depositMethod, depositDate, depositPrice, contractorId) {
+    const sql = "INSERT INTO contractorsdeposits (deposit_method, deposit_date, deposit_price, contractor_id) VALUES (?, ?, ?, ?)";
+    const params = [depositMethod, depositDate, depositPrice, contractorId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      console.log(result)
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async deleteContractorDepoById(id) {
+    const sql = "DELETE FROM contractorsdeposits WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async editContractorDepoById(depositMethod, depositDate, depositPrice, contractorId, id) {
+    const sql = "UPDATE contractorsdeposits SET deposit_method = ?, deposit_date = ?, deposit_price = ?, contractor_id = ? WHERE id = ?";
+    const params = [depositMethod, depositDate, depositPrice, contractorId, id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async calcContractorsDepoByContractorId(id) {
+    const sql = "SELECT sum(deposit_price) sum FROM contractorsdeposits WHERE contractor_id = ?";
     const params = [id];
 
     try {
