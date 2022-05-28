@@ -37,6 +37,25 @@ CREATE TABLE `contractors` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `contractorsdeposits`
+--
+
+DROP TABLE IF EXISTS `contractorsdeposits`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `contractorsdeposits` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `deposit_method` varchar(100) DEFAULT NULL,
+  `deposit_date` date DEFAULT NULL,
+  `deposit_price` decimal(50,2) DEFAULT NULL,
+  `contractor_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `contractor_id` (`contractor_id`),
+  CONSTRAINT `contractor_id` FOREIGN KEY (`contractor_id`) REFERENCES `contractors` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `deposits`
 --
 
@@ -52,7 +71,7 @@ CREATE TABLE `deposits` (
   PRIMARY KEY (`id`),
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,4 +252,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-26  1:13:16
+-- Dump completed on 2022-05-29  1:17:59
