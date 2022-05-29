@@ -31,6 +31,11 @@
       <% } %>">Purchases<span class="arrow">►</span></a>
     </li>
     <li class="list">
+      <a href="/outlays/<%= projectId %>" class="listLink <% if (active == 'outlays') { %>
+      active
+      <% } %>">Outlays<span class="arrow">►</span></a>
+    </li>
+    <li class="list">
       <a href="/extras/<%= projectId %>" class="listLink <% if (active == 'extras') { %>
       active
       <% } %>">Extras<span class="arrow">►</span></a>

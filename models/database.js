@@ -652,6 +652,67 @@ class DbService {
       throw new Error(error);
     }
   }
+
+  async getOutlaysByProjectId(id) {
+    const sql = "SELECT * FROM outlays WHERE project_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async addNewOutlay(outlayName, outlayDate, outlayUnitPrice, outlayUnitQuantity, outlayDetails, outlayTotal, projectId) {
+    const sql = "INSERT INTO outlays (outlay_name, outlay_details, outlay_date, outlay_unit_price, outlay_unit_quantity, outlay_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    const params = [outlayName, outlayDetails, outlayDate, outlayUnitPrice, outlayUnitQuantity, outlayTotal, projectId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      console.log(result)
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async deleteOutlayById(id) {
+    const sql = "DELETE FROM outlays WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getOutlayById(id) {
+    const sql = "SELECT * FROM outlays WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async editOutlayById(outlayName, outlayDate, outlayUnitPrice, outlayUnitQuantity, outlayDetails, outlayTotal, id) {
+    const sql = "UPDATE outlays SET outlay_name = ?, outlay_details = ?, outlay_date = ?, outlay_unit_price = ?, outlay_unit_quantity = ?, outlay_total = ? WHERE id = ?";
+    const params = [outlayName, outlayDetails, outlayDate, outlayUnitPrice, outlayUnitQuantity, outlayTotal, id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = DbService;

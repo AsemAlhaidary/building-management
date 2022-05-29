@@ -126,7 +126,7 @@ router.post('/:projectId/edit/:contractorDepositId', security.checkAuthenticated
         await dbService.editContractorDepoById(depositMethod, depositDate, depositPrice, contractorId, contractorDepositId);
         res.redirect('/contractorsdepo/' + projectId);
       } else {
-        req.flash('error', 'لقد تجاوزت المبلغ المتاح لك')
+        req.flash('error', 'لقد تجاوزت المبلغ المتاح لك');
         res.redirect('/contractorsdepo/' + projectId + '/new');
       }
 

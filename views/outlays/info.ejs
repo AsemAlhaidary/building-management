@@ -1,0 +1,35 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'outlays', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="infoBox">
+        <h3 class="title">Info <%= outlay.outlay_name %></h3>
+        <div class="field">
+          <h3 class="info">Name: <span><%= outlay.outlay_name %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Date: <span><%= outlay.outlay_date %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Unit Price: <span><%= outlay.outlay_unit_price %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Quantity: <span><%= outlay.outlay_unit_quantity %></span></h3>
+        </div>
+        
+        <div class="field">
+          <h3 class="info">Total Price: <span><%= outlay.outlay_total %></span></h3>
+        </div>
+        <div class="field">
+          <h3 class="info">Details: <span><%= outlay.outlay_details %></span></h3>
+        </div>
+        <div class="actionButtons">
+          <form action="/outlays/<%= projectId %>/report/<%= outlay.id %>" method="post">
+            <button type="submit">Report</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

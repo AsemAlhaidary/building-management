@@ -1,0 +1,46 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'outlays', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="formBox">
+        <h3 class="title">Edit Outlay</h3>
+        <form action="/outlays/<%= projectId %>/edit/<%= outlay.id %>" method="POST" class="form grid">
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="name">Name</label>
+            <% } %>
+            <input type="text" id="name" class="input" name="outlayName" value="<%= outlay.outlay_name %>" placeholder="Name">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="date">Date</label>
+            <% } %>
+            <input type="date" id="date" class="input" name="outlayDate" value="<%= outlay.outlay_date %>" placeholder="Date">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="unitPrice">Unit Price</label>
+            <% } %>
+            <input type="number" id="unitPrice" class="input" name="outlayUnitPrice" value="<%= outlay.outlay_unit_price %>" placeholder="Unit Price">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="quantity">Quantity</label>
+            <% } %>
+            <input type="number" id="quantity" class="input" name="outlayUnitQuantity" value="<%= outlay.outlay_unit_quantity %>" placeholder="Quantity">
+          </div>
+          <div class="row spanTwo">
+            <% if (label) { %>
+              <label class="def" for="details">Details</label>
+            <% } %>
+            <textarea name="outlayDetails" class="input" id="details" cols="30" rows="10" placeholder="Details"><%= outlay.outlay_details %></textarea>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Edit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
