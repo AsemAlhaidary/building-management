@@ -1,9 +1,11 @@
 const express = require('express');
 const security = require('../security/security');
 const database = require('../models/database');
+const usefulTools = require('../public/js/tools');
 const router = express.Router();
 
 const dbService = database.getDbServiceInstance();
+const tools = usefulTools.getToolsInstance();
 
 router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
@@ -22,6 +24,7 @@ router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
   try {
     const invoiceName = req.body.invoiceName;
+    const invoiceDate = req.body.invoiceDate;
     const invoiceNumber = req.body.invoiceNumber;
     const invoiceUnit = req.body.invoiceUnit;
     const invoiceUnitPrice= req.body.invoiceUnitPrice;
@@ -31,7 +34,7 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const invoiceTotal = invoiceUnitPrice * invoiceQuantity;
     const { projectId } = req.params;
 
-    await dbService.addNewinvoice(invoiceName, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, projectId);
+    await dbService.addNewinvoice(invoiceName, invoiceDate, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, projectId);
 
     res.redirect('/invoices/' + projectId);
   } catch (error) {
@@ -56,7 +59,8 @@ router.get('/:projectId/info/:invoiceId', security.checkAuthenticated, async (re
   try {
     const { projectId, invoiceId } = req.params;
 
-    const invoice = await dbService.getInvoiceById(invoiceId);
+    let invoice = await dbService.getInvoiceById(invoiceId);
+    invoice.invoice_date = tools.getStandardDate(invoice.invoice_date);
 
     res.render('invoices/info', { invoice: invoice, projectId: projectId } );
   } catch (error) {
@@ -79,6 +83,7 @@ router.get('/:projectId/edit/:invoiceId', security.checkAuthenticated, async (re
 router.post('/:projectId/edit/:invoiceId', security.checkAuthenticated, async (req, res) => {
   try {
     const invoiceName = req.body.invoiceName;
+    const invoiceDate = req.body.invoiceDate;
     const invoiceNumber = req.body.invoiceNumber;
     const invoiceUnit = req.body.invoiceUnit;
     const invoiceUnitPrice= req.body.invoiceUnitPrice;
@@ -88,7 +93,7 @@ router.post('/:projectId/edit/:invoiceId', security.checkAuthenticated, async (r
     const invoiceTotal = invoiceUnitPrice * invoiceQuantity;
     const { projectId, invoiceId } = req.params;
 
-    await dbService.editInvoiceById(invoiceName, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, invoiceId);
+    await dbService.editInvoiceById(invoiceName, invoiceDate, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, invoiceId);
 
     res.redirect('/invoices/' + projectId);
   } catch (error) {

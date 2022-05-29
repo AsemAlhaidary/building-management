@@ -14,6 +14,12 @@
           </div>
           <div class="row">
             <% if (label) { %>
+              <label class="def" for="date">Date</label>
+            <% } %>
+            <input type="date" id="date" class="input" name="invoiceDate">
+          </div>
+          <div class="row">
+            <% if (label) { %>
               <label class="def" for="number">Number</label>
             <% } %>
             <input type="number" id="number" class="input" name="invoiceNumber" value="<%= invoice.invoice_number %>" placeholder="Invoice Number">

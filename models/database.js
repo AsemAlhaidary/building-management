@@ -293,7 +293,6 @@ class DbService {
 
     try {
       const result = await this.runQuery(sql, params);
-      console.log(result)
       return result;
     } catch (error) {
       throw new Error(error);
@@ -354,7 +353,6 @@ class DbService {
 
     try {
       const result = await this.runQuery(sql, params);
-      console.log(result)
       return result;
     } catch (error) {
       throw new Error(error);
@@ -415,7 +413,6 @@ class DbService {
 
     try {
       const result = await this.runQuery(sql, params);
-      console.log(result)
       return result;
     } catch (error) {
       throw new Error(error);
@@ -470,13 +467,12 @@ class DbService {
     }
   }
 
-  async addNewinvoice(invoiceName, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, projectId) {
-    const sql = "INSERT INTO invoices (invoice_name, invoice_details, invoice_number, invoice_unit, invoice_unit_price, invoice_unit_quantity, invoice_type, invoice_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    const params = [invoiceName, invoiceDetails, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceTotal, projectId];
+  async addNewinvoice(invoiceName, invoiceDate, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, projectId) {
+    const sql = "INSERT INTO invoices (invoice_name, invoice_date, invoice_details, invoice_number, invoice_unit, invoice_unit_price, invoice_unit_quantity, invoice_type, invoice_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const params = [invoiceName, invoiceDate, invoiceDetails, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceTotal, projectId];
 
     try {
       const result = await this.runQuery(sql, params);
-      console.log(result)
       return result;
     } catch (error) {
       throw new Error(error);
@@ -495,9 +491,9 @@ class DbService {
     }
   }
 
-  async editInvoiceById(invoiceName, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, id) {
-    const sql = "UPDATE invoices SET invoice_name = ?, invoice_details = ?, invoice_number = ?, invoice_unit = ?, invoice_unit_price = ?, invoice_unit_quantity = ?, invoice_type = ?, invoice_total = ? WHERE id = ?";
-    const params = [invoiceName, invoiceDetails, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceTotal, id];
+  async editInvoiceById(invoiceName, invoiceDate, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, id) {
+    const sql = "UPDATE invoices SET invoice_name = ?, invoice_date = ?, invoice_details = ?, invoice_number = ?, invoice_unit = ?, invoice_unit_price = ?, invoice_unit_quantity = ?, invoice_type = ?, invoice_total = ? WHERE id = ?";
+    const params = [invoiceName, invoiceDate, invoiceDetails, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceTotal, id];
 
     try {
       const result = await this.runQuery(sql, params);
@@ -549,7 +545,6 @@ class DbService {
 
     try {
       const result = await this.runQuery(sql, params);
-      console.log(result)
       return result;
     } catch (error) {
       throw new Error(error);
@@ -610,7 +605,6 @@ class DbService {
 
     try {
       const result = await this.runQuery(sql, params);
-      console.log(result)
       return result;
     } catch (error) {
       throw new Error(error);
@@ -671,7 +665,6 @@ class DbService {
 
     try {
       const result = await this.runQuery(sql, params);
-      console.log(result)
       return result;
     } catch (error) {
       throw new Error(error);
