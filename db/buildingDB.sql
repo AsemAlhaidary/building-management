@@ -33,7 +33,7 @@ CREATE TABLE `contractors` (
   `project_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_contractors_projects1_idx` (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `deposits` (
   PRIMARY KEY (`id`),
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +94,29 @@ CREATE TABLE `employees` (
   PRIMARY KEY (`id`),
   KEY `fk_employees_projects1_idx` (`project_id`),
   CONSTRAINT `fk_employees_projects1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `equipments`
+--
+
+DROP TABLE IF EXISTS `equipments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `equipments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment_name` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `equipment_details` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `equipment_date` date DEFAULT NULL,
+  `equipment_unit_price` decimal(50,2) DEFAULT NULL,
+  `equipment_unit_quantity` int(11) DEFAULT NULL,
+  `equipment_total` decimal(50,2) DEFAULT NULL,
+  `project_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_equipments_projects1_idx` (`project_id`),
+  CONSTRAINT `fk_equipments_projects1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +135,7 @@ CREATE TABLE `extras` (
   PRIMARY KEY (`id`),
   KEY `fk_extras_employees1_idx` (`employee_id`),
   CONSTRAINT `fk_extras_employees1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +202,7 @@ CREATE TABLE `outlays` (
   PRIMARY KEY (`id`),
   KEY `fk_outlays_projects1_idx` (`project_id`),
   CONSTRAINT `fk_outlays_projects1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +222,7 @@ CREATE TABLE `projects` (
   PRIMARY KEY (`id`),
   KEY `fk_projects_users_idx` (`user_id`),
   CONSTRAINT `fk_projects_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,12 +282,8 @@ CREATE TABLE `users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping events for database 'building_management'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -276,4 +294,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-30  1:15:45
+-- Dump completed on 2022-06-01  0:10:10

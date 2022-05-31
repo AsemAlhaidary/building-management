@@ -1,0 +1,46 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'equipments', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="formBox">
+        <h3 class="title">Edit equipment</h3>
+        <form action="/equipments/<%= projectId %>/edit/<%= equipment.id %>" method="POST" class="form grid">
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="name">Name</label>
+            <% } %>
+            <input type="text" id="name" class="input" name="equipmentName" value="<%= equipment.equipment_name %>" placeholder="Name">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="date">Date</label>
+            <% } %>
+            <input type="date" id="date" class="input" name="equipmentDate" value="<%= equipment.equipment_date %>" placeholder="Date">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="unitPrice">Unit Price</label>
+            <% } %>
+            <input type="number" id="unitPrice" class="input" name="equipmentUnitPrice" value="<%= equipment.equipment_unit_price %>" placeholder="Unit Price">
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="quantity">equipment</label>
+            <% } %>
+            <input type="number" id="quantity" class="input" name="equipmentUnitQuantity" value="<%=equipment.equipment_unit_quantity %>" placeholder="equipment">
+          </div>
+          <div class="row spanTwo">
+            <% if (label) { %>
+              <label class="def" for="details">Details</label>
+            <% } %>
+            <textarea name="equipmentDetails" class="input" id="details" cols="30" rows="10" placeholder="Details"><%= equipment.equipment_details %></textarea>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Edit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

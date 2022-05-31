@@ -1,0 +1,36 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'equipments', projectId: projectId }) %>
+    <div class="workspace index">
+      <div class="info">
+        <% equipments.forEach((equipment) => { %>
+          <span class="infoContainer">
+            <div class="infos">
+              <h3 class="data name">Name: <span class="value"><%= equipment.equipment_name %></span></h3>
+              <h3 class="data price">Unit Price: <span class="value"><%= equipment.equipment_unit_price %></span></h3>
+              <h3 class="data quantity">Unit Quantity: <span class="value"><%= equipment.equipment_unit_quantity %></span></h3>
+              <h3 class="data total">Total Price: <span class="value"><%= equipment.equipment_total %></span></h3>
+            </div>
+            <div class="buttons">
+              <form action="/equipments/<%= projectId %>/delete/<%= equipment.id %>" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+              <form action="/equipments/<%= projectId %>/edit/<%= equipment.id %>" method="GET">
+                <button type="submit">Edit</button>
+              </form>
+              <form action="/equipments/<%= projectId %>/info/<%= equipment.id %>" method="GET">
+                <button type="submit">Info</button>
+              </form>
+            </div>
+          </span>
+        <% }) %>
+      </div>
+      <div class="actionButtons">
+        <form action="/equipments/<%= projectId %>/new" method="GET">
+          <button type="submit">New</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -706,6 +706,62 @@ class DbService {
       throw new Error(error);
     }
   }
+  async getEquipmentsByProjectId(id) {
+    const sql = "SELECT * FROM equipments WHERE project_id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+  async getEquipmentById(id) {
+    const sql = "SELECT * FROM equipments WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async addNewEquipment(equipmentName, equipmentDate, equipmentUnitPrice, equipmentUnitQuantity, equipmentDetails, equipmentTotal, projectId) {
+    const sql = "INSERT INTO equipments (equipment_name, equipment_details, equipment_date, equipment_unit_price, equipment_unit_quantity, equipment_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    const params = [equipmentName, equipmentDetails, equipmentDate, equipmentUnitPrice, equipmentUnitQuantity, equipmentTotal, projectId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+  async deleteEquipmentById(id) {
+    const sql = "DELETE FROM equipments WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+  async editEquipmentById(equipmentName, equipmentDate, equipmentUnitPrice, equipmentUnitQuantity, equipmentDetails, equipmentTotal, id) {
+    const sql = "UPDATE equipments SET equipment_name = ?, equipment_details = ?, equipment_date = ?, equipment_unit_price = ?, equipment_unit_quantity = ?, equipment_total = ? WHERE id = ?";
+    const params = [equipmentName, equipmentDetails, equipmentDate, equipmentUnitPrice, equipmentUnitQuantity, equipmentTotal, id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = DbService;
