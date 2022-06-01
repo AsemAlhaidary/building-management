@@ -26,7 +26,7 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const invoiceName = req.body.invoiceName;
     const invoiceDate = req.body.invoiceDate;
     const invoiceNumber = req.body.invoiceNumber;
-    const invoiceUnit = req.body.invoiceUnit;
+  //  const invoiceUnit = req.body.invoiceUnit;
     const invoiceUnitPrice= req.body.invoiceUnitPrice;
     const invoiceQuantity= req.body.invoiceQuantity;
     const invoiceType= req.body.invoiceType;
@@ -34,7 +34,7 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const invoiceTotal = invoiceUnitPrice * invoiceQuantity;
     const { projectId } = req.params;
 
-    await dbService.addNewinvoice(invoiceName, invoiceDate, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, projectId);
+    await dbService.addNewinvoice(invoiceName, invoiceDate, invoiceNumber, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, projectId);
 
     res.redirect('/invoices/' + projectId);
   } catch (error) {
@@ -85,7 +85,7 @@ router.post('/:projectId/edit/:invoiceId', security.checkAuthenticated, async (r
     const invoiceName = req.body.invoiceName;
     const invoiceDate = req.body.invoiceDate;
     const invoiceNumber = req.body.invoiceNumber;
-    const invoiceUnit = req.body.invoiceUnit;
+   // const invoiceUnit = req.body.invoiceUnit;
     const invoiceUnitPrice= req.body.invoiceUnitPrice;
     const invoiceQuantity= req.body.invoiceQuantity;
     const invoiceType= req.body.invoiceType;
@@ -93,7 +93,7 @@ router.post('/:projectId/edit/:invoiceId', security.checkAuthenticated, async (r
     const invoiceTotal = invoiceUnitPrice * invoiceQuantity;
     const { projectId, invoiceId } = req.params;
 
-    await dbService.editInvoiceById(invoiceName, invoiceDate, invoiceNumber, invoiceUnit, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, invoiceId);
+    await dbService.editInvoiceById(invoiceName, invoiceDate, invoiceNumber, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, invoiceId);
 
     res.redirect('/invoices/' + projectId);
   } catch (error) {

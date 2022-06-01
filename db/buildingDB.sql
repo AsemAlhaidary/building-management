@@ -151,7 +151,7 @@ CREATE TABLE `invoices` (
   `invoice_date` date DEFAULT NULL,
   `invoice_details` varchar(200) DEFAULT NULL,
   `invoice_number` int(11) DEFAULT NULL,
-  `invoice_unit` varchar(100) DEFAULT NULL,
+  -- `invoice_unit` varchar(100) DEFAULT NULL,
   `invoice_unit_price` decimal(50,2) DEFAULT NULL,
   `invoice_unit_quantity` int(11) DEFAULT NULL,
   `invoice_type` varchar(100) DEFAULT NULL,
