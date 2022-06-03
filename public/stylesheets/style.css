@@ -19,7 +19,7 @@
 @font-face {
   font-family: 'Noto Naskh';
   src: url("/fonts/NotoNaskhArabic-Regular.ttf") format('truetype');
-  font-weight: 800;
+  font-weight: 400;
   font-style: normal;
 }
 @font-face {
@@ -31,7 +31,7 @@
 @font-face {
   font-family: 'Poppins';
   src: url("/fonts/Poppins-SemiBold.ttf") format('truetype');
-  font-weight: 800;
+  font-weight: 600;
   font-style: normal;
 }
 @font-face {
@@ -43,7 +43,7 @@
 @font-face {
   font-family: 'Poppins';
   src: url("/fonts/Poppins-Regular.ttf") format('truetype');
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
 }
 * {
@@ -70,8 +70,6 @@
   --navbarHeight: 4em;
   --boxPadding: 2em;
   --siteFont: 'Poppins';
-  font-weight: bold;
-
 }
 .formContainer {
   width: 100%;
@@ -256,7 +254,6 @@
   opacity: 1;
   color: var(--primaryTextColor);
   transform: translateX(0%);
-  
 }
 .container .workspaceContainer .workspace {
   height: 100%;
@@ -368,7 +365,6 @@
 .container .workspaceContainer .workspace .formBox .form.grid .row .input {
   font-size: 0.8em;
   flex-grow: 1;
-  
 }
 .container .workspaceContainer .workspace .formBox .form.grid .error {
   margin: calc(var(--boxPadding) / 2) 0 0;

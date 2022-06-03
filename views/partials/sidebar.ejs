@@ -3,60 +3,57 @@
     <li class="list">
       <a href="/employees/<%= projectId %>" class="listLink <% if (active == 'employees') { %>
       active
-      <% } %>">العمال<span class="arrow">►</span></a>
+      <% } %>">Employees<span class="arrow">►</span></a>
     </li>
-    <li class="list">
-      <a href="/deposits/<%= projectId %>" class="listLink <% if (active == 'deposits') { %>
-      active
-      <% } %>">الصرف والقبض للعمال<!-- and Disbursement--><span class="arrow">►</span></a>
-    </li>
-    <li class="list">
-      <a href="/extras/<%= projectId %>" class="listLink <% if (active == 'extras') { %>
-      active
-      <% } %>">الاضافي<span class="arrow">►</span></a>
-    </li>
-    
     <li class="list">
       <a href="/contractors/<%= projectId %>" class="listLink <% if (active == 'contractors') { %>
       active
-      <% } %>">المقاولين<span class="arrow">►</span></a>
+      <% } %>">Contractors<span class="arrow">►</span></a>
     </li>
     <li class="list">
       <a href="/contractorsdepo/<%= projectId %>" class="listLink <% if (active == 'contractorsdepo') { %>
       active
-      <% } %>">الصرف والقبض للمقاولين<span class="arrow">►</span></a>
+      <% } %>">Contractors Deposits<span class="arrow">►</span></a>
     </li>
     <li class="list">
       <a href="/managers/<%= projectId %>" class="listLink <% if (active == 'managers') { %>
       active
-      <% } %>">الادارة<span class="arrow">►</span></a>
-    </li>
-    <li class="list">
-      <a href="/purchases/<%= projectId %>" class="listLink <% if (active == 'purchases') { %>
-      active
-      <% } %>">المشتريات<span class="arrow">►</span></a>
+      <% } %>">Managers<span class="arrow">►</span></a>
     </li>
     <li class="list">
       <a href="/invoices/<%= projectId %>" class="listLink <% if (active == 'invoices') { %>
       active
-      <% } %>">المشتريات بالفاتورة<span class="arrow">►</span></a>
+      <% } %>">invoices<span class="arrow">►</span></a>
     </li>
-    
+    <li class="list">
+      <a href="/purchases/<%= projectId %>" class="listLink <% if (active == 'purchases') { %>
+      active
+      <% } %>">Purchases<span class="arrow">►</span></a>
+    </li>
     <li class="list">
       <a href="/equipments/<%= projectId %>" class="listLink <% if (active == 'equipments') { %>
       active
-      <% } %>">المعدات<span class="arrow">►</span></a>
+      <% } %>">Equipments<span class="arrow">►</span></a>
     </li>
     <li class="list">
       <a href="/outlays/<%= projectId %>" class="listLink <% if (active == 'outlays') { %>
       active
-      <% } %>">النثريات<span class="arrow">►</span></a>
+      <% } %>">Outlays<span class="arrow">►</span></a>
     </li>
-   
+    <li class="list">
+      <a href="/extras/<%= projectId %>" class="listLink <% if (active == 'extras') { %>
+      active
+      <% } %>">Extras<span class="arrow">►</span></a>
+    </li>
+    <li class="list">
+      <a href="/deposits/<%= projectId %>" class="listLink <% if (active == 'deposits') { %>
+      active
+      <% } %>">Employees Deposits<!-- and Disbursement--><span class="arrow">►</span></a>
+    </li>
     <li class="list">
       <a href="/reports/<%= projectId %>" class="listLink <% if (active == 'reports') { %>
       active
-      <% } %>">التقارير<span class="arrow">►</span></a>
+      <% } %>">Reports<span class="arrow">►</span></a>
     </li>
   </ul>
 </nav>
