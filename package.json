@@ -21,10 +21,12 @@
   "homepage": "https://github.com/AsemAlhaidary/building.management#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "easyinvoice": "^2.3.0",
     "ejs": "^3.1.7",
     "express": "^4.17.3",
     "express-ejs-layouts": "^2.5.1",
     "express-flash": "0.0.2",
+    "express-pdf": "^1.2.2",
     "express-session": "^1.17.2",
     "method-override": "^3.0.0",
     "mysql": "^2.18.1",
