@@ -4,13 +4,13 @@
     <%- include('../partials/sidebar', { active: 'invoices' , projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">New invoice</h3>
+        <h3 class="title">فاتورة جديد</h3>
         <form action="/invoices/<%= projectId %>/create" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
               <label class="def" for="name">Name</label>
             <% } %>
-            <input type="text" id="name" class="input" name="invoiceName" placeholder="Name">
+            <input type="text" id="name" class="input" name="invoiceName" placeholder="اسمه">
           </div>
           <div class="row">
             <% if (label) { %>
@@ -22,43 +22,43 @@
             <% if (label) { %>
               <label class="def" for="number">Number</label>
             <% } %>
-            <input type="number" id="number" class="input" name="invoiceNumber" placeholder="Invoice Number">
+            <input type="number" id="number" class="input" name="invoiceNumber" placeholder="رقم الفاتورة">
           </div>
           <!-- <div class="row">
-            <$% if (label) { %>
+            <@% if (label) { %>
               <label class="def" for="unit">Unit</label>
-            <$% } %> -->
+            <@% } %> -->
             <!-- <input type="text" id="unit" class="input" name="invoiceUnit" placeholder="Unit">
           </div> -->
           <div class="row">
             <% if (label) { %>
               <label class="def" for="unitPrice">Unit Price</label>
             <% } %>
-            <input type="number" id="unitPrice" class="input" name="invoiceUnitPrice" placeholder="Unit Price">
+            <input type="number" id="unitPrice" class="input" name="invoiceUnitPrice" placeholder="سعر الوحدة">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="quantity">Quantity</label>
             <% } %>
-            <input type="number" id="quantity" class="input" name="invoiceQuantity" placeholder="Quantity">
+            <input type="number" id="quantity" class="input" name="invoiceQuantity" placeholder="الكمية">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="invoiceType">Type</label>
             <% } %>
             <select id="invoiceType" class="input" name="invoiceType" size="1">
-              <option value="postponed">Postponed</option>
-              <option value="cash">Cash</option>
+              <option value="postponed">آجل</option>
+              <option value="cash">كاش</option>
             </select>
           </div>
           <div class="row spanTwo">
             <% if (label) { %>
               <label class="def" for="details">Details</label>
             <% } %>
-            <textarea name="invoiceDetails" class="input" id="details" cols="30" rows="10" placeholder="Details"></textarea>
+            <textarea name="invoiceDetails" class="input" id="details" cols="30" rows="10" placeholder="البيان"></textarea>
           </div>
           <div class="actionButtons">
-            <button type="submit">Add</button>
+            <button type="submit">اضافة</button>
           </div>
         </form>
       </div>

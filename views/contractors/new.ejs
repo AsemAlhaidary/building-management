@@ -4,19 +4,19 @@
     <%- include('../partials/sidebar', { active: 'contractors', projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">New Contractor</h3>
+        <h3 class="title">مقاول جديد</h3>
         <form action="/contractors/<%= projectId %>/create" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
               <label class="def" for="contractorName">Name</label>
             <% } %>
-            <input type="text" id="contractorName" class="input" name="contractorName" placeholder="Name" required>
+            <input type="text" id="contractorName" class="input" name="contractorName" placeholder="اسمه" required>
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="contractorDetails">Details</label>
             <% } %>
-            <input type="text" id="contractorDetails" class="input" name="contractorDetails" placeholder="Details" required>
+            <input type="text" id="contractorDetails" class="input" name="contractorDetails" placeholder="البيان" required>
           </div>
           <div class="row">
             <% if (label) { %>
@@ -32,22 +32,22 @@
             <% if (label) { %>
               <label class="def" for="contractorWorkQuantity">Quantity</label>
             <% } %>
-            <input type="number" id="contractorWorkQuantity" class="input" name="contractorWorkQuantity" placeholder="Quantity">
+            <input type="number" id="contractorWorkQuantity" class="input" name="contractorWorkQuantity" placeholder="الكمية">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="contractorUnitPrice">Price</label>
             <% } %>
-            <input type="number" id="contractorUnitPrice" class="input" name="contractorUnitPrice" placeholder="Price">
+            <input type="number" id="contractorUnitPrice" class="input" name="contractorUnitPrice" placeholder="السعر">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="contractorWorkTotal">Total</label>
             <% } %>
-            <input type="number" id="contractorWorkTotal" class="input" name="contractorWorkTotal" placeholder="Total">
+            <input type="number" id="contractorWorkTotal" class="input" name="contractorWorkTotal" placeholder="الاجمالي">
           </div>
           <div class="actionButtons">
-            <button type="submit">Add</button>
+            <button type="submit">اضافة</button>
           </div>
         </form>
       </div>

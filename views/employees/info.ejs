@@ -7,42 +7,42 @@
         <h3 class="title"><%= employee.employee_name %></h3>
         <% if (employee.employee_name) { %>
           <div class="field">
-            <h3 class="info">Name: <span><%= employee.employee_name %></span></h3>
+            <h3 class="info">اسمة: <span><%= employee.employee_name %></span></h3>
           </div>
         <% } %>
         <% if (employee.employee_job) { %>
           <div class="field">
-            <h3 class="info">Job: <span><%= employee.employee_job %></span></h3>
+            <h3 class="info">المهنة: <span><%= employee.employee_job %></span></h3>
           </div>
         <% } %>
         <% if (employee.employee_phone_num) { %>
           <div class="field">
-            <h3 class="info">Phone Number: <span><%= employee.employee_phone_num %></span></h3>
+            <h3 class="info">رقم التلفون: <span><%= employee.employee_phone_num %></span></h3>
           </div>
         <% } %>
         <% if (employee.employee_day_price) { %>
           <div class="field">
-            <h3 class="info">Day Price: <span><%= employee.employee_day_price %></span></h3>
+            <h3 class="info">سعر يومة: <span><%= employee.employee_day_price %></span></h3>
           </div>
         <% } %>
         <% if (employee.employee_start_date) { %>
           <div class="field">
-            <h3 class="info">Start Date: <span><%= employee.employee_start_date %></span></h3>
+            <h3 class="info">بداية عملة: <span><%= employee.employee_start_date %></span></h3>
           </div>
         <% } %>
         <% if (employee.employee_end_date) { %>
           <div class="field">
-            <h3 class="info">End Date: <span><%= employee.employee_end_date %></span></h3>
+            <h3 class="info">نهاية عملة: <span><%= employee.employee_end_date %></span></h3>
           </div>
         <% } %>
         <% if (employee.employee_total) { %>
           <div class="field">
-            <h3 class="info">Total: <span><%= employee.employee_total %></span></h3>
+            <h3 class="info">الاجمالي: <span><%= employee.employee_total %></span></h3>
           </div>
         <% } %>
         <div class="actionButtons">
           <form action="/reports/emreport/<%= projectId %>/<%= employee.id %>" method="post">
-            <button type="submit">Report</button>
+            <button type="submit">التقرير</button>
           </form>
         </div>
       </div>

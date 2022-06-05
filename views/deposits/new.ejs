@@ -4,7 +4,7 @@
     <%- include('../partials/sidebar', { active: 'deposits' , projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">New Deposit</h3>
+        <h3 class="title">صرف/قبض عامل جديد</h3>
         <form action="/deposits/<%= projectId %>/create" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
@@ -34,13 +34,13 @@
             <% if (label) { %>
               <label class="def" for="depositDate">Date</label>
             <% } %>
-            <input type="date" id="depositDate" class="input" name="depositDate" placeholder="Date" required>
+            <input type="date" id="depositDate" class="input" name="depositDate" placeholder="التاريخ" required>
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="depositPrice">Price</label>
             <% } %>
-            <input type="number" id="depositPrice" class="input" name="depositPrice" placeholder="Price" min="0" required>
+            <input type="number" id="depositPrice" class="input" name="depositPrice" placeholder="السعر" min="0" required>
           </div>
           <p class="error">
             <% if (messages.error) { %>
@@ -48,7 +48,7 @@
             <% } %>
           </p>
           <div class="actionButtons">
-            <button type="submit">Add</button>
+            <button type="submit">اضافة</button>
           </div>
         </form>
       </div>

@@ -4,7 +4,7 @@
     <%- include('../partials/sidebar', { active: 'deposits', projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">Edit Deposit</h3>
+        <h3 class="title">تعديل صرف/ قبض عامل جديد</h3>
         <form action="/deposits/<%= projectId %>/edit/<%= deposit.id %>" method="POST" class="form">
           <div class="row">
             <label class="def" for="name">Name</label>
@@ -12,14 +12,14 @@
           </div>
           <div class="row">
             <label class="def" for="time">Time</label>
-            <input type="text" id="time" class="input" name="depositTime" value="<%= deposit.deposit_time %>" placeholder="deposit_time" required>
+            <input type="text" id="time" class="input" name="depositTime" value="<%= deposit.deposit_time %>" placeholder="التاريخ" required>
           </div>
           <div class="row">
             <label class="def" for="">Time Price</label>
             <input type="tel" id="deposit_time_price" class="input" name="depositstimeprice" value="<%= deposit.deposit_time_price%>" placeholder="" required>
           </div>
           <div class="actionButtons">
-            <button type="submit">Edit</button>
+            <button type="submit">تعديل</button>
           </div>
         </form>
       </div>

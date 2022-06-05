@@ -4,7 +4,7 @@
     <%- include('../partials/sidebar', { active: 'extras', projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">Edit Extra</h3>
+        <h3 class="title">تعديل الاضافي</h3>
         <form action="/extras/<%= projectId %>/edit/<%= extra.id %>" method="POST" class="form">
           <div class="row">
             <% if (label) { %>
@@ -22,16 +22,16 @@
             <% if (label) { %>
               <label class="def" for="time">Time</label>
             <% } %>
-            <input type="number" id="time" class="input" name="nExtraTime" value="<%= extra.extra_time %>" placeholder="Extra Time" required>
+            <input type="number" id="time" class="input" name="nExtraTime" value="<%= extra.extra_time %>" placeholder="وقت الاضافي" required>
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="extraTimePrice">Time Price</label>
             <% } %>
-            <input type="number" id="extraTimePrice" class="input" name="nExtraTimePrice" value="<%= extra.extra_time_price%>" placeholder="Time Price" required>
+            <input type="number" id="extraTimePrice" class="input" name="nExtraTimePrice" value="<%= extra.extra_time_price%>" placeholder="سعر الساعة" required>
           </div>
           <div class="actionButtons">
-            <button type="submit">Edit</button>
+            <button type="submit">التعديل</button>
           </div>
         </form>
       </div>

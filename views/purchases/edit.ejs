@@ -4,25 +4,25 @@
     <%- include('../partials/sidebar', { active: 'purchases', projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">Edit Purchase</h3>
+        <h3 class="title">تعديل المشتريات</h3>
         <form action="/purchases/<%= projectId %>/edit/<%= purchase.id %>" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
               <label class="def" for="name">Name</label>
             <% } %>
-            <input type="text" id="name" class="input" name="purchaseName" value="<%= purchase.purchase_name %>" placeholder="Name">
+            <input type="text" id="name" class="input" name="purchaseName" value="<%= purchase.purchase_name %>" placeholder="اسمه">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="unitPrice">Unit Price</label>
             <% } %>
-            <input type="number" id="unitPrice" class="input" name="purchaseUnitPrice" value="<%= purchase.purchase_unit_price %>" placeholder="Unit Price">
+            <input type="number" id="unitPrice" class="input" name="purchaseUnitPrice" value="<%= purchase.purchase_unit_price %>" placeholder="سعر الوحدة">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="quantity">Quantity</label>
             <% } %>
-            <input type="number" id="quantity" class="input" name="purchaseUnitQuantity" value="<%= purchase.purchase_unit_quantity %>" placeholder="Quantity">
+            <input type="number" id="quantity" class="input" name="purchaseUnitQuantity" value="<%= purchase.purchase_unit_quantity %>" placeholder="الكمية">
           </div>
           <div class="row">
             <% if (label) { %>
@@ -31,20 +31,20 @@
             <select id="type" class="input" name="purchaseType" size="1">
               <option value="postponed" <% if (purchase.purchase_type == 'postponed') { %>
                 selected
-              <% } %>>Postponed</option>
+              <% } %>>آجل</option>
               <option value="cash" <% if (purchase.purchase_type == 'cash') { %>
                 selected
-              <% } %>>Cash</option>
+              <% } %>>كاش</option>
             </select>
           </div>
           <div class="row spanTwo">
             <% if (label) { %>
               <label class="def" for="details">Details</label>
             <% } %>
-            <textarea name="purchaseDetails" class="input" id="details" cols="30" rows="10" placeholder="Details"><%= purchase.purchase_details %></textarea>
+            <textarea name="purchaseDetails" class="input" id="details" cols="30" rows="10" placeholder="البيان"><%= purchase.purchase_details %></textarea>
           </div>
           <div class="actionButtons">
-            <button type="submit">Edit</button>
+            <button type="submit">تعديل</button>
           </div>
         </form>
       </div>

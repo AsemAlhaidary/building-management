@@ -4,40 +4,40 @@
     <%- include('../partials/sidebar', { active: 'outlays' , projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">New Outlays</h3>
+        <h3 class="title">نثريات جديدة</h3>
         <form action="/outlays/<%= projectId %>/create" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
               <label class="def" for="name">Name</label>
             <% } %>
-            <input type="text" id="name" class="input" name="outlayName" placeholder="Name">
+            <input type="text" id="name" class="input" name="outlayName" placeholder="الاسم">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="date">Date</label>
             <% } %>
-            <input type="date" id="date" class="input" name="outlayDate" placeholder="Date">
+            <input type="date" id="date" class="input" name="outlayDate" placeholder="التاريخ">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="unitPrice">Unit Price</label>
             <% } %>
-            <input type="number" id="unitPrice" class="input" name="outlayUnitPrice" placeholder="Unit Price">
+            <input type="number" id="unitPrice" class="input" name="outlayUnitPrice" placeholder="سعر الوحدة">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="quantity">Quantity</label>
             <% } %>
-            <input type="number" id="quantity" class="input" name="outlayUnitQuantity" placeholder="Quantity">
+            <input type="number" id="quantity" class="input" name="outlayUnitQuantity" placeholder="الكمية">
           </div>
           <div class="row spanTwo">
             <% if (label) { %>
               <label class="def" for="details">Details</label>
             <% } %>
-            <textarea name="outlayDetails" class="input" id="details" cols="30" rows="10" placeholder="Details"></textarea>
+            <textarea name="outlayDetails" class="input" id="details" cols="30" rows="10" placeholder="البيان"></textarea>
           </div>
           <div class="actionButtons">
-            <button type="submit">Add</button>
+            <button type="submit">اضافة</button>
           </div>
         </form>
       </div>

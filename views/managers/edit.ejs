@@ -10,28 +10,28 @@
             <% if (label) { %>
               <label class="def" for="managerName">Name</label>
             <% } %>
-            <input type="text" id="managerName" class="input" name="nManagerName" value="<%= manager.manager_name %>" placeholder="Name" required>
+            <input type="text" id="managerName" class="input" name="nManagerName" value="<%= manager.manager_name %>" placeholder="الاسم" required>
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="managerOutlayDetails">Details</label>
             <% } %>
-            <input type="text" id="managerOutlayDetails" class="input" name="nManagerOutlayDetails" value="<%= manager.manager_outlay_details %>" placeholder="Details" required>
+            <input type="text" id="managerOutlayDetails" class="input" name="nManagerOutlayDetails" value="<%= manager.manager_outlay_details %>" placeholder="البيان" required>
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="managerOutlayAmount">Amount</label>
             <% } %>
-            <input type="number" id="managerOutlayAmount" class="input" name="nManagerOutlayAmount" value="<%= manager.manager_outlay_amount %>" placeholder="Amount">
+            <input type="number" id="managerOutlayAmount" class="input" name="nManagerOutlayAmount" value="<%= manager.manager_outlay_amount %>" placeholder="المبلغ">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="managerOutlayDate">Date</label>
             <% } %>
-            <input type="date" id="managerOutlayDate" class="input" name="nManagerOutlayDate" value="<%= manager.manager_outlay_date %>" placeholder="Date">
+            <input type="date" id="managerOutlayDate" class="input" name="nManagerOutlayDate" value="<%= manager.manager_outlay_date %>" placeholder="التاريخ">
           </div>
           <div class="actionButtons">
-            <button type="submit">Edit</button>
+            <button type="submit">تعديل</button>
           </div>
         </form>
       </div>

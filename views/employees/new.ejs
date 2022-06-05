@@ -4,46 +4,46 @@
     <%- include('../partials/sidebar', { active: 'employees', projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">New Employee</h3>
+        <h3 class="title">عامل جديد</h3>
         <form action="/employees/<%= projectId %>/create" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
               <label class="def" for="name">Name</label>
             <% } %>
-            <input type="text" id="name" class="input" name="employeeName" placeholder="Name" required>
+            <input type="text" id="name" class="input" name="employeeName" placeholder="الاسم" required>
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="job">Job</label>
             <% } %>
-            <input type="text" id="job" class="input" name="employeeJob" placeholder="Job" required>
+            <input type="text" id="job" class="input" name="employeeJob" placeholder="مهنتة" required>
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="phoneNum">Phone Number</label>
             <% } %>
-            <input type="tel" id="phoneNum" class="input" name="employeePhoneNum" placeholder="Phone Number">
+            <input type="tel" id="phoneNum" class="input" name="employeePhoneNum" placeholder="رقم التلفون">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="dayPrice">Day Price</label>
             <% } %>
-            <input type="number" id="dayPrice" class="input" name="employeeDayPrice" placeholder="Day Price">
+            <input type="number" id="dayPrice" class="input" name="employeeDayPrice" placeholder="سعر يومة">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="workStart">Work Start</label>
             <% } %>
-            <input type="date" id="workStart" class="input" name="employeeWorkStart" placeholder="Work Start">
+            <input type="date" id="workStart" class="input" name="employeeWorkStart" placeholder="بداية عملة">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="workEnd">Work End</label>
             <% } %>
-            <input type="date" id="workEnd" class="input" name="employeeWorkEnd" placeholder="Work End">
+            <input type="date" id="workEnd" class="input" name="employeeWorkEnd" placeholder="نهاية عملة">
           </div>
           <div class="actionButtons">
-            <button type="submit">Add</button>
+            <button type="submit">اضافة</button>
           </div>
         </form>
       </div>

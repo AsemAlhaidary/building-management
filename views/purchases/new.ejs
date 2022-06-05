@@ -4,43 +4,43 @@
     <%- include('../partials/sidebar', { active: 'purchases' , projectId: projectId }) %>
     <div class="workspace">
       <div class="formBox">
-        <h3 class="title">New Purchase</h3>
+        <h3 class="title">مشتريات جديدة</h3>
         <form action="/purchases/<%= projectId %>/create" method="POST" class="form grid">
           <div class="row">
             <% if (label) { %>
               <label class="def" for="name">Name</label>
             <% } %>
-            <input type="text" id="name" class="input" name="purchaseName" placeholder="Name">
+            <input type="text" id="name" class="input" name="purchaseName" placeholder="الاسم">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="unitPrice">Unit Price</label>
             <% } %>
-            <input type="number" id="unitPrice" class="input" name="purchaseUnitPrice" placeholder="Unit Price">
+            <input type="number" id="unitPrice" class="input" name="purchaseUnitPrice" placeholder="سعر الوحدة">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="quantity">Quantity</label>
             <% } %>
-            <input type="number" id="quantity" class="input" name="purchaseUnitQuantity" placeholder="Quantity">
+            <input type="number" id="quantity" class="input" name="purchaseUnitQuantity" placeholder="الكمية">
           </div>
           <div class="row">
             <% if (label) { %>
               <label class="def" for="phoneNum">Type</label>
             <% } %>
             <select id="type" class="input" name="purchaseType" size="1">
-              <option value="postponed">Postponed</option>
-              <option value="cash">Cash</option>
+              <option value="postponed">آجل</option>
+              <option value="cash">كاش</option>
             </select>
           </div>
           <div class="row spanTwo">
             <% if (label) { %>
               <label class="def" for="details">Details</label>
             <% } %>
-            <textarea name="purchaseDetails" class="input" id="details" cols="30" rows="10" placeholder="Details"></textarea>
+            <textarea name="purchaseDetails" class="input" id="details" cols="30" rows="10" placeholder="البيان"></textarea>
           </div>
           <div class="actionButtons">
-            <button type="submit">Add</button>
+            <button type="submit">اضافة</button>
           </div>
         </form>
       </div>
