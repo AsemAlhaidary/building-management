@@ -1,9 +1,11 @@
 const express = require('express');
 const security = require('../security/security');
 const database = require('../models/database');
+const usefulTools = require('../public/js/tools');
 const router = express.Router();
 
 const dbService = database.getDbServiceInstance();
+const tools = usefulTools.getToolsInstance();
 
 router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
@@ -52,7 +54,8 @@ router.get('/:projectId/info/:managerId', security.checkAuthenticated, async (re
   try {
     const { projectId, managerId } = req.params;
 
-    const manager = await dbService.getManagerById(managerId);
+    let manager = await dbService.getManagerById(managerId);
+    manager.manager_outlay_date = tools.getStandardDate(manager.manager_outlay_date);
 
     res.render('managers/info', { manager: manager, projectId: projectId } );
   } catch (error) {
@@ -88,17 +91,16 @@ router.post('/:projectId/edit/:managerId', security.checkAuthenticated, async (r
   }
 });
 
-router.post('/:projectId/report/:employeeId', security.checkAuthenticated, async (req, res) => {
-  try {
-    const { projectId, employeeId } = req.params;
+// router.post('/:projectId/report/:employeeId', security.checkAuthenticated, async (req, res) => {
+//   try {
+//     const { projectId, employeeId } = req.params;
 
-    const result = await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum);
+//     const result = await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum);
 
-    res.redirect('/employees/' + projectId);
-  } catch (error) {
-    console.log(error.message);
-  }
-});
-
+//     res.redirect('/employees/' + projectId);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// });
 
 module.exports = router;

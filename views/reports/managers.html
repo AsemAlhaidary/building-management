@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pdf Document</title>
+  <style>
+    header tr,
+    header td,
+    header th {
+      border: unset;
+    }
+
+    header td,
+    header th {
+      width: calc(100% / 3);
+      text-align: center;
+    }
+
+    .title {
+      text-align: right;
+      font-size: 1.2em;
+    }
+
+    img {
+      height: 8em;
+    }
+
+    table {
+      /* border-collapse: collapse; */
+      width: 100%;
+    }
+
+    td,
+    th {
+      text-align: right;
+      padding: 4px 8px;
+    }
+
+    .id {
+      text-align: center;
+    }
+
+    main {
+      font-family: 'Cairo';
+    }
+
+    main table {
+      outline: 1px solid #646464;
+    }
+
+    main th {
+      font-weight: bold;
+    }
+
+    /* tr:nth-child(even) {
+      background-color: #dddddd;
+    } */
+  </style>
+</head>
+
+<body>
+  <header>
+    <table>
+      <tr>
+        <td align="center">
+          <img src="http://localhost:3000/img/logo.png" alt="Logo">
+        </td>
+        <td align="center">
+          <h4>بسم الله الرحمن الرحيم</h4>
+          <h3>{{project.project_name}}</h3>
+        </td>
+        <td align="center">
+          <p style="font-weight: 600;">M-K DESIGN</p>
+          <p style="font-weight: 600;">الجمهورية اليمنية - تعز</p>
+          <p style="font-weight: 600;">تصميم - تنفيذ - إشراف</p>
+        </td>
+      </tr>
+    </table>
+  </header>
+
+  <hr>
+
+  <main>
+    <h2 class="title">{{title}}</h2>
+    <table border="1">
+      <tr>
+        <th>المبلغ</th>
+        <th>التاريخ</th>
+        <th>البيان</th>
+        <th>الإسم</th>
+        <th class="id">م</th>
+      </tr>
+      {{#each items}}
+      <tr>
+        <td>{{this.manager_outlay_amount}}</td>
+        <td>{{this.manager_outlay_date}}</td>
+        <td>{{this.manager_outlay_details}}</td>
+        <td>{{this.manager_name}}</td>
+        <td class="id">{{this.id}}</td>
+      </tr>
+      {{/each}}
+      <tr>
+        <th>{{total.sum}}</th>
+        <th colspan="4">المجموع الكلي</th>
+      </tr>
+    </table>
+  </main>
+</body>
+
+</html>
