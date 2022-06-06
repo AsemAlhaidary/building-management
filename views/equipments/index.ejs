@@ -27,6 +27,9 @@
         <% }) %>
       </div>
       <div class="actionButtons">
+        <form action="/reports/equipmentsreport/<%= projectId %>" method="POST">
+          <button type="submit">Report</button>
+        </form>
         <form action="/equipments/<%= projectId %>/new" method="GET">
           <button type="submit">New</button>
         </form>

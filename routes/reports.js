@@ -72,6 +72,129 @@ router.post('/contractorsreport/:projectId', security.checkAuthenticated, async 
   createPDF('contractors.html', data, '/contractors/' + projectId, res);
 });
 
+router.post('/contractorsreport/:projectId', security.checkAuthenticated, async (req, res) => {
+  const { projectId } = req.params;
+
+  // const totalSql = 'SELECT SUM(contractor_work_total) sum FROM contractors WHERE project_id = ?';
+  // const totalParams = [projectId];
+
+  const projectSql = 'SELECT * FROM projects WHERE id = ?';
+  const projectParams = [projectId];
+
+  let contractorsdepo = await dbService.getContractorsDepoByProjectId(projectId);
+ // let total = await dbService.runQuery(totalSql, totalParams);
+  let project = await dbService.runQuery(projectSql, projectParams);
+
+ // total = JSON.parse(JSON.stringify(total[0]));
+  project = JSON.parse(JSON.stringify(project[0]));
+
+  contractors.forEach((contractor, i) => {
+    contractor.id = i + 1;
+  });
+
+  let data = {
+    project: project,
+    title: 'كشف حساب مقاولين',
+    items: contractors,
+    total: total
+  }
+
+  createPDF('contractors.html', data, '/contractors/' + projectId, res);
+});
+router.post('/purchasesreport/:projectId', security.checkAuthenticated, async (req, res) => {
+  const { projectId } = req.params;
+
+  const totalSql = 'SELECT SUM(purchase_total) sum FROM purchases WHERE project_id = ?';
+  const totalParams = [projectId];
+
+  const projectSql = 'SELECT * FROM projects WHERE id = ?';
+  const projectParams = [projectId];
+
+  let purchases = await dbService.getPurchasesByProjectId(projectId);
+  let total = await dbService.runQuery(totalSql, totalParams);
+  let project = await dbService.runQuery(projectSql, projectParams);
+
+  total = JSON.parse(JSON.stringify(total[0]));
+  project = JSON.parse(JSON.stringify(project[0]));
+
+  purchases.forEach((purchase, i) => {
+    purchase.id = i + 1;
+    purchase.purchase_date = tools.getStandardDate(purchase.purchase_date);
+    purchase.purchase_date = tools.getStandardDate(purchase.purchase_date);
+  });
+
+  let data = {
+    project: project,
+    title: 'إجمالي المشتريات',
+    items: purchases,
+    total: total
+  }
+
+  createPDF('invoices.html', data, '/invoices/' + projectId, res);
+});
+router.post('/invoicesreport/:projectId', security.checkAuthenticated, async (req, res) => {
+  const { projectId } = req.params;
+
+  const totalSql = 'SELECT SUM(invoice_total) sum FROM invoices WHERE project_id = ?';
+  const totalParams = [projectId];
+
+  const projectSql = 'SELECT * FROM projects WHERE id = ?';
+  const projectParams = [projectId];
+
+  let invoices = await dbService.getInvoicesByProjectId(projectId);
+  let total = await dbService.runQuery(totalSql, totalParams);
+  let project = await dbService.runQuery(projectSql, projectParams);
+
+  total = JSON.parse(JSON.stringify(total[0]));
+  project = JSON.parse(JSON.stringify(project[0]));
+
+  invoices.forEach((invoice, i) => {
+   invoice.id = i + 1;
+   invoice.invoice_date = tools.getStandardDate(invoice.invoice_date);
+    invoice.invoice_date = tools.getStandardDate(invoice.invoice_date);
+  });
+
+  let data = {
+    project: project,
+    title: ' إجمالي المشتريات بالفواتير',
+    items: invoices,
+    total: total
+  }
+
+  createPDF('invoices.html', data, '/invoices/' + projectId, res);
+});
+router.post('/outlaysreport/:projectId', security.checkAuthenticated, async (req, res) => {
+  const { projectId } = req.params;
+
+  const totalSql = 'SELECT SUM(outlay_total) sum FROM outlays WHERE project_id = ?';
+  const totalParams = [projectId];
+
+  const projectSql = 'SELECT * FROM projects WHERE id = ?';
+  const projectParams = [projectId];
+
+  let outlays = await dbService.getOutlaysByProjectId(projectId);
+  let total = await dbService.runQuery(totalSql, totalParams);
+  let project = await dbService.runQuery(projectSql, projectParams);
+
+  total = JSON.parse(JSON.stringify(total[0]));
+  project = JSON.parse(JSON.stringify(project[0]));
+
+  outlays.forEach((outlay, i) => {
+   outlay.id = i + 1;
+  outlay.outlay_date = tools.getStandardDate(outlay.outlay_date);
+    outlay.outlay_date = tools.getStandardDate(outlay.outlay_date);
+  });
+
+  let data = {
+    project: project,
+    title: ' إجمالي النثريات',
+    items: outlays,
+    total: total
+  }
+
+  createPDF('outlays.html', data, '/outlays/' + projectId, res);
+});
+
 function createPDF(templateFile, data, srcPath, res) {
   const html = fs.readFileSync(path.join(__dirname, '../views/reports/' + templateFile), 'utf-8');
   const filename = 'report' + Math.random() + '_doc' + '.pdf';
