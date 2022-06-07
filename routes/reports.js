@@ -96,13 +96,46 @@ router.post('/contractorsdeporeport/:projectId', security.checkAuthenticated, as
 
   let data = {
     project: project,
-    title: 'كشف حساب مقاولين',
+    title: 'صرف / قبض مقاولين',
     items: contractorsdepo,
     total: total
   }
 
   createPDF('contractorsDepo.html', data, '/contractorsdepo/' + projectId, res);
 });
+
+router.post('/depositsreport/:projectId', security.checkAuthenticated, async (req, res) => {
+  const { projectId } = req.params;
+
+  const totalSql = 'SELECT SUM(deposit_price) sum FROM deposits LEFT JOIN  employees ON deposits.employee_id = employees.id WHERE employees.project_id = ?';
+  const totalParams = [projectId];
+
+  const projectSql = 'SELECT * FROM projects WHERE id = ?';
+  const projectParams = [projectId];
+
+  let deposits = await dbService.getDepositsByProjectId(projectId);
+  
+  let total = await dbService.runQuery(totalSql, totalParams);
+  let project = await dbService.runQuery(projectSql, projectParams);
+  
+  total = JSON.parse(JSON.stringify(total[0]));
+  project = JSON.parse(JSON.stringify(project[0]));
+  
+  deposits.forEach((deposits, i) => {
+    deposits.id = i + 1;
+    deposits.deposit_date = tools.getStandardDate(deposits.deposit_date);
+  });
+
+  let data = {
+    project: project,
+    title: 'صرف / قبض عمال',
+    items: deposits,
+    total: total
+  }
+
+  createPDF('deposits.html', data, '/deposits/' + projectId, res);
+});
+
 
 router.post('/purchasesreport/:projectId', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
@@ -262,6 +295,38 @@ router.post('/equipmentsreport/:projectId', security.checkAuthenticated, async (
   }
 
   createPDF('equipments.html', data, '/equipments/' + projectId, res);
+});
+
+router.post('/extrasreport/:projectId', security.checkAuthenticated, async (req, res) => {
+  const { projectId } = req.params;
+
+  const totalSql = 'SELECT SUM(extra_total_price) sum FROM extras LEFT JOIN employees ON extras.employee_id = employees.id WHERE employees.project_id = ?';
+  const totalParams = [projectId];
+
+  const projectSql = 'SELECT * FROM projects WHERE id = ?';
+  const projectParams = [projectId];
+
+  let extras = await dbService.getExtrasByProjectId(projectId);
+  
+  let total = await dbService.runQuery(totalSql, totalParams);
+  let project = await dbService.runQuery(projectSql, projectParams);
+  
+  total = JSON.parse(JSON.stringify(total[0]));
+  project = JSON.parse(JSON.stringify(project[0]));
+
+  extras.forEach((equipment, i) => {
+    equipment.id = i + 1;
+    equipment.equipment_date = tools.getStandardDate(equipment.equipment_date);
+  });
+
+  let data = {
+    project: project,
+    title: 'الإضافي',
+    items: extras,
+    total: total
+  }
+
+  createPDF('extras.html', data, '/extras/' + projectId, res);
 });
 
 function createPDF(templateFile, data, srcPath, res) {
