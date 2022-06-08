@@ -297,16 +297,16 @@ router.post('/equipmentsreport/:projectId', security.checkAuthenticated, async (
   createPDF('equipments.html', data, '/equipments/' + projectId, res);
 });
 
-router.post('/extrasreport/:projectId', security.checkAuthenticated, async (req, res) => {
+router.post('/paymentsservicereport/:projectId', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
-  const totalSql = 'SELECT SUM(extra_total_price) sum FROM extras LEFT JOIN employees ON extras.employee_id = employees.id WHERE employees.project_id = ?';
+  const totalSql = 'SELECT SUM(payments_amount) sum FROM paymentsservice WHERE project_id = ?';
   const totalParams = [projectId];
 
   const projectSql = 'SELECT * FROM projects WHERE id = ?';
   const projectParams = [projectId];
 
-  let extras = await dbService.getExtrasByProjectId(projectId);
+  let paymentsService = await dbService.getPaymentsServiceByProjectId(projectId);
   
   let total = await dbService.runQuery(totalSql, totalParams);
   let project = await dbService.runQuery(projectSql, projectParams);
@@ -314,19 +314,19 @@ router.post('/extrasreport/:projectId', security.checkAuthenticated, async (req,
   total = JSON.parse(JSON.stringify(total[0]));
   project = JSON.parse(JSON.stringify(project[0]));
 
-  extras.forEach((equipment, i) => {
-    equipment.id = i + 1;
-    equipment.equipment_date = tools.getStandardDate(equipment.equipment_date);
+  paymentsService.forEach((paymentService, i) => {
+    paymentService.id = i + 1;
+    paymentService.payments_date = tools.getStandardDate(paymentService.payments_date);
   });
 
   let data = {
     project: project,
-    title: 'الإضافي',
-    items: extras,
+    title: 'المسلمات',
+    items: paymentsService,
     total: total
   }
 
-  createPDF('extras.html', data, '/extras/' + projectId, res);
+  createPDF('paymentsservice.html', data, '/paymentsservice/' + projectId, res);
 });
 
 function createPDF(templateFile, data, srcPath, res) {

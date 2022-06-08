@@ -1,0 +1,38 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'paymentsservice', projectId: projectId }) %>
+    <div class="workspace index">
+      <div class="info">
+        <% paymentsService.forEach((paymentService) => { %>
+          <span class="infoContainer">
+            <div class="infos">
+              <h3 class="data amount">Amount: <span class="value"><%=  paymentService.payments_amount %></span></h3>
+              <h3 class="data date">Date: <span class="value"><%= paymentService.payments_date %></span></h3>
+              <h3 class="data details">Details: <span class="value"><%= paymentService.payments_details %></span></h3>
+            </div>
+            <div class="buttons">
+              <form action="/paymentsservice/<%= projectId %>/delete/<%= paymentService.id %>" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+              <form action="/paymentsservice/<%= projectId %>/edit/<%= paymentService.id %>" method="GET">
+                <button type="submit">Edit</button>
+              </form>
+              <form action="/paymentsservice/<%= projectId %>/info/<%= paymentService.id %>" method="GET">
+                <button type="submit">Info</button>
+              </form>
+            </div>
+          </span>
+        <% }) %>
+      </div>
+      <div class="actionButtons">
+        <form action="/reports/paymentsservicereport/<%= projectId %>" method="POST">
+          <button type="submit">Report</button>
+        </form>
+        <form action="/paymentsservice/<%= projectId %>/new" method="GET">
+          <button type="submit">New</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

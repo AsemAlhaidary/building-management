@@ -1,0 +1,35 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'paymentsservice', projectId: projectId }) %>
+    <div class="workspace">
+      <div class="formBox">
+        <h3 class="title">Edit PaymentSservice</h3>
+        <form action="/paymentsservice/<%= projectId %>/create" method="POST" class="form grid">
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="amount">Amount</label>
+            <% } %>
+            <input type="number" id="amount" class="input" name="paymentAmount" value="<%= paymentService.payments_amount %>" placeholder="Amount" required>
+          </div>
+          <div class="row">
+            <% if (label) { %>
+              <label class="def" for="date">Date</label>
+            <% } %>
+            <input type="date" id="date" class="input" name="paymentDate" value="<%= paymentService.payments_date %>" placeholder="Date" required>
+          </div>
+          <div class="row spanTwo">
+            <% if (label) { %>
+              <label class="def" for="details">Details</label>
+            <% } %>
+            <textarea name="paymentDetails" class="input" id="details" cols="30" rows="10" placeholder="Details"><%= paymentService.payments_details %></textarea>
+          </div>
+          <div class="actionButtons">
+            <button type="submit">Add</button>
+          </div>
+        </form>
+      
+      </div>
+    </div>
+  </div>
+</div>

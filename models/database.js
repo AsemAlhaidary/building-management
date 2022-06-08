@@ -286,32 +286,10 @@ class DbService {
       throw new Error(error);
     }
   }
-  async getPaymentsrecivesByProjectId(id) {
-    const sql = "SELECT * FROM paymentsrecives WHERE project_id = ?";
-    const params = [id];
-
-    try {
-      const result = await this.runQuery(sql, params);
-      return result;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
 
   async addNewExtraTime(extraTime, extraTimePrice, extraTotalPrice, employeeId) {
     const sql = "INSERT INTO extras (extra_time, extra_time_price, extra_total_price, employee_id) VALUES (?, ?, ?, ?)";
     const params = [extraTime, extraTimePrice, extraTotalPrice, employeeId];
-
-    try {
-      const result = await this.runQuery(sql, params);
-      return result;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-  async addNewpaymentsrecive( paymentsAmount, paymentsDate,  paymentsDetails, paymentsreciveId) {
-    const sql = "INSERT INTO paymentsrecives (paymentsAmount,  paymentsDate, paymentsDetails, project_id) VALUES (?, ?, ?, ?)";
-    const params = [paymentsAmount, paymentsDate,paymentsDetails, paymentsreciveId];
 
     try {
       const result = await this.runQuery(sql, params);
@@ -332,8 +310,9 @@ class DbService {
       throw new Error(error);
     }
   }
-  async deletePaymentsrecivesById(id) {
-    const sql = "DELETE FROM paymentsrecives WHERE id = ?";
+
+  async getPaymentsServiceByProjectId(id) {
+    const sql = "SELECT * FROM paymentsservice WHERE project_id = ?";
     const params = [id];
 
     try {
@@ -344,6 +323,51 @@ class DbService {
     }
   }
 
+  async addNewPaymentService(paymentAmount, paymentDate, paymentDetails, projectId) {
+    const sql = "INSERT INTO paymentsservice (payments_amount,  payments_date, payments_details, project_id) VALUES (?, ?, ?, ?)";
+    const params = [paymentAmount, paymentDate, paymentDetails, projectId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+  async deletePaymentServiceById(id) {
+    const sql = "DELETE FROM paymentsservice WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getPaymentServiceById(id) {
+    const sql = "SELECT * FROM paymentsservice WHERE id = ?";
+    const params = [id];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result[0];
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+  async editPaymentService(paymentAmount, paymentDate, paymentDetails, paymentserviceId) {
+    const sql = "UPDATE paymentsservice SET payments_amount = ?, payments_date = ?, payments_details = ?";
+    const params = [paymentAmount, paymentDate, paymentDetails, paymentserviceId];
+
+    try {
+      const result = await this.runQuery(sql, params);
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
   async getExtraById(id) {
     const sql = "SELECT e.*, m.employee_name FROM extras e LEFT JOIN employees m ON e.employee_id = m.id WHERE e.id = ?";
     const params = [id];

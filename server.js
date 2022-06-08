@@ -24,7 +24,7 @@ const invoicesRouter = require('./routes/invoices');
 const extrasRouter = require('./routes/extras');
 const depositsRouter = require('./routes/deposits');
 const deportesRouter = require('./routes/deportes');
-const paymentsrecivesRouter = require('./routes/paymentsrecives');
+const paymentsServiceRouter = require('./routes/paymentsservice');
 const reportsRouter = require('./routes/reports');
 
 const app = express();
@@ -62,8 +62,8 @@ app.use('/outlays', outlaysRouter);
 app.use('/equipments', equipmentsRouter);
 app.use('/extras', extrasRouter);
 app.use('/deposits', depositsRouter);
-app.use('/invoices',invoicesRouter);
-app.use('/paymentsrecives',paymentsrecivesRouter);
+app.use('/invoices', invoicesRouter);
+app.use('/paymentsservice', paymentsServiceRouter);
 app.use('/deportes', deportesRouter);
 app.use('/reports', reportsRouter);
 

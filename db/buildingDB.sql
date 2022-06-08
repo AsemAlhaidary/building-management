@@ -205,13 +205,13 @@ CREATE TABLE `outlays` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `paymentsrecives`
+-- Table structure for table `paymentsservice`
 --
 
-DROP TABLE IF EXISTS `paymentsrecives`;
+DROP TABLE IF EXISTS `paymentsservice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `paymentsrecives` (
+CREATE TABLE `paymentsservice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `payments_amount` decimal(10,2) DEFAULT NULL,
   `payments_date` date DEFAULT NULL,
