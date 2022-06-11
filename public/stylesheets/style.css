@@ -1,24 +1,24 @@
 @font-face {
-  font-family: 'Noto Naskh';
-  src: url("/fonts/NotoNaskhArabic-Bold.ttf") format('truetype');
+  font-family: 'Cairo';
+  src: url("/fonts/Cairo-Black.ttf") format('truetype');
+  font-weight: bolder;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Cairo';
+  src: url("/fonts/Cairo-Bold.truetype") format('ttf');
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Noto Naskh';
-  src: url("/fonts/NotoNaskhArabic-SemiBold.truetype") format('ttf');
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Noto Naskh';
-  src: url("/fonts/NotoNaskhArabic-Medium.ttf") format('truetype');
+  font-family: 'Cairo';
+  src: url("/fonts/Cairo-Medium.ttf") format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Noto Naskh';
-  src: url("/fonts/NotoNaskhArabic-Regular.ttf") format('truetype');
+  font-family: 'Cairo';
+  src: url("/fonts/Cairo-Regular.ttf") format('truetype');
   font-weight: 400;
   font-style: normal;
 }
@@ -255,6 +255,9 @@
   color: var(--primaryTextColor);
   transform: translateX(0%);
 }
+.container .workspaceContainer form {
+  flex-grow: 1;
+}
 .container .workspaceContainer .workspace {
   height: 100%;
   display: flex;
@@ -387,7 +390,6 @@
 }
 .container .workspaceContainer .workspace .info .infoContainer {
   padding: 0.5em;
-  display: block;
   min-height: 3em;
   display: flex;
   gap: 1em;

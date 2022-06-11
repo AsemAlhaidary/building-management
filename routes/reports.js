@@ -10,6 +10,121 @@ const router = express.Router();
 const dbService = database.getDbServiceInstance();
 const tools = usefulTools.getToolsInstance();
 
+router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
+  const { projectId } = req.params;
+
+  res.render('reports/index', { projectId: projectId });
+});
+
+router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req, res) => {
+  const id = req.params.projectId;
+
+  let reportList = [], reportData = [], finalTotal = 0, ratio = req.body.ratio, project, details, totalSql, startDate, endDate, managerRatio;
+
+  let projectSql = 'SELECT * FROM projects WHERE id = ?';
+
+  project = await dbService.runQuery(projectSql, id);
+  project = JSON.parse(JSON.stringify(project[0]));
+
+  let optionsList = {
+    employees: req.body.employeesReport, 
+    outlays: req.body.outlaysReport, 
+    contractors: req.body.contractorsReport, 
+    equipments: req.body.equipmentsReport, 
+    purchases: req.body.purchasesReport, 
+    invoices: req.body.invoicesReport, 
+    managers: req.body.managersReport
+  };
+
+  Object.keys(optionsList).forEach(optionList => {
+    if (optionsList[optionList] == 'on') {
+      reportList.push(optionList);
+    }
+  });
+
+  if (reportList.includes('employees')) {
+    details = 'إجمالي الإيدي العاملة';
+    startDate = 'SELECT MIN(employee_start_date) startDate FROM employees WHERE project_id = ?';
+    endDate = 'SELECT MAX(employee_end_date) endDate FROM employees WHERE project_id = ?';
+    totalSql = 'SELECT SUM(employee_total) total FROM employees WHERE project_id = ?';
+
+    reportData.push(await getDataObject(details, startDate, endDate, totalSql, id));
+  }
+
+  if (reportList.includes('outlays')) {
+    details = 'إجمالي النثريات';
+    startDate = 'SELECT MIN(outlay_date) startDate FROM outlays WHERE project_id = ?';
+    endDate = 'SELECT MAX(outlay_date) endDate FROM outlays WHERE project_id = ?';
+    totalSql = 'SELECT SUM(outlay_total) total FROM outlays WHERE project_id = ?';
+
+    reportData.push(await getDataObject(details, startDate, endDate, totalSql, id));
+  }
+
+  if (reportList.includes('contractors')) {
+    details = 'إجمالي خرج المقاولين';
+    startDate = 'SELECT MIN(project_start_date) startDate FROM projects WHERE id = ?';
+    endDate = 'SELECT MAX(project_end_date) endDate FROM projects WHERE id = ?';
+    totalSql = 'SELECT SUM(contractor_work_total) total FROM contractors WHERE project_id = ?';
+
+    reportData.push(await getDataObject(details, startDate, endDate, totalSql, id));
+  }
+
+  if (reportList.includes('equipments')) {
+    details = 'إجمالي اجور المعدات';
+    startDate = 'SELECT MIN(equipment_date) startDate FROM equipments WHERE project_id = ?';
+    endDate = 'SELECT MAX(equipment_date) endDate FROM equipments WHERE project_id = ?';
+    totalSql = 'SELECT SUM(equipment_total) total FROM equipments WHERE project_id = ?';
+
+    reportData.push(await getDataObject(details, startDate, endDate, totalSql, id));
+  }
+
+  if (reportList.includes('purchases')) {
+    details = 'إجمالي المشتريات';
+    startDate = 'SELECT MIN(purchas_date) startDate FROM purchases WHERE project_id = ?';
+    endDate = 'SELECT MAX(purchas_date) endDate FROM purchases WHERE project_id = ?';
+    totalSql = 'SELECT SUM(purchase_total) total FROM purchases WHERE project_id = ?';
+
+    reportData.push(await getDataObject(details, startDate, endDate, totalSql, id));
+  }
+
+  if (reportList.includes('invoices')) {
+    details = 'إجمالي مشتريات الفواتير';
+    startDate = 'SELECT MIN(invoice_date) startDate FROM invoices WHERE project_id = ?';
+    endDate = 'SELECT MAX(invoice_date) endDate FROM invoices WHERE project_id = ?';
+    totalSql = 'SELECT SUM(invoice_total) total FROM invoices WHERE project_id = ?';
+
+    reportData.push(await getDataObject(details, startDate, endDate, totalSql, id));
+  }
+
+  if (reportList.includes('managers')) {
+    details = 'إجمالي مصروفات المشرف';
+    startDate = 'SELECT MIN(manager_outlay_date) startDate FROM managers WHERE project_id = ?';
+    endDate = 'SELECT MAX(manager_outlay_date) endDate FROM managers WHERE project_id = ?';
+    totalSql = 'SELECT SUM(manager_outlay_amount) total FROM managers WHERE project_id = ?';
+
+    reportData.push(await getDataObject(details, startDate, endDate, totalSql, id));
+  }
+
+  reportData.forEach((data, i) => {
+    data.id = i + 1;
+    finalTotal += data.total;
+  });
+
+  if (ratio > 0) {
+    managerRatio = ratio * finalTotal / 100;
+  }
+
+  let finalData = {
+    project: project,
+    title: 'الترحيل النهائي',
+    items: reportData,
+    total: finalTotal,
+    ratio: managerRatio
+  };
+
+  createPDF('finalreport.html', finalData, '/reports/' + id, res);
+});
+
 router.post('/employeesreport/:projectId', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
@@ -356,6 +471,27 @@ function createPDF(templateFile, data, srcPath, res) {
   pdf.create(document, reportOptions)
     .then(res.redirect(srcPath))
     .catch(err => { console.log(err) });
+}
+
+async function getDataObject(details, startDate, endDate, totalSql, id) {
+  startDate = await dbService.runQuery(startDate, id);
+  endDate = await dbService.runQuery(endDate, id);
+  total = await dbService.runQuery(totalSql, id);
+
+  startDate = JSON.parse(JSON.stringify(startDate[0]));
+  endDate = JSON.parse(JSON.stringify(endDate[0]));
+  total = JSON.parse(JSON.stringify(total[0]));
+
+  startDate = tools.getStandardDate(startDate.startDate);
+  endDate = tools.getStandardDate(endDate.endDate);
+  total = total.total;
+
+  return {
+    details: details,
+    startDate: startDate,
+    endDate: endDate,
+    total: total
+  }
 }
 
 module.exports = router;

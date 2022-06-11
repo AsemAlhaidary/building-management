@@ -1,0 +1,47 @@
+<div class="container">
+  <%- include('../partials/navbar') %>
+  <div class="workspaceContainer">
+    <%- include('../partials/sidebar', { active: 'reports' , projectId: projectId }) %>
+    <form action="/reports/finalreports/<%= projectId %>" method="POST">
+      <div class="workspace index">
+        <div class="info">
+          <label for="ratio" class="infoContainer">
+            <h3 class="data">Ratio</h3>
+            <input type="number" name="ratio" min="0" max="100" id="ratio" class="reportOption">
+          </label>
+          <label for="employeesReport" class="infoContainer">
+            <h3 class="data">Employees Total</h3>
+            <input type="checkbox" name="employeesReport" id="employeesReport" class="reportOption">
+          </label>
+          <label for="outlaysReport" class="infoContainer">
+            <h3 class="data">Outlays Total</h3>
+            <input type="checkbox" name="outlaysReport" id="outlaysReport" class="reportOption">
+          </label>
+          <label for="contractorsReport" class="infoContainer">
+            <h3 class="data">Contractors Total</h3>
+            <input type="checkbox" name="contractorsReport" id="contractorsReport" class="reportOption">
+          </label>
+          <label for="equipmentsReport" class="infoContainer">
+            <h3 class="data">Equipments Total</h3>
+            <input type="checkbox" name="equipmentsReport" id="equipmentsReport" class="reportOption">
+          </label>
+          <label for="purchasesReport" class="infoContainer">
+            <h3 class="data">Purchases Total</h3>
+            <input type="checkbox" name="purchasesReport" id="purchasesReport" class="reportOption">
+          </label>
+          <label for="invoicesReport" class="infoContainer">
+            <h3 class="data">Invoices Total</h3>
+            <input type="checkbox" name="invoicesReport" id="invoicesReport" class="reportOption">
+          </label>
+          <label for="managersReport" class="infoContainer">
+            <h3 class="data">Managers Total</h3>
+            <input type="checkbox" name="managersReport" id="managersReport" class="reportOption">
+          </label>
+        </div>
+        <div class="actionButtons">
+          <button type="submit" class="getReport">Report</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
