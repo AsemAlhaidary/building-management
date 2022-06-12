@@ -89,7 +89,7 @@ router.post('/:projectId/edit/:employeeId', security.checkAuthenticated, async (
     const nEmployeeDayPrice = req.body.employeeDayPrice;
     const nEmployeeWorkStart = req.body.employeeWorkStart;
     const nEmployeeWorkEnd = req.body.employeeWorkEnd;
-    const nEmployeeTotal = tools.getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) * nEmployeeDayPrice;
+    const nEmployeeTotal = (tools.getPeriod(req.body.employeeWorkStart, req.body.employeeWorkEnd) + 1) * nEmployeeDayPrice;
 
     await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum, nEmployeeDayPrice, nEmployeeWorkStart, nEmployeeWorkEnd, nEmployeeTotal);
 

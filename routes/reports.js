@@ -19,7 +19,7 @@ router.get('/:projectId/', security.checkAuthenticated, async (req, res) => {
 router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req, res) => {
   const id = req.params.projectId;
 
-  let reportList = [], reportData = [], finalTotal = 0, ratio = req.body.ratio, project, details, totalSql, startDate, endDate, managerRatio;
+  let reportList = [], reportData = [], finalTotal = 0, ratio = req.body.ratio, project, details, totalSql, startDate, endDate, managerRatio, creditorTotal;
 
   let projectSql = 'SELECT * FROM projects WHERE id = ?';
 
@@ -114,12 +114,20 @@ router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req
     managerRatio = ratio * finalTotal / 100;
   }
 
+  totalSql = 'SELECT SUM(payments_amount) sum FROM paymentsservice WHERE project_id = ?';
+
+  creditorTotal = await dbService.runQuery(totalSql, id);
+  creditorTotal = JSON.parse(JSON.stringify(creditorTotal[0]));
+
   let finalData = {
     project: project,
     title: 'الترحيل النهائي',
     items: reportData,
     total: finalTotal,
-    ratio: managerRatio
+    ratio: managerRatio,
+    creditor: creditorTotal.sum,
+    leftFor: finalTotal - creditorTotal.sum,
+    leftOn: creditorTotal.sum - finalTotal
   };
 
   createPDF('finalreport.html', finalData, '/reports/' + id, res);
@@ -442,6 +450,37 @@ router.post('/paymentsservicereport/:projectId', security.checkAuthenticated, as
   }
 
   createPDF('paymentsservice.html', data, '/paymentsservice/' + projectId, res);
+});
+
+router.post('/extrasreport/:projectId', security.checkAuthenticated, async (req, res) => {
+  const { projectId } = req.params;
+
+  const totalSql = 'SELECT SUM(extra_total_price) sum FROM extras ';
+  const totalParams = [projectId];
+
+  const projectSql = 'SELECT e.*, m.employee_name FROM extras e LEFT JOIN employees m ON e.employee_id = m.id WHERE m.project_id = ?';
+  const projectParams = [projectId];
+
+  let extras = await dbService.getExtrasByProjectId(projectId);
+  
+  let total = await dbService.runQuery(totalSql, totalParams);
+  let project = await dbService.runQuery(projectSql, projectParams);
+  
+  total = JSON.parse(JSON.stringify(total[0]));
+  project = JSON.parse(JSON.stringify(project[0]));
+
+  extras.forEach((extra, i) => {
+    extra.id = i + 1;
+  });
+
+  let data = {
+    project: project,
+    title: 'الاضافيات',
+    items: extras,
+    total: total
+  }
+
+  createPDF('extras.html', data, '/extras/' + projectId, res);
 });
 
 function createPDF(templateFile, data, srcPath, res) {
