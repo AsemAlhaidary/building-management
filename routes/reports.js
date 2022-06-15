@@ -110,9 +110,11 @@ router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req
     finalTotal += data.total;
   });
 
-  if (ratio > 0) {
-    managerRatio = ratio * finalTotal / 100;
+  if (ratio == '' || ratio < 0) {
+    ratio = 0;
   }
+
+  managerRatio = ratio * finalTotal / 100;
 
   totalSql = 'SELECT SUM(payments_amount) sum FROM paymentsservice WHERE project_id = ?';
 
@@ -125,7 +127,7 @@ router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req
     items: reportData,
     total: finalTotal,
     ratio: managerRatio,
-    creditor: creditorTotal.sum,
+    creditor: creditorTotal.sum - managerRatio,
     leftFor: finalTotal - creditorTotal.sum,
     leftOn: creditorTotal.sum - finalTotal
   };

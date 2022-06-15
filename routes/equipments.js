@@ -26,7 +26,7 @@ router.post('/:projectId/create', security.checkAuthenticated, async (req, res) 
     const equipmentName = req.body.equipmentName;
     const equipmentDate = req.body.equipmentDate;
     const equipmentUnitPrice = req.body.equipmentUnitPrice;
-    const equipmentUnitQuantity = req.body.equipmentUnitQuantity;
+    const equipmentUnitQuantity = parseFloat(req.body.equipmentUnitQuantity);
     const equipmentDetails = req.body.equipmentDetails;
     const equipmentTotal = equipmentUnitPrice * equipmentUnitQuantity;
     const { projectId } = req.params;
