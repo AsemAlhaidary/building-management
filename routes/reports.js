@@ -114,12 +114,24 @@ router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req
     ratio = 0;
   }
 
-  managerRatio = ratio * finalTotal / 100;
-
   totalSql = 'SELECT SUM(payments_amount) sum FROM paymentsservice WHERE project_id = ?';
 
   creditorTotal = await dbService.runQuery(totalSql, id);
   creditorTotal = JSON.parse(JSON.stringify(creditorTotal[0]));
+
+  let leftFor = finalTotal - creditorTotal.sum;
+  let leftOn = creditorTotal.sum - finalTotal;
+  managerRatio = ratio * finalTotal / 100;
+  let creditor = creditorTotal.sum - managerRatio;
+
+  finalTotal = finalTotal.toLocaleString('en-US');
+  leftFor = leftFor.toLocaleString('en-US');
+  leftOn = leftOn.toLocaleString('en-US');
+  creditor = creditor.toLocaleString('en-US');
+
+  reportData.forEach(data => {
+    data.total = data.total.toLocaleString('en-US');
+  });
 
   let finalData = {
     project: project,
@@ -127,9 +139,9 @@ router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req
     items: reportData,
     total: finalTotal,
     ratio: managerRatio,
-    creditor: creditorTotal.sum - managerRatio,
-    leftFor: finalTotal - creditorTotal.sum,
-    leftOn: creditorTotal.sum - finalTotal
+    creditor:creditor,
+    leftFor: leftFor,
+    leftOn: leftOn
   };
 
   createPDF('finalreport.html', finalData, '/reports/' + id, res);
@@ -155,13 +167,16 @@ router.post('/employeesreport/:projectId', security.checkAuthenticated, async (r
     employee.id = i + 1;
     employee.employee_start_date = tools.getStandardDate(employee.employee_start_date);
     employee.employee_end_date = tools.getStandardDate(employee.employee_end_date);
+    employee.employee_total = employee.employee_total.toLocaleString('en-US');
   });
+
+  total.sum = total.sum.toLocaleString('en-US');
 
   let data = {
     project: project,
     title: 'إجمالي الأيدي العاملة',
     items: employees,
-    total: total
+    total: total.sum
   }
 
   createPDF('employees.html', data, '/employees/' + projectId, res);
@@ -182,10 +197,15 @@ router.post('/contractorsreport/:projectId', security.checkAuthenticated, async 
 
   total = JSON.parse(JSON.stringify(total[0]));
   project = JSON.parse(JSON.stringify(project[0]));
-
   contractors.forEach((contractor, i) => {
     contractor.id = i + 1;
+
+    contractor. contractor_work_total= contractor.contractor_work_total.toLocaleString('en-US');
+
   });
+
+  total.sum = total.sum.toLocaleString('en-US');
+
 
   let data = {
     project: project,
@@ -217,6 +237,7 @@ router.post('/contractorsdeporeport/:projectId', security.checkAuthenticated, as
   contractorsdepo.forEach((contractordepo, i) => {
     contractordepo.id = i + 1;
     contractordepo.deposit_date = tools.getStandardDate(contractordepo.deposit_date);
+
   });
 
   let data = {
@@ -281,17 +302,20 @@ router.post('/purchasesreport/:projectId', security.checkAuthenticated, async (r
   purchases.forEach((purchase, i) => {
     purchase.id = i + 1;
     purchase.purchase_date = tools.getStandardDate(purchase.purchase_date);
-    purchase.purchase_date = tools.getStandardDate(purchase.purchase_date);
+
+    purchase.purchase_total=purchase.purchase_total.toLocaleString('en-US');
   });
+  
+  total.sum = total.sum.toLocaleString('en-US');
 
   let data = {
     project: project,
     title: 'إجمالي المشتريات',
     items: purchases,
-    total: total
+    total: total.sum
   }
 
-  createPDF('invoices.html', data, '/invoices/' + projectId, res);
+  createPDF('purchases.html', data, '/purchases/' + projectId, res);
 });
 
 router.post('/invoicesreport/:projectId', security.checkAuthenticated, async (req, res) => {
@@ -313,14 +337,18 @@ router.post('/invoicesreport/:projectId', security.checkAuthenticated, async (re
   invoices.forEach((invoice, i) => {
   invoice.id = i + 1;
   invoice.invoice_date = tools.getStandardDate(invoice.invoice_date);
-    invoice.invoice_date = tools.getStandardDate(invoice.invoice_date);
+   
+  invoice.invoice_total =  invoice.invoice_total.toLocaleString('en-US');
   });
+   
+  total.sum = total.sum.toLocaleString('en-US');
+
 
   let data = {
     project: project,
     title: ' إجمالي المشتريات بالفواتير',
     items: invoices,
-    total: total
+    total: total.sum
   }
 
   createPDF('invoices.html', data, '/invoices/' + projectId, res);

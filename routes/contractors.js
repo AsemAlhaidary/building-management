@@ -108,17 +108,7 @@ router.post('/:projectId/edit/:contractorId', security.checkAuthenticated, async
   }
 });
 
-router.post('/:projectId/report/:employeeId', security.checkAuthenticated, async (req, res) => {
-  try {
-    const { projectId, employeeId } = req.params;
 
-    const result = await dbService.editEmployeeById(employeeId, nEmployeeName, nEmployeeJob, nEmployeePhoneNum);
-
-    res.redirect('/employees/' + projectId);
-  } catch (error) {
-    console.log(error.message);
-  }
-});
 
 
 module.exports = router;
