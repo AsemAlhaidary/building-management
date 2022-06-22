@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', security.checkNotAuthenticated, (req, res) => {
   res.redirect('/login');
- // res.render('signin', { label: false });
+  // res.render('signin', { label: false });
 });
 
 router.post('/addUser', security.checkNotAuthenticated, async (req, res) => {

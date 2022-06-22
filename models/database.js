@@ -2,11 +2,11 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 let instance = null;
 
 const con = mysql.createConnection({
-  host: process.env.HOSTHOST,
+  host: process.env.HOST,
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
