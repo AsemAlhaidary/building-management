@@ -150,15 +150,13 @@ router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req
 router.post('/employeesreport/:projectId', security.checkAuthenticated, async (req, res) => {
   const { projectId } = req.params;
 
+  const employeesSql = 'SELECT e.* FROM employees e LEFT JOIN projects p ON e.project_id = p.id WHERE p.id = ? ORDER BY employee_start_date';
   const totalSql = 'SELECT SUM(employee_total) sum FROM employees WHERE project_id = ?';
-  const totalParams = [projectId];
-
   const projectSql = 'SELECT * FROM projects WHERE id = ?';
-  const projectParams = [projectId];
 
-  let employees = await dbService.getEmployeesByProjectId(projectId);
-  let total = await dbService.runQuery(totalSql, totalParams);
-  let project = await dbService.runQuery(projectSql, projectParams);
+  let employees = await dbService.runQuery(employeesSql, projectId);
+  let total = await dbService.runQuery(totalSql, projectId);
+  let project = await dbService.runQuery(projectSql, projectId);
 
   total = JSON.parse(JSON.stringify(total[0]));
   project = JSON.parse(JSON.stringify(project[0]));
