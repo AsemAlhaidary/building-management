@@ -16,8 +16,12 @@ class tools {
   }
 
   getStandardDate(date) {
-    let today = new Date(date);
-    return (today.getDate()) + '/' + (today.getMonth() + 1) + '/' + (today.getFullYear());
+    if (date != null) {
+      let today = new Date(date);
+      return (today.getDate()) + '/' + (today.getMonth() + 1) + '/' + (today.getFullYear());
+    }
+
+    return date;
   }
 }
 

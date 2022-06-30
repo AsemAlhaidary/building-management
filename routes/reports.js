@@ -80,8 +80,8 @@ router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req
 
   if (reportList.includes('purchases')) {
     details = 'إجمالي المشتريات';
-    startDate = 'SELECT MIN(purchas_date) startDate FROM purchases WHERE project_id = ?';
-    endDate = 'SELECT MAX(purchas_date) endDate FROM purchases WHERE project_id = ?';
+    startDate = 'SELECT MIN(purchase_date) startDate FROM purchases WHERE project_id = ?';
+    endDate = 'SELECT MAX(purchase_date) endDate FROM purchases WHERE project_id = ?';
     totalSql = 'SELECT SUM(purchase_total) total FROM purchases WHERE project_id = ?';
 
     reportData.push(await getDataObject(details, startDate, endDate, totalSql, id));
@@ -107,7 +107,9 @@ router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req
 
   reportData.forEach((data, i) => {
     data.id = i + 1;
-    finalTotal += data.total;
+    if (data.total != null) {
+      finalTotal += data.total;
+    }
   });
 
   if (ratio == '' || ratio < 0) {
@@ -124,13 +126,16 @@ router.post('/finalreports/:projectId/', security.checkAuthenticated, async (req
   managerRatio = ratio * finalTotal / 100;
   let creditor = creditorTotal.sum - managerRatio;
 
-  finalTotal = finalTotal.toLocaleString('en-US');
-  leftFor = leftFor.toLocaleString('en-US');
-  leftOn = leftOn.toLocaleString('en-US');
-  creditor = creditor.toLocaleString('en-US');
+  finalTotal = parseInt(finalTotal).toLocaleString('en-US');
+  leftFor = parseInt(leftFor).toLocaleString('en-US');
+  leftOn = parseInt(leftOn).toLocaleString('en-US');
+  creditor = parseInt(creditor).toLocaleString('en-US');
+  managerRatio = parseInt(managerRatio).toLocaleString('en-US');
 
   reportData.forEach(data => {
-    data.total = data.total.toLocaleString('en-US');
+    if (data.total != null) {
+      data.total = parseInt(data.total).toLocaleString('en-US');
+    }
   });
 
   let finalData = {
@@ -335,10 +340,10 @@ router.post('/invoicesreport/:projectId', security.checkAuthenticated, async (re
   invoices.forEach((invoice, i) => {
   invoice.id = i + 1;
   invoice.invoice_date = tools.getStandardDate(invoice.invoice_date);
-   
+
   invoice.invoice_total =  invoice.invoice_total.toLocaleString('en-US');
   });
-   
+
   total.sum = total.sum.toLocaleString('en-US');
 
 
@@ -552,6 +557,8 @@ async function getDataObject(details, startDate, endDate, totalSql, id) {
   startDate = tools.getStandardDate(startDate.startDate);
   endDate = tools.getStandardDate(endDate.endDate);
   total = total.total;
+
+  if (total != null) total = parseInt(total);
 
   return {
     details: details,
