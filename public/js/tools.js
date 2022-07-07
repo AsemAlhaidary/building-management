@@ -23,6 +23,10 @@ class tools {
 
     return date;
   }
+
+  formatCurrency(num) {
+    return parseInt(num).toLocaleString('en-US');
+  }
 }
 
 module.exports = tools;

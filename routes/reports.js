@@ -473,7 +473,10 @@ router.post('/paymentsservicereport/:projectId', security.checkAuthenticated, as
   paymentsService.forEach((paymentService, i) => {
     paymentService.id = i + 1;
     paymentService.payments_date = tools.getStandardDate(paymentService.payments_date);
+    paymentService.payments_amount = tools.formatCurrency(paymentService.payments_amount);
   });
+
+  total.sum = tools.formatCurrency(total.sum);
 
   let data = {
     project: project,
