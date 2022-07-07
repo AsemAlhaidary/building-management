@@ -170,10 +170,11 @@ router.post('/employeesreport/:projectId', security.checkAuthenticated, async (r
     employee.id = i + 1;
     employee.employee_start_date = tools.getStandardDate(employee.employee_start_date);
     employee.employee_end_date = tools.getStandardDate(employee.employee_end_date);
-    employee.employee_total = employee.employee_total.toLocaleString('en-US');
+    employee.employee_day_price = tools.formatCurrency(employee.employee_day_price);
+    employee.employee_total = tools.formatCurrency(employee.employee_total);
   });
 
-  total.sum = total.sum.toLocaleString('en-US');
+  total.sum = tools.formatCurrency(total.sum);
 
   let data = {
     project: project,
