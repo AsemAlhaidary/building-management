@@ -23,15 +23,15 @@ router.get('/:projectId/new', security.checkAuthenticated, (req, res) => {
 router.post('/:projectId/create', security.checkAuthenticated, async (req, res) => {
   try {
     const purchaseName = req.body.purchaseName;
+    const purchaseDetails = req.body.purchaseDetails;
+    const purchaseType = req.body.purchaseType;
     const purchaseDate = req.body.purchaseDate;
     const purchaseUnitPrice = req.body.purchaseUnitPrice;
     const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
     const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
-    const purchaseType = req.body.purchaseType;
-    const purchaseDetails = req.body.purchaseDetails;
     const { projectId } = req.params;
 
-    await dbService.addNewPurchase(purchaseName, purchaseDate, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDetails,  projectId);
+    await dbService.addNewPurchase(purchaseName,purchaseDetails,purchaseType,purchaseDate,purchaseUnitPrice, purchaseUnitQuantity,  purchasTotal,  projectId);
 
     res.redirect('/purchases/' + projectId);
   } catch (error) {
