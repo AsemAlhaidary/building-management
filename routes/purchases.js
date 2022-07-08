@@ -91,15 +91,15 @@ router.get('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (r
 router.post('/:projectId/edit/:purchaseId', security.checkAuthenticated, async (req, res) => {
   try {
     const purchaseName = req.body.purchaseName;
-    const purchaseUnitPrice = req.body.purchaseUnitPrice;
-    const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
-    const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
     const purchaseDetails = req.body.purchaseDetails;
     const purchaseType = req.body.purchaseType;
     const purchaseDate = req.body.purchaseDate;
+    const purchaseUnitPrice = req.body.purchaseUnitPrice;
+    const purchaseUnitQuantity = req.body.purchaseUnitQuantity;
+    const purchasTotal = purchaseUnitPrice * purchaseUnitQuantity;
     const { projectId, purchaseId } = req.params;
 
-    const result = await dbService.editPurchaseById(purchaseName, purchaseUnitPrice, purchaseUnitQuantity, purchasTotal, purchaseType, purchaseDate,purchaseDetails, purchaseId);
+     await dbService.editPurchaseById(purchaseName,purchaseDetails,purchaseType,purchaseDate,purchaseUnitPrice, purchaseUnitQuantity,purchasTotal,  purchaseId);
 
     res.redirect('/purchases/' + projectId);
   } catch (error) {

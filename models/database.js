@@ -263,7 +263,7 @@ class DbService {
     }
   }
 
-  async editPurchaseById(name, unitPrice, quantity, total, type, purchaseDate,details, id) {
+  async editPurchaseById(name,details, type,purchaseDate, unitPrice, quantity, total,  id) {
     const sql = "UPDATE purchases SET purchase_name = ?,purchase_details = ?,purchase_type = ?,purchase_date = ?, purchase_unit_price = ?, purchase_unit_quantity = ?, purchase_total = ? WHERE id = ?";
     const params = [name, details, type, purchaseDate, unitPrice, quantity, total, id];
 
@@ -524,7 +524,7 @@ class DbService {
     }
   }
 
-  async addNewinvoice(invoiceName, invoiceDate, invoiceNumber,invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, projectId) {
+  async addNewinvoice(invoiceName, invoiceDate, invoiceDetails,invoiceNumber,invoiceUnitPrice, invoiceQuantity, invoiceType,  invoiceTotal, projectId) {
     const sql = "INSERT INTO invoices (invoice_name, invoice_date, invoice_details, invoice_number,  invoice_unit_price, invoice_unit_quantity, invoice_type, invoice_total, project_id) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     const params = [invoiceName, invoiceDate, invoiceDetails, invoiceNumber, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceTotal, projectId];
 
@@ -548,7 +548,7 @@ class DbService {
     }
   }
 
-  async editInvoiceById(invoiceName, invoiceDate, invoiceNumber,  invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceDetails, invoiceTotal, id) {
+  async editInvoiceById(invoiceName, invoiceDate,invoiceDetails,  invoiceNumber,  invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceTotal, id) {
     const sql = "UPDATE invoices SET invoice_name = ?, invoice_date = ?, invoice_details = ?, invoice_number = ?, invoice_unit_price = ?, invoice_unit_quantity = ?, invoice_type = ?, invoice_total = ? WHERE id = ?";
     const params = [invoiceName, invoiceDate, invoiceDetails, invoiceNumber, invoiceUnitPrice, invoiceQuantity, invoiceType, invoiceTotal, id];
 
