@@ -88,22 +88,22 @@
     <table border="1">
       <tr>
         <th>المجموع</th>
+        <th>النوع</th>
         <th>الكمية</th>
         <th>سعر الوحدة</th>
-        <th>التاريخ</th>
-        <th>النوع</th>
         <th>البيان</th>
+        <th>التاريخ</th>
         <th>الإسم</th>
         <th class="id">م</th>
       </tr>
       {{#each items}}
       <tr>
         <td>{{this.purchase_total}}</td>
+        <td>{{this.purchase_type}}</td>
         <td>{{this.purchase_unit_quantity}}</td>
         <td>{{this.purchase_unit_price}}</td>
-        <td>{{this.purchase_date}}</td>
-        <td>{{this.purchase_type}}</td>
         <td>{{this.purchase_details}}</td>
+        <td>{{this.purchase_date}}</td>
         <td>{{this.purchase_name}}</td>
         <td class="id">{{this.id}}</td>
       </tr>

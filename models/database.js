@@ -227,9 +227,9 @@ class DbService {
     }
   }
 
-  async addNewPurchase(name, unitPrice, quantity, total, type, details, id) {
-    const sql = "INSERT INTO purchases (purchase_name, purchase_details, purchase_type, purchase_unit_price, purchase_unit_quantity, purchase_total, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    const params = [name, details, type, unitPrice, quantity, total, id];
+  async addNewPurchase(name, details, type,purchaseDate, unitPrice, quantity, total, id) {
+    const sql = "INSERT INTO purchases (purchase_name, purchase_details, purchase_type, purchase_date,purchase_unit_price, purchase_unit_quantity, purchase_total, project_id) VALUES (?,?,?, ?, ?, ?, ?, ?)";
+    const params = [name, details, type,purchaseDate, unitPrice, quantity, total, id];
 
     try {
       const result = await this.runQuery(sql, params);
@@ -263,9 +263,9 @@ class DbService {
     }
   }
 
-  async editPurchaseById(name, unitPrice, quantity, total, type, details, id) {
-    const sql = "UPDATE purchases SET purchase_name = ?, purchase_details = ?, purchase_type = ?, purchase_unit_price = ?, purchase_unit_quantity = ?, purchase_total = ? WHERE id = ?";
-    const params = [name, details, type, unitPrice, quantity, total, id];
+  async editPurchaseById(name, unitPrice, quantity, total, type, purchaseDate,details, id) {
+    const sql = "UPDATE purchases SET purchase_name = ?,purchase_details = ?,purchase_type = ?,purchase_date = ?, purchase_unit_price = ?, purchase_unit_quantity = ?, purchase_total = ? WHERE id = ?";
+    const params = [name, details, type, purchaseDate, unitPrice, quantity, total, id];
 
     try {
       const result = await this.runQuery(sql, params);

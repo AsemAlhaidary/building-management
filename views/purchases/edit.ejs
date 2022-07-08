@@ -14,6 +14,12 @@
           </div>
           <div class="row">
             <% if (label) { %>
+              <label class="def" for="date">Date</label>
+            <% } %>
+            <input type="date" id="date" class="input" name="purchaseDate">
+          </div>
+          <div class="row">
+            <% if (label) { %>
               <label class="def" for="unitPrice">Unit Price</label>
             <% } %>
             <input type="number" id="unitPrice" class="input" name="purchaseUnitPrice" value="<%= purchase.purchase_unit_price %>" placeholder="Unit Price">

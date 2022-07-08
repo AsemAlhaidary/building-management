@@ -306,12 +306,13 @@ router.post('/purchasesreport/:projectId', security.checkAuthenticated, async (r
   purchases.forEach((purchase, i) => {
     purchase.id = i + 1;
     purchase.purchase_date = tools.getStandardDate(purchase.purchase_date);
-
-    purchase.purchase_total=purchase.purchase_total.toLocaleString('en-US');
+    purchase.purchase_unit_price = tools.formatCurrency(purchase.purchase_unit_price);
+    purchase.purchase_unit_quantity = tools.formatCurrency(purchase.purchase_unit_quantity);
+    purchase.purchase_total = tools.formatCurrency(purchase.purchase_total);
   });
-  
-  total.sum = total.sum.toLocaleString('en-US');
+  total.sum = tools.formatCurrency(total.sum);
 
+ 
   let data = {
     project: project,
     title: 'إجمالي المشتريات',
@@ -341,12 +342,13 @@ router.post('/invoicesreport/:projectId', security.checkAuthenticated, async (re
   invoices.forEach((invoice, i) => {
   invoice.id = i + 1;
   invoice.invoice_date = tools.getStandardDate(invoice.invoice_date);
-
-  invoice.invoice_total =  invoice.invoice_total.toLocaleString('en-US');
+  invoice.invoice_unit_price = tools.formatCurrency(invoice.invoice_unit_price);
+  invoice.invoice_unit_quantity = tools.formatCurrency(invoice.invoice_unit_quantity);
+  invoice.invoice_total = tools.formatCurrency(invoice.invoice_total);
+  
   });
 
-  total.sum = total.sum.toLocaleString('en-US');
-
+  total.sum = tools.formatCurrency(total.sum);
 
   let data = {
     project: project,
@@ -442,7 +444,11 @@ router.post('/equipmentsreport/:projectId', security.checkAuthenticated, async (
   equipments.forEach((equipment, i) => {
     equipment.id = i + 1;
     equipment.equipment_date = tools.getStandardDate(equipment.equipment_date);
+    equipment.equipment_unit_price = tools.formatCurrency(equipment.equipment_unit_price);
+    equipment.equipment_total = tools.formatCurrency(equipment.equipment_total);
+   
   });
+  total.sum = tools.formatCurrency(total.sum);
 
   let data = {
     project: project,
